@@ -1,6 +1,8 @@
 services:
   night-horizons:
-    image: night-horizons
+    build: 
+      context: .
+      dockerfile: Dockerfile
     restart: always
     environment: 
       POSTGRES_DB: gis
