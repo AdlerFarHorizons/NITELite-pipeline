@@ -1,0 +1,3 @@
+[submodule "night-horizons-mapmaker"]
+	path = night-horizons-mapmaker
+	url = git@github.com:AdlerFarHorizons/night-horizons-mapmaker.git
