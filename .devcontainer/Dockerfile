@@ -9,8 +9,8 @@ RUN apt-get update -y && \
     rm -rf /var/cache/apt/lists
 
 # Install Miniconda
-ENV CONDA_DIR /opt/conda
-ENV PATH=${CONDA_DIR}/bin:${PATH}
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-    /bin/bash ~/miniconda.sh -b -p ${CONDA_DIR} && \
-    rm ~/miniconda.sh
+# ENV CONDA_DIR /opt/conda
+# ENV PATH=${CONDA_DIR}/bin:${PATH}
+# RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
+#     /bin/bash ~/miniconda.sh -b -p ${CONDA_DIR} && \
+#     rm ~/miniconda.sh

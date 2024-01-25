@@ -1,15 +1,10 @@
+version: '3.8'
 services:
-  nitelite:
+  devcontainer:
     build: 
       context: .
       dockerfile: Dockerfile
-    restart: always
-    environment: 
-      POSTGRES_DB: gis
-      POSTGRES_USER: gis
-      POSTGRES_PASSWORD: gis
-    ports:
-      - 5432:5432
     volumes:
-      - /Users/Shared/data/nitelite/220513-FH135:/flight-data
-      - ./bin:/usr/local/bin/nitelite
+      - ../..:/workspaces:cached      
+    network_mode: service:db
+    command: sleep infinity
