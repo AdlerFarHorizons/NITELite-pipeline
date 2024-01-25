@@ -1,5 +1,5 @@
 services:
-  night-horizons:
+  nitelite:
     build: 
       context: .
       dockerfile: Dockerfile
@@ -11,6 +11,5 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - ./data/postgis:/var/lib/postgresql/data
-      - /Users/Shared/data/nitelite/220513-FH135/images/referenced:/home
+      - /Users/Shared/data/nitelite/220513-FH135:/flight-data
       - ./bin:/usr/local/bin/nitelite

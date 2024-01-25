@@ -8,7 +8,7 @@
     //     "dockerfile": "./Dockerfile"
     // },
     "dockerComposeFile": "./docker-compose.yml",
-    "service": "nitelite-pipeline"
+    "service": "nitelite"
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
