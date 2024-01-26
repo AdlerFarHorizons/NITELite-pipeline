@@ -16,9 +16,10 @@ ENV PATH=${CONDA_DIR}/bin:${PATH}
 # TODO: Change this when we are done with the development
 COPY ./downloads/miniconda.sh /miniconda.sh
 RUN /bin/bash /miniconda.sh -b -p ${CONDA_DIR} && \
-    rm /miniconda.sh && \
-    conda env create -f docker/conda-env.yaml
+    rm /miniconda.sh
 
 # Install python packages
+COPY ./conda-env.yaml /conda-env.yaml
+RUN conda env create -f /conda-env.yaml
 # RUN source activate night-horizons && \
 #     conda install --file ./night-horizons-mapmaker/requirements.txt
