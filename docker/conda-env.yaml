@@ -1,0 +1,17 @@
+name: nitelite-pipeline
+channels:
+  - conda-forge
+dependencies:
+  - pytest
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - tqdm
+  - PyYAML
+  - gdal
+  - pyproj
+  - matplotlib
+  - seaborn
+  - folium
+  - jupyterlab
