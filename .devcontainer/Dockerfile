@@ -18,15 +18,18 @@ COPY ./downloads/miniconda.sh /miniconda.sh
 RUN /bin/bash /miniconda.sh -b -p ${CONDA_DIR} && \
     rm /miniconda.sh
 
-# Install python packages
+# Install python environment
 COPY ./conda-env.yaml /conda-env.yaml
 RUN conda env create -f /conda-env.yaml
-# RUN source activate night-horizons && \
-#     conda install --file ./night-horizons-mapmaker/requirements.txt
-# Check the installation worked
-RUN source activate night-horizons && \
-    python -c "import numpy"
 
-# This command is more likely to work,
-# so we'll use it for actually running the pipeline
-# RUN conda run -n nitelite-pipeline /bin/bash -c python -c "import numpy"
+# Install night-horizons
+# The conda run command (and /bin/bash) is required,
+# since there are issues with conda activate
+WORKDIR /night-horizons-mapmaker
+RUN conda run -n nitelite-pipeline /bin/bash -c \
+    pip install -e .
+
+# Validate the install
+RUN conda run -n nitelite-pipeline /bin/bash -c \
+    python -c "import night_horizons"
+
