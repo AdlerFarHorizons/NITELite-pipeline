@@ -23,3 +23,10 @@ COPY ./conda-env.yaml /conda-env.yaml
 RUN conda env create -f /conda-env.yaml
 # RUN source activate night-horizons && \
 #     conda install --file ./night-horizons-mapmaker/requirements.txt
+# Check the installation worked
+RUN source activate night-horizons && \
+    python -c "import numpy"
+
+# This command is more likely to work,
+# so we'll use it for actually running the pipeline
+# RUN conda run -n nitelite-pipeline /bin/bash -c python -c "import numpy"
