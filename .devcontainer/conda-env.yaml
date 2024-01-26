@@ -7,9 +7,11 @@ dependencies:
   - numpy
   - scipy
   - pandas
+  - pyarrow
   - scikit-learn
   - tqdm
   - PyYAML
+  - opencv
   - gdal
   - pyproj
   - matplotlib
