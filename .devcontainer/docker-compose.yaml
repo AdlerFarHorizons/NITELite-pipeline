@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ../..:/workspaces:cached
+      - /Users/Shared/data/nitelite/220513-FH135:/data/220513-FH135:cached
     command: sleep infinity
     environment: 
       POSTGRES_DB: gis
