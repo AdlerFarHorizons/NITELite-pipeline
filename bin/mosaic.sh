@@ -29,6 +29,11 @@ while [[ $# -gt 0 ]]; do
             show_help
             exit 0
             ;;
+        *)
+            echo "Error: Unrecognized option $1"
+            show_help
+            exit 1
+            ;;
     esac
 done
 
