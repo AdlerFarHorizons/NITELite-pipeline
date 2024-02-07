@@ -1,11 +1,9 @@
 services:
   nitelite_pipeline:
     image: nitelite_pipeline
-    command: sleep infinity
     environment: 
       POSTGRES_DB: gis
       POSTGRES_USER: gis
       POSTGRES_PASSWORD: gis
-    # Not working currently
-    # ports:
-    #   - 5432:5432
+    ports:
+      - 5432:5432

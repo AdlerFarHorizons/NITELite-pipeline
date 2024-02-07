@@ -7,6 +7,8 @@ Usage: ./mosaic.sh -c CONFIG_FILEPATH -d DATA_DIR [OPTIONS]
 
 Options:
     -c, --config CONFIG_FILEPATH    Location of the configuration file.
+                                    Must be inside either the repository
+                                    or the data directory.
     -d, --data DATA_DIR             Location of the data directory. This will
                                     be mounted to the /data directory inside
                                     the docker container. Any data you want to
@@ -78,14 +80,16 @@ DOCKER_CMD+=" conda run -n nitelite-pipeline-conda"
 # DOCKER_CMD+=" \bin\bash -c"
 
 # The script to run inside the docker image
-# DOCKER_CMD+=" python "
-# DOCKER_CMD+=" pytest"
-DOCKER_CMD+=" python ./night-horizons-mapmaker/night_horizons/mapmake.py --help"
-# DOCKER_CMD+=" ls ."
+DOCKER_CMD+=" python ./night-horizons-mapmaker/night_horizons/mapmake.py"
+
+# The command line arguments to the script
+DOCKER_CMD+=" $CONFIG_FILEPATH"
+
+# TODO: Delete this later
+# DOCKER_CMD+=" ls /data/other"
 
 # Execute docker run command
 echo "Running the following command:"
-echo
 echo $DOCKER_CMD
 echo
 eval $DOCKER_CMD
