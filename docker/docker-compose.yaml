@@ -1,8 +1,6 @@
 services:
-  devcontainer:
-    build: 
-      context: .
-      dockerfile: Dockerfile
+  nitelite_pipeline:
+    image: nitelite_pipeline
     volumes:
       - ../..:/workspaces:cached
       - /Users/Shared/data/nitelite/220513-FH135:/data/220513-FH135:cached

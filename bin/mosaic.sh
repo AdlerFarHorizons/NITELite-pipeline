@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Function to display help message
@@ -35,27 +34,30 @@ done
 
 # Check if the config file path was provided
 if [ -z "$CONFIG_FILEPATH" ]; then
-    echo "Error: Configuration file path is required."
+    echo "Error: Configuration filepath is required."
     show_help
     exit 1
 fi
 
 # Construct docker run command
-DOCKER_CMD="docker run"
+DOCKER_CMD="docker compose run"
 
 # We specify the platform, important for running on M1 Macs
-DOCKER_CMD+=" --platform linux/amd64"
+# DOCKER_CMD+=" --platform linux/amd64"
 
-# Name of the image
+# Name of the service
 DOCKER_CMD+=" nitelite_pipeline"
 
 # This part of the command specifies the python environment
 # (inside the docker image) to use
-DOCKER_CMD+=" conda run -n nitelite-pipeline /bin/bash -c"
+# DOCKER_CMD+=" conda run -n nitelite-pipeline"
+# DOCKER_CMD+="\bin\bash -c"
 
-DOCKER_CMD+=" cd ../ ; ls"
 # The script to run inside the docker image
-# DOCKER_CMD+=" python"
+# DOCKER_CMD+=" python "
+# DOCKER_CMD+=" pytest"
+# DOCKER_CMD+=" python /workspaces/NITELite-pipeline/night-horizons-mapmaker/night_horizons/mapmake.py --help"
+DOCKER_CMD+=" ls ."
 
 # Execute docker run command
 echo "Running the following command:"
