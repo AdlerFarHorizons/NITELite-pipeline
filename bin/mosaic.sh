@@ -45,7 +45,8 @@ if [ -z "$CONFIG_FILEPATH" ]; then
 fi
 
 # Construct docker run command
-DOCKER_CMD="docker compose run"
+# DOCKER_CMD="docker compose run"
+DOCKER_CMD="docker compose -f ./docker/docker-compose.yaml run"
 
 # We specify the platform, important for running on M1 Macs
 # DOCKER_CMD+=" --platform linux/amd64"
@@ -55,14 +56,14 @@ DOCKER_CMD+=" nitelite_pipeline"
 
 # This part of the command specifies the python environment
 # (inside the docker image) to use
-# DOCKER_CMD+=" conda run -n nitelite-pipeline"
-# DOCKER_CMD+="\bin\bash -c"
+DOCKER_CMD+=" conda run -n nitelite-pipeline-conda"
+# DOCKER_CMD+=" \bin\bash -c"
 
 # The script to run inside the docker image
 # DOCKER_CMD+=" python "
 # DOCKER_CMD+=" pytest"
-# DOCKER_CMD+=" python /workspaces/NITELite-pipeline/night-horizons-mapmaker/night_horizons/mapmake.py --help"
-DOCKER_CMD+=" ls ."
+DOCKER_CMD+=" python ./night-horizons-mapmaker/night_horizons/mapmake.py --help"
+# DOCKER_CMD+=" ls ."
 
 # Execute docker run command
 echo "Running the following command:"

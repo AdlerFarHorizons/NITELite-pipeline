@@ -15,12 +15,12 @@ WORKDIR /NITELite_pipeline/docker
 # Install Miniconda
 ENV CONDA_DIR /opt/conda
 ENV PATH=${CONDA_DIR}/bin:${PATH}
-# RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda.sh && \
-#     /bin/bash /miniconda.sh -b -p ${CONDA_DIR} && \
-#     rm /miniconda.sh
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /miniconda.sh && \
+    /bin/bash /miniconda.sh -b -p ${CONDA_DIR} && \
+    rm /miniconda.sh
 # To avoid downloading miniconda every time we copy it from the host
 # TODO: Change this when we are done with the development
-RUN /bin/bash ./downloads/miniconda.sh -b -p ${CONDA_DIR}
+# RUN /bin/bash ./downloads/miniconda.sh -b -p ${CONDA_DIR}
 
 # Install python environment
 RUN conda env create -f ./conda-env.yaml
@@ -29,10 +29,13 @@ RUN conda env create -f ./conda-env.yaml
 # The conda run command (and /bin/bash) is required,
 # since there are issues with conda activate
 WORKDIR /NITELite_pipeline/night-horizons-mapmaker
-RUN conda run -n nitelite-pipeline /bin/bash -c \
+# RUN conda run -n nitelite-pipeline /bin/bash -c \
+#     pip install -e .
+RUN conda run -n nitelite-pipeline-conda \
     pip install -e .
 
 # Validate the install
-RUN conda run -n nitelite-pipeline /bin/bash -c \
+WORKDIR /NITELite_pipeline
+RUN conda run -n nitelite-pipeline-conda \
     python -c "import night_horizons"
 
