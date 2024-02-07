@@ -3,14 +3,19 @@
 # Function to display help message
 show_help() {
     cat << EOF
-Usage: ./mosaic.sh -c CONFIG_FILEPATH [OPTIONS]
+Usage: ./mosaic.sh -c CONFIG_FILEPATH -d DATA_DIR [OPTIONS]
 
 Options:
-    -c, --config CONFIG_FILEPATH    Location of the configuration file
+    -c, --config CONFIG_FILEPATH    Location of the configuration file.
+    -d, --data DATA_DIR             Location of the data directory. This will
+                                    be mounted to the /data directory inside
+                                    the docker container. Any data you want to
+                                    use should be inside DATA_DIR, and any paths
+                                    in the config should be relative to this.
     -h, --help                      Show this help message
 
 Example:
-    ./bin/mosaic.sh ./mosaic_config.yml
+    ./bin/mosaic.sh -c ./mosaic_config.yml -d ~/data
 EOF
 }
 
@@ -22,6 +27,11 @@ while [[ $# -gt 0 ]]; do
     case $key in
         -c|--config)
             CONFIG_FILEPATH="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -d|--data)
+            DATA_DIR="$2"
             shift # past argument
             shift # past value
             ;;
@@ -37,9 +47,14 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Check if the config file path was provided
+# Check the necessary arguments are provided
 if [ -z "$CONFIG_FILEPATH" ]; then
     echo "Error: Configuration filepath is required."
+    show_help
+    exit 1
+fi
+if [ -z "$DATA_DIR" ]; then
+    echo "Error: Data directory is required."
     show_help
     exit 1
 fi
@@ -47,6 +62,9 @@ fi
 # Construct docker run command
 # DOCKER_CMD="docker compose run"
 DOCKER_CMD="docker compose -f ./docker/docker-compose.yaml run"
+
+# Mount the data directory
+DOCKER_CMD+=" --volume $DATA_DIR:/data"
 
 # We specify the platform, important for running on M1 Macs
 # DOCKER_CMD+=" --platform linux/amd64"
