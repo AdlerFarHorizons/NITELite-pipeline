@@ -104,7 +104,7 @@ fi
 # DOCKER_CMD+=" ls /data/other"
 
 # Execute docker run command
-echo "Running the following command:"
+echo "Executing:"
 echo $DOCKER_CMD
 echo
 eval $DOCKER_CMD
