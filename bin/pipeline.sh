@@ -14,6 +14,9 @@ Options:
                                     the docker container. Any data you want to
                                     use should be inside DATA_DIR, and any paths
                                     in the config should be relative to this.
+    -i, --interactive               Instead of running the execution script,
+                                    open an interactive shell inside the
+                                    docker container.
     -h, --help                      Show this help message
 
 Example:
@@ -37,6 +40,10 @@ while [[ $# -gt 0 ]]; do
             shift # past argument
             shift # past value
             ;;
+        -i|--interactive)
+            INTERACTIVE="true"
+            shift # past argument
+            ;;
         -h|--help)
             show_help
             exit 0
@@ -50,40 +57,48 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Check the necessary arguments are provided
-if [ -z "$CONFIG_FILEPATH" ]; then
-    echo "Error: Configuration filepath is required."
-    show_help
-    exit 1
-fi
 if [ -z "$DATA_DIR" ]; then
     echo "Error: Data directory is required."
     show_help
     exit 1
 fi
+if [ -z "$CONFIG_FILEPATH" ] && [ -z "$INTERACTIVE" ]; then
+    echo "Error: Configuration filepath is required."
+    show_help
+    exit 1
+fi
 
-# Construct docker run command
-# DOCKER_CMD="docker compose run"
-DOCKER_CMD="docker compose -f ./docker/docker-compose.yaml run"
+# Construct docker command
+DOCKER_CMD="docker compose -f ./docker/docker-compose.yaml"
+# The docker command itself
+DOCKER_CMD+=" run"
+
+# If not interactive, then we add a "run"
+if [ -n "$INTERACTIVE" ]; then
+    DOCKER_CMD+=" -i"
+fi
 
 # Mount the data directory
 DOCKER_CMD+=" --volume $DATA_DIR:/data"
 
-# We specify the platform, important for running on M1 Macs
-# DOCKER_CMD+=" --platform linux/amd64"
-
 # Name of the service
 DOCKER_CMD+=" nitelite_pipeline"
 
-# This part of the command specifies the python environment
-# (inside the docker image) to use
-DOCKER_CMD+=" conda run -n nitelite-pipeline-conda"
-# DOCKER_CMD+=" \bin\bash -c"
-
 # The script to run inside the docker image
-DOCKER_CMD+=" python ./night-horizons-mapmaker/night_horizons/mapmake.py"
+if [ -z "$INTERACTIVE" ]; then
 
-# The command line arguments to the script
-DOCKER_CMD+=" $CONFIG_FILEPATH"
+    # This part of the command specifies the python environment
+    # (inside the docker image) to use
+    DOCKER_CMD+=" conda run -n nitelite-pipeline-conda"
+
+    DOCKER_CMD+=" python ./night-horizons-mapmaker/night_horizons/mapmake.py"
+
+    # The command line arguments to the script
+    DOCKER_CMD+=" $CONFIG_FILEPATH"
+else
+    DOCKER_CMD+=" /bin/bash"
+fi
+
 
 # TODO: Delete this later
 # DOCKER_CMD+=" ls /data/other"
