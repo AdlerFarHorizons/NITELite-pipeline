@@ -11,8 +11,8 @@ RUN apt-get update -y && \
     rm -rf /var/cache/apt/lists
 
 # Copy over the pipeline code and move into its directory
-COPY . /NITELite-pipeline-for-docker-build
-WORKDIR /NITELite-pipeline-for-docker-build
+COPY . /NITELite-pipeline
+WORKDIR /NITELite-pipeline
 
 # Install the python environment
 RUN conda env create -f ./docker/conda-env.yaml
@@ -20,11 +20,11 @@ RUN conda env create -f ./docker/conda-env.yaml
 # Install night-horizons
 # The conda run command is required,
 # since there are issues with conda activate
-WORKDIR /NITELite-pipeline-for-docker-build/night-horizons-mapmaker
+WORKDIR /NITELite-pipeline/night-horizons-mapmaker
 RUN conda run -n nitelite-pipeline-conda \
    pip install -e .
 
-WORKDIR /
+WORKDIR /NITELite-pipeline
 
 # # Validate the install
 # WORKDIR /NITELite_pipeline

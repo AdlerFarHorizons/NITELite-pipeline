@@ -91,10 +91,11 @@ if [ -n "$CONFIG_FILEPATH" ]; then
     DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yml"
 fi
 
-# Mount the code and make it the workdir
-CODE_DIR=$(realpath ..)
-DOCKER_CMD+=" --volume $CODE_DIR:/NITELite-pipeline"
-DOCKER_CMD+=" -w /NITELite-pipeline"
+# TODO: Delete
+# # Mount the code and make it the workdir
+# CODE_DIR=$(realpath ..)
+# DOCKER_CMD+=" --volume $CODE_DIR:/NITELite-pipeline"
+# DOCKER_CMD+=" -w /NITELite-pipeline"
 
 # Name of the service
 DOCKER_CMD+=" nitelite_pipeline"
