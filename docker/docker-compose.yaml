@@ -3,7 +3,7 @@ services:
     image: nitelite_pipeline
     # TODO: Delete this. It's used for debugging
     volumes:
-      - "/Users/zhafensaavedra/Google Drive/Shared drives/NITELite/NITELite_Mapmaker/data/night_horizons_test_data:/data/test_data:cached"
+      - "/Users/zhafensaavedra/Google Drive/Shared drives/NITELite/NITELite_Mapmaker/data/night_horizons_test_data:/data/night_horizons_test_data:cached"
     # TODO: We should probably use separate services for PostGIS and the
     #       pipeline, especially if it let's us avoid a speed-decrease from 
     #       mac-linux mismatch.

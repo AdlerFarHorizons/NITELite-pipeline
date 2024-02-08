@@ -1,4 +1,4 @@
-name: nitelite-pipeline-conda2
+name: nitelite-pipeline-conda
 channels:
   - conda-forge
 dependencies:
