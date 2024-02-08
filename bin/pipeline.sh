@@ -14,6 +14,10 @@ Options:
                                     the docker container. Any data you want to
                                     use should be inside DATA_DIR, and any paths
                                     in the config should be relative to this.
+    -cp, --copy-code                Mount the code directory (the parent
+                                    directory of this executable) to the docker
+                                    container. This is useful if you want to
+                                    use your own edited code.
     -i, --interactive               Instead of running the execution script,
                                     open an interactive shell inside the
                                     docker container.
@@ -39,6 +43,10 @@ while [[ $# -gt 0 ]]; do
             DATA_DIR="$2"
             shift # past argument
             shift # past value
+            ;;
+        -cp|--copy-code)
+            COPY_CODE="true"
+            shift # past argument
             ;;
         -i|--interactive)
             INTERACTIVE="true"
@@ -91,11 +99,11 @@ if [ -n "$CONFIG_FILEPATH" ]; then
     DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yml"
 fi
 
-# TODO: Delete
-# # Mount the code and make it the workdir
-# CODE_DIR=$(realpath ..)
-# DOCKER_CMD+=" --volume $CODE_DIR:/NITELite-pipeline"
-# DOCKER_CMD+=" -w /NITELite-pipeline"
+if [ -n "$COPY_CODE" ]; then
+    # Mount the code. Only use this if you want to use your own edited code.
+    CODE_DIR=$(realpath ..)
+    DOCKER_CMD+=" --volume $CODE_DIR:/NITELite-pipeline"
+fi
 
 # Name of the service
 DOCKER_CMD+=" nitelite_pipeline"
