@@ -8,7 +8,7 @@ mapmaker:
 
 # I/O settings
 io_manager:
-  input_dir: /data/220513-FH135
+  input_dir: /data/nitelite/220513-FH135
   input_description:
     raw_images:
       directory: images/raw
@@ -17,7 +17,7 @@ io_manager:
       directory: images/referenced
       extension: ['tif', 'tiff']
       pattern: 'Geo\s\d+_\d.tif'
-  output_dir: /data/220513-FH135/mosaics/referenced
+  output_dir: /data/nitelite/220513-FH135/mosaics/referenced
   file_exists: new
 
 # Coordinate reference-system employed

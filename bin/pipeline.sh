@@ -75,6 +75,9 @@ DOCKER_CMD="docker compose -f ./docker/docker-compose.yaml"
 # The docker command itself
 DOCKER_CMD+=" run"
 
+# DEBUG
+DOCKER_CMD+=" --remove-orphans"
+
 # If not interactive, then we add a "run"
 if [ -n "$INTERACTIVE" ]; then
     DOCKER_CMD+=" -i"

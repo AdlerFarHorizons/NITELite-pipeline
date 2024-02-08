@@ -1,3 +1,16 @@
 #!/bin/bash
 
-./bin/pipeline.sh -c ./config/mosaic.yml -d /Users/Shared/data
+CMD="./bin/pipeline.sh"
+CMD+=" -c ./config/mosaic.yml"
+CMD+=" -d /Users/Shared/data"
+
+# Pass any other commands to the docker build command
+if [ $# -gt 0 ]; then
+    CMD+=" \"$@\""
+fi
+
+# Execute the build
+echo "Executing:"
+echo $CMD
+echo
+eval $CMD
