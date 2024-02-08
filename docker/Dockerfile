@@ -1,4 +1,6 @@
 # We use miniconda as a base image
+# We use this instead of the simpler python image because gdal is difficult to
+# install without conda.
 FROM continuumio/miniconda3
 
 # The base postgis image does not include any CLI tools, so we install them
