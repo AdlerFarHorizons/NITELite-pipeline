@@ -57,15 +57,17 @@ while [[ $# -gt 0 ]]; do
 done
 
 # Check the necessary arguments are provided
-if [ -z "$DATA_DIR" ]; then
-    echo "Error: Data directory is required."
-    show_help
-    exit 1
-fi
-if [ -z "$CONFIG_FILEPATH" ] && [ -z "$INTERACTIVE" ]; then
-    echo "Error: Configuration filepath is required."
-    show_help
-    exit 1
+if [ -z "$INTERACTIVE" ]; then
+    if [ -z "$DATA_DIR" ]; then
+        echo "Error: Data directory is required."
+        show_help
+        exit 1
+    fi
+    if [ -z "$CONFIG_FILEPATH" ]; then
+        echo "Error: Configuration filepath is required."
+        show_help
+        exit 1
+    fi
 fi
 
 # Construct docker command
@@ -79,7 +81,15 @@ if [ -n "$INTERACTIVE" ]; then
 fi
 
 # Mount the data directory
-DOCKER_CMD+=" --volume $DATA_DIR:/data"
+if [ -n "$DATA_DIR" ]; then
+    DOCKER_CMD+=" --volume $DATA_DIR:/data"
+fi
+
+# Mount the config file
+if [ -n "$CONFIG_FILEPATH" ]; then
+    CONFIG_FILEPATH=$(realpath $CONFIG_FILEPATH)
+    DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yml"
+fi
 
 # Name of the service
 DOCKER_CMD+=" nitelite_pipeline"
@@ -91,10 +101,10 @@ if [ -z "$INTERACTIVE" ]; then
     # (inside the docker image) to use
     DOCKER_CMD+=" conda run -n nitelite-pipeline-conda"
 
-    DOCKER_CMD+=" python ./night-horizons-mapmaker/night_horizons/mapmake.py"
+    DOCKER_CMD+=" python night_horizons/mapmake.py"
 
-    # The command line arguments to the script
-    DOCKER_CMD+=" $CONFIG_FILEPATH"
+    # Pass in the config itself
+    DOCKER_CMD+=" /used-config.yml"
 else
     DOCKER_CMD+=" /bin/bash"
 fi
