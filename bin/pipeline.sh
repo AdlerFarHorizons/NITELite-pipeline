@@ -114,7 +114,7 @@ if [ -z "$INTERACTIVE" ]; then
 
     # This part of the command specifies the python environment
     # (inside the docker image) to use
-    DOCKER_CMD+=" conda run -n nitelite-pipeline-conda"
+    DOCKER_CMD+=" conda run -n nitelite-pipeline-conda --live-stream"
 
     DOCKER_CMD+=" python night-horizons-mapmaker/night_horizons/mapmake.py"
 
