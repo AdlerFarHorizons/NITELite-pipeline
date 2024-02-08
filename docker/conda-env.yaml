@@ -1,8 +1,7 @@
-name: nitelite-pipeline-conda
+name: nitelite-pipeline-conda2
 channels:
   - conda-forge
 dependencies:
-  - python
   - pytest
   - numpy
   - scipy
