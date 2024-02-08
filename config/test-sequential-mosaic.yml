@@ -22,8 +22,12 @@ io_manager:
     img_log: metadata/image.log
     imu_log: metadata/PresIMULog.csv
     gps_log: metadata/GPSLog.csv
-  output_dir: /data/nitelite/220513-FH135/mosaics/sequential
+  output_dir: /data/nitelite/220513-FH135/mosaics/sequential_test
   file_exists: new
+
+# Settings for testing and training data
+data_splitter:
+  drop_raw_images: True
 
 # Coordinate reference-system employed
 crs:
