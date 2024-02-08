@@ -1,1 +1,1 @@
-docker build -f ./docker/Dockerfile -t nitelite_pipeline .
+docker build --progress plain -f ./docker/Dockerfile -t nitelite_pipeline .

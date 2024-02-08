@@ -1,4 +1,4 @@
-# We use postgis as a base image
+# We use miniconda as a base image
 FROM continuumio/miniconda3
 
 # The base postgis image does not include any CLI tools, so we install them
@@ -8,11 +8,9 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -rf /var/cache/apt/lists
 
-# Copy over the pipeline code
+# Copy over the pipeline code and move into its directory
 COPY . /NITELite_pipeline
-
-# DEBUG
-RUN echo "Checking the working directory" && pwd
+WORKDIR /NITELite_pipeline
 
 # # Install Miniconda
 # ENV CONDA_DIR /opt/conda
@@ -33,14 +31,13 @@ RUN conda env create -f ./docker/conda-env.yaml
 # Install night-horizons
 # The conda run command (and /bin/bash) is required,
 # since there are issues with conda activate
-# WORKDIR /NITELite_pipeline/night-horizons-mapmaker
+WORKDIR /NITELite_pipeline/night-horizons-mapmaker
 # RUN conda run -n nitelite-pipeline /bin/bash -c \
 #     pip install -e .
-# RUN conda run -n nitelite-pipeline-conda \
-#    pip install -e .
+RUN conda run -n nitelite-pipeline-conda \
+   pip install -e .
 # 
 # # Validate the install
 # WORKDIR /NITELite_pipeline
 # RUN conda run -n nitelite-pipeline-conda \
 #     python -c "import night_horizons"
-
