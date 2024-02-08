@@ -1,7 +1,7 @@
 #!/bin/bash
 
-CMD="./bin/pipeline.sh"
-CMD+=" -c ./config/mosaic.yml"
+CMD="./bin/mapmake.sh"
+CMD+=" -c ./config/sequential-mosaic.yml"
 CMD+=" -d /Users/Shared/data"
 
 # Pass any other commands to the docker build command
