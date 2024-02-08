@@ -26,11 +26,6 @@ RUN conda run -n nitelite-pipeline-conda \
 
 WORKDIR /NITELite-pipeline
 
-# # Validate the install
-# WORKDIR /NITELite_pipeline
-# RUN conda run -n nitelite-pipeline-conda \
-#     python -c "import night_horizons"
-
 # Ensure that the conda environment is act:vated whenever the user logs in
 # Entrypoints don't work with conda activate, so we add it to the bashrc
 # This still doesn't work for one-offs. conda run is required for those.
