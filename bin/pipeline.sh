@@ -91,6 +91,11 @@ if [ -n "$CONFIG_FILEPATH" ]; then
     DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yml"
 fi
 
+# Mount the code and make it the workdir
+CODE_DIR=$(realpath ..)
+DOCKER_CMD+=" --volume $CODE_DIR:/NITELite-pipeline"
+DOCKER_CMD+=" -w /NITELite-pipeline"
+
 # Name of the service
 DOCKER_CMD+=" nitelite_pipeline"
 
@@ -101,7 +106,7 @@ if [ -z "$INTERACTIVE" ]; then
     # (inside the docker image) to use
     DOCKER_CMD+=" conda run -n nitelite-pipeline-conda"
 
-    DOCKER_CMD+=" python night_horizons/mapmake.py"
+    DOCKER_CMD+=" python night-horizons-mapmaker/night_horizons/mapmake.py"
 
     # Pass in the config itself
     DOCKER_CMD+=" /used-config.yml"
