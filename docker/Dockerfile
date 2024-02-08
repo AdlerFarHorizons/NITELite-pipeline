@@ -12,7 +12,7 @@ RUN apt-get update -y && \
 
 # Copy over the pipeline code and move into its directory
 COPY . /NITELite-pipeline-for-docker-build
-WORKDIR /NITELite_pipeline-for_docker-build
+WORKDIR /NITELite-pipeline-for-docker-build
 
 # Install the python environment
 RUN conda env create -f ./docker/conda-env.yaml
