@@ -1,6 +1,6 @@
 services:
-  nitelite_pipeline:
-    image: nitelite_pipeline
+  nitelite-pipeline:
+    image: nitelite-pipeline
     # TODO: Delete this. It's used for debugging
     volumes:
       - "/Users/zhafensaavedra/Google Drive/Shared drives/NITELite/NITELite_Mapmaker/data/night_horizons_test_data:/data/night_horizons_test_data:cached"

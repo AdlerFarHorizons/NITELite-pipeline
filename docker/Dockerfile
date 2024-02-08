@@ -10,12 +10,12 @@ RUN apt-get update -y && \
     apt-get clean && \
     rm -rf /var/cache/apt/lists
 
-# Copy over the pipeline code and move into its directory
-COPY . /NITELite-pipeline
-WORKDIR /NITELite-pipeline
-
 # Install the python environment
-RUN conda env create -f ./docker/conda-env.yaml
+COPY ./docker/conda-env.yaml /conda-env.yaml
+RUN conda env create -f /conda-env.yaml
+
+# Copy over the code
+COPY . /NITELite-pipeline
 
 # Install night-horizons
 # The conda run command is required,

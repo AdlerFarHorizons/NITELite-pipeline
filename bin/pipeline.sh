@@ -104,7 +104,7 @@ fi
 # fi
 
 # Name of the service
-DOCKER_CMD+=" nitelite_pipeline"
+DOCKER_CMD+=" nitelite-pipeline"
 
 # The script to run inside the docker image
 if [ -z "$INTERACTIVE" ]; then
