@@ -1,0 +1,31 @@
+###############################################################################
+# Example Configuration File
+###############################################################################
+
+# Indicate what type of map we want to create
+mapmaker:
+  map_type: sequential
+
+# I/O settings
+io_manager:
+  input_dir: /data/nitelite/220513-FH135
+  input_description:
+    raw_images:
+      directory: images/raw
+      extension: ['raw', 'tif', 'tiff']
+    referenced_images:
+      directory: images/referenced
+      extension: ['tif', 'tiff']
+      pattern: 'Geo\s\d+_\d.tif'
+    img_log: metadata/image.log
+    imu_log: metadata/PresIMULog.csv
+    gps_log: metadata/GPSLog.csv
+  output_dir: /data/nitelite/220513-FH135/mosaics/sequential
+  file_exists: new
+
+# Coordinate reference-system employed
+crs:
+  projparams: 'EPSG:3857'
+
+random_state: 
+  seed: 159234
