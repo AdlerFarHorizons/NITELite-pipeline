@@ -124,9 +124,6 @@ else
     DOCKER_CMD+=" /bin/bash"
 fi
 
-# TODO: Delete this later
-# DOCKER_CMD+=" ls /data/other"
-
 # Execute docker run command
 echo "Executing:"
 echo $DOCKER_CMD
