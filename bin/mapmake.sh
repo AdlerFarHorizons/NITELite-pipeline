@@ -17,6 +17,8 @@ Options:
     -i, --interactive               Instead of running the execution script,
                                     open an interactive shell inside the
                                     docker container.
+    -f, --compose-file              Specify the docker-compose file to use.
+                                    Default is ./build/docker-compose.yaml
     -h, --help                      Show this help message
 
 Example:
@@ -37,6 +39,11 @@ while [[ $# -gt 0 ]]; do
             ;;
         -d|--data)
             DATA_DIR="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -f|--compose-file)
+            COMPOSE_FILE="$2"
             shift # past argument
             shift # past value
             ;;
@@ -68,10 +75,13 @@ if [ -z "$INTERACTIVE" ]; then
         show_help
         exit 1
     fi
+    if [ -z "$COMPOSE_FILE" ]; then
+        COMPOSE_FILE="./build/docker-compose.yaml"
+    fi
 fi
 
 # Construct docker command
-DOCKER_CMD="docker compose -f ./docker/docker-compose.yaml"
+DOCKER_CMD="docker compose -f ./build/docker-compose.yaml"
 # The docker command itself
 DOCKER_CMD+=" run"
 

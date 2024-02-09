@@ -11,7 +11,7 @@ RUN apt-get update -y && \
     rm -rf /var/cache/apt/lists
 
 # Install the python environment
-COPY ./docker/conda-env.yaml /conda-env.yaml
+COPY ./build/conda-env.yaml /conda-env.yaml
 RUN conda env create -f /conda-env.yaml
 
 # Copy over the code

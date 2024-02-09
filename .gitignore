@@ -2,4 +2,4 @@
 
 # This was useful during development
 .devcontainer/downloads
-docker/downloads
+build/downloads

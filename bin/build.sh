@@ -7,7 +7,7 @@ DOCKER_CMD="docker build"
 DOCKER_CMD+=" --progress plain"
 
 # The docker file, for convenience
-DOCKER_CMD+=" -f ./docker/Dockerfile"
+DOCKER_CMD+=" -f ./build/Dockerfile"
 
 # The tag
 DOCKER_CMD+=" -t zhafen/nitelite-pipeline:latest"
