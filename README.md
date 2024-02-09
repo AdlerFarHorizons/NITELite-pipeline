@@ -24,4 +24,17 @@ Increasing the resources available to the docker container will typically
 resolve this. To do so, on Docker Desktop go to "settings" (gear icon)
 and then select "resources". There should be a slider for Memory.
 
+## Editing the Code
+
+If you want to edit the pipeline code and see the changes take effect, you
+have to build the image yourself. To do this, from the main directory
+run `./bin/build.sh`. Then run `./bin/mapmake.sh` as you usually would,
+but include the option `-f ./build/dev-docker-compose.yaml`.
+For example,
+
+```shell
+./bin/mapmake.sh -c ./config/mosaic.yml -d my/data -f ./build/dev-docker-compose.yaml
+```
+
+
 [FH135-drive]: https://drive.google.com/drive/folders/1RVNJydEQZ29ElqbNvxbMS5cBAw2bMShU?usp=drive_link
