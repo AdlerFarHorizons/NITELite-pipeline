@@ -81,7 +81,7 @@ if [ -z "$INTERACTIVE" ]; then
 fi
 
 # Construct docker command
-DOCKER_CMD="docker compose -f ./build/docker-compose.yaml"
+DOCKER_CMD="docker compose -f $COMPOSE_FILE"
 # The docker command itself
 DOCKER_CMD+=" run"
 
