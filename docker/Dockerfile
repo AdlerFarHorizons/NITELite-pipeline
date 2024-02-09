@@ -24,7 +24,9 @@ WORKDIR /NITELite-pipeline/night-horizons-mapmaker
 RUN conda run -n nitelite-pipeline-conda \
    pip install -e .
 
+# Some useful settings
 WORKDIR /NITELite-pipeline
+USER root
 
 # Ensure that the conda environment is act:vated whenever the user logs in
 # Entrypoints don't work with conda activate, so we add it to the bashrc
