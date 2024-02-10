@@ -3,7 +3,7 @@
 # Function to display help message
 show_help() {
     cat << EOF
-Usage: ./bin/mapmake.sh -c CONFIG_FILEPATH -d DATA_DIR [OPTIONS]
+Usage: ./mosaic.sh -c CONFIG_FILEPATH -d DATA_DIR [OPTIONS]
 
 Options:
     -c, --config CONFIG_FILEPATH    Location of the configuration file.
@@ -22,7 +22,7 @@ Options:
     -h, --help                      Show this help message
 
 Example:
-    ./bin/mapmake.sh -c ./config/mosaic.yml -d /Users/shared/data
+    ./bin/mosaic.sh -c ./mosaic_config.yml -d ~/data
 EOF
 }
 
@@ -32,11 +32,6 @@ while [[ $# -gt 0 ]]; do
     key="$1"
 
     case $key in
-        -c|--config)
-            CONFIG_FILEPATH="$2"
-            shift # past argument
-            shift # past value
-            ;;
         -d|--data)
             DATA_DIR="$2"
             shift # past argument
@@ -70,14 +65,9 @@ if [ -z "$INTERACTIVE" ]; then
         show_help
         exit 1
     fi
-    if [ -z "$CONFIG_FILEPATH" ]; then
-        echo "Error: Configuration filepath is required."
-        show_help
-        exit 1
-    fi
 fi
 if [ -z "$COMPOSE_FILE" ]; then
-    COMPOSE_FILE="./build/docker-compose.yaml"
+    COMPOSE_FILE="./build/dev-docker-compose.yaml"
 fi
 
 # Construct docker command
@@ -95,12 +85,6 @@ if [ -n "$DATA_DIR" ]; then
     DOCKER_CMD+=" --volume $DATA_DIR:/data"
 fi
 
-# Mount the config file
-if [ -n "$CONFIG_FILEPATH" ]; then
-    CONFIG_FILEPATH=$(realpath $CONFIG_FILEPATH)
-    DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yml"
-fi
-
 # TODO: Delete and explain why
 # Explanation for removal: The idea behind this is to allow the user to use
 # their own version of the pipeline. However, one of the goals is to freeze the
@@ -114,19 +98,14 @@ fi
 # fi
 
 # Name of the service
-DOCKER_CMD+=" nitelite-pipeline"
+DOCKER_CMD+=" postgis"
 
 # The script to run inside the docker image
 if [ -z "$INTERACTIVE" ]; then
 
     # This part of the command specifies the python environment
     # (inside the docker image) to use
-    DOCKER_CMD+=" conda run -n nitelite-pipeline-conda --live-stream"
-
-    DOCKER_CMD+=" python night-horizons-mapmaker/night_horizons/mapmake.py"
-
-    # Pass in the config itself
-    DOCKER_CMD+=" /used-config.yml"
+    DOCKER_CMD+=" raster2pqsgl -h"
 else
     DOCKER_CMD+=" /bin/bash"
 fi

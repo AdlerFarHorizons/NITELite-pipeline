@@ -5,7 +5,7 @@ services:
     build:
       context: ..
       dockerfile: ./docker/postgis.Dockerfile
-    environment: 
+    environment:
       POSTGRES_DB: gis
       POSTGRES_USER: gis
       POSTGRES_PASSWORD: gis
