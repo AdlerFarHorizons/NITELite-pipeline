@@ -1,16 +1,16 @@
-# NITELite-pipeline
+# The NITELite data pipeline
 Code to process images and data taken with the HAB NITELite instrument.
 
 ## Installation
 
 Installation requires two steps.
 
-First, clone this repository,  e.g.
+First, clone this repository,  i.e.
 ```shell
 git clone git@github.com:AdlerFarHorizons/NITELite-pipeline.git
 ```
 
-Second, clone the docker image, e.g.
+Second, clone the docker image, i.e.
 ```shell
 docker clone zhafen/nitelite-pipeline
 ```
@@ -56,6 +56,21 @@ and using the training sample as a base to georeference the test sample.
 In any config file, you will have to edit it to ensure that it points to your
 data. Inside the config file, this is the "io_manager" section. The provided
 template configs describe the parameters in detail.
+
+### A Note on Filepaths
+
+During typical execution the user passes the directory containing all their
+data to `./bin/mapmake.sh` as the `-d` argument.
+That directory is then mounted to the docker image at `/data`.
+The user then specifies in the config where the input and output are
+inside the mounted directory.
+
+Example:
+The directory containing all data is `/Users/Shared/shared_data`.
+and the input data is at `/Users/Shared/shared_data/nitelite/220513-FH135`.
+In this case the user would specify `-d /Users/Shared/shared_data` when
+executing `./bin/mapmake.sh`, and would set the `input_dir` option in the
+configuration files to `/data/nitelite/220513-FH135`.
 
 ### Example command
 
