@@ -1,10 +1,13 @@
 services:
   nitelite-pipeline:
     image: nitelite-pipeline
-  # postgis:
-  #   environment: 
-  #     POSTGRES_DB: gis
-  #     POSTGRES_USER: gis
-  #     POSTGRES_PASSWORD: gis
-  #   ports:
-  #     - 5432:5432
+  postgis:
+    build:
+      context: ..
+      dockerfile: ./docker/postgis.Dockerfile
+    environment: 
+      POSTGRES_DB: gis
+      POSTGRES_USER: gis
+      POSTGRES_PASSWORD: gis
+    ports:
+      - 5432:5432
