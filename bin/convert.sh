@@ -105,7 +105,7 @@ if [ -z "$INTERACTIVE" ]; then
 
     # This part of the command specifies the python environment
     # (inside the docker image) to use
-    DOCKER_CMD+=" raster2pqsgl -h"
+    DOCKER_CMD+=" raster2pgsql"
 else
     DOCKER_CMD+=" /bin/bash"
 fi
