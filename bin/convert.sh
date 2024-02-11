@@ -73,17 +73,17 @@ fi
 # Construct docker command
 DOCKER_CMD="docker compose -f $COMPOSE_FILE"
 # The docker command itself
-DOCKER_CMD+=" run"
+DOCKER_CMD+=" up"
 
 # If not interactive, then we add a "run"
 if [ -n "$INTERACTIVE" ]; then
     DOCKER_CMD+=" -i"
 fi
 
-# Mount the data directory
-if [ -n "$DATA_DIR" ]; then
-    DOCKER_CMD+=" --volume $DATA_DIR:/data"
-fi
+# # Mount the data directory
+# if [ -n "$DATA_DIR" ]; then
+#     DOCKER_CMD+=" --volume $DATA_DIR:/data"
+# fi
 
 # TODO: Delete and explain why
 # Explanation for removal: The idea behind this is to allow the user to use
@@ -105,7 +105,8 @@ if [ -z "$INTERACTIVE" ]; then
 
     # This part of the command specifies the python environment
     # (inside the docker image) to use
-    DOCKER_CMD+=" raster2pgsql"
+    DOCKER_CMD+=""
+    # DOCKER_CMD+=" raster2pgsql"
 else
     DOCKER_CMD+=" /bin/bash"
 fi
