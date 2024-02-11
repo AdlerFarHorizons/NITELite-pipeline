@@ -17,6 +17,8 @@ docker clone zhafen/nitelite-pipeline
 For this command to work you must download and run
 [docker desktop](https://www.docker.com/products/docker-desktop/).
 
+TODO: Don't have the user clone, just have them run it instead.
+
 ## Running the pipeline
 
 To run the pipeline, navigate to the main directory for this repository (the
