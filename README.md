@@ -3,15 +3,25 @@ Code to process images and data taken with the HAB NITELite instrument.
 
 ## Installation
 
-Installation requires two steps.
+Installation requires a few steps.
+These are a one-time thing.
 
-First, clone this repository,  i.e.
+First, if you are using windows you will need to download and install
+[Windows Powershell](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell?view=powershell-7.4).
+This will enable you to treat your windows computer like a unix-based system,
+which is what Linux, Mac, and cloud systems typically use.
+
+Second, [install git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), if you don't have it installed already.
+
+Next, clone this repository,  i.e.
 ```shell
-git clone git@github.com:AdlerFarHorizons/NITELite-pipeline.git
+git clone https://github.com/AdlerFarHorizons/NITELite-pipeline.git
 ```
 
-Second, download and run  
+Second, download and run
 [docker desktop](https://www.docker.com/products/docker-desktop/).
+
+# TODO: @zhafen add a "check install" command.
 
 ## Running the pipeline
 
@@ -84,6 +94,10 @@ Nine times out of ten this is because the analysis ran out of memory.
 Increasing the resources available to the docker container will typically
 resolve this. To do so, on Docker Desktop go to "settings" (gear icon)
 and then select "resources". There should be a slider for Memory.
+
+
+#### Why can't I push my edits to Git?
+You cloned with https (as recommended earlier). This is simpler, but doesn't enable you to publish your changes. Clone with ssh instead, after setting up ssh.
 
 ## Editing the Code
 
