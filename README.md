@@ -21,7 +21,12 @@ git clone https://github.com/AdlerFarHorizons/NITELite-pipeline.git
 Second, download and run
 [docker desktop](https://www.docker.com/products/docker-desktop/).
 
-# TODO: @zhafen add a "check install" command.
+To download the docker image (the pre-packaged pipeline) and verify installation,
+run the following
+```shell
+cd NITELite-pipeline # Move into the pipeline
+./bin/validate.sh # Validation script
+```
 
 ## Running the pipeline
 
