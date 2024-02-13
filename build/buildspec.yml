@@ -1,76 +1,30 @@
 version: 0.2
 
-run-as: Linux-user-name
+# TODO: Currently running as root, if we change to non-root then change this
+# run-as: Linux-user-name
 
 env:
-  shell: shell-tag
-  variables:
-    key: "value"
-    key: "value"
-  parameter-store:
-    key: "value"
-    key: "value"
-  exported-variables:
-    - variable
-    - variable
-  secrets-manager:
-    key: secret-id:json-key:version-stage:version-id
-  git-credential-helper: no | yes
-
-proxy:
-  upload-artifacts: no | yes
-  logs: no | yes
-
-batch:
-  fast-fail: false | true
-  # build-list:
-  # build-matrix:
-  # build-graph:
+  shell: bash
+  # TODO: Consider setting up the data directory with environment variables
+  # variables:
+  #   key: "value"
+  #   key: "value"
         
 phases:
   install:
-    run-as: Linux-user-name
-    on-failure: ABORT | CONTINUE
-    runtime-versions:
-      runtime: version
-      runtime: version
+    on-failure: ABORT
     commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
-    # steps:
-  pre_build:
-    run-as: Linux-user-name
-    on-failure: ABORT | CONTINUE
-    commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
-    # steps:
+      - git clone https://github.com/AdlerFarHorizons/NITELite-pipeline.git
+      - ./bin/validate.sh
   build:
-    run-as: Linux-user-name
-    on-failure: ABORT | CONTINUE
+    on-failure: ABORT
     commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
+      - ./bin/aws_mapmake.sh
     # steps:
   post_build:
-    run-as: Linux-user-name
-    on-failure: ABORT | CONTINUE
+    on-failure: CONTINUE
     commands:
-      - command
-      - command
-    finally:
-      - command
-      - command
-    # steps:
+      - ./bin/aws_convert.sh
 reports:
   report-group-name-or-arn:
     files:
