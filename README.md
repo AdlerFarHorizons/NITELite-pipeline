@@ -10,14 +10,8 @@ First, clone this repository,  i.e.
 git clone git@github.com:AdlerFarHorizons/NITELite-pipeline.git
 ```
 
-Second, clone the docker image, i.e.
-```shell
-docker clone zhafen/nitelite-pipeline
-```
-For this command to work you must download and run
+Second, download and run  
 [docker desktop](https://www.docker.com/products/docker-desktop/).
-
-TODO: Don't have the user clone, just have them run it instead.
 
 ## Running the pipeline
 
