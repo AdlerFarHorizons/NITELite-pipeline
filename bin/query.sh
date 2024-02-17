@@ -1,0 +1,1 @@
+docker exec -it build-db-1 psql -U postgres

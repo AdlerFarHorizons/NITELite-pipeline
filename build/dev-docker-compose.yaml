@@ -1,17 +1,24 @@
+# Use postgres/example user/password credentials
+version: '3.9'
+
 services:
-  nitelite-pipeline:
-    image: nitelite-pipeline
-  postgis:
-    image: postgis/postgis
+
+  db:
+    image: postgres
     restart: always
-    # build:
-      # context: ..
-      # dockerfile: ./build/postgis.Dockerfile
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
-      - POSTGRES_DB=gis
-      - POSTGRES_USER=gis
-      - POSTGRES_PASSWORD=gis
+      POSTGRES_PASSWORD: example
+
+  adminer:
+    image: adminer
+    restart: always
     ports:
-      - 5432:5432
-    volumes:
-      - /Users/Shared/data/nitelite/220513-FH135/postgis:/var/lib/postgresql/data
+      - 8080:8080
