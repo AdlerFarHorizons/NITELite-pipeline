@@ -1,0 +1,1 @@
+docker compose -f ./build/dev-docker-compose.yaml up
