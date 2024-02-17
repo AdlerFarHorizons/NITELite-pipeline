@@ -1,1 +1,1 @@
-docker exec -it build-db-1 psql -U postgres
+docker exec -it build-db-1 /bin/bash -c "raster2pgsql /data/referenced/*modified.tif public.referenced > /data/referenced/raster.sql" #> raster.sql # | docker exec -it build-db-1 psql -U postgres -d
