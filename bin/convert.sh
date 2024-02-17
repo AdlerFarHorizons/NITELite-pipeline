@@ -5,7 +5,8 @@ docker compose -f ./build/dev-docker-compose.yaml build --no-cache
 # Boot up the container
 docker compose -f ./build/dev-docker-compose.yaml up -d
 # Wait for it to boot up
-sleep 2
+echo "Sleeping for 10 seconds to let the database boot up..."
+sleep 10
 
 # Enable raster support, drop the table if it exists
 docker exec -it build-db-1 psql -U gis -c "CREATE EXTENSION IF NOT EXISTS postgis_raster; DROP TABLE IF EXISTS public.referenced;"
