@@ -1,0 +1,67 @@
+Resources:
+  CodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Artifacts: 
+        Location: !Ref OutputBucket
+        Type: S3
+      Environment: 
+        Type: LINUX_CONTAINER
+        Image: aws/codebuild/standard:5.0
+        ComputeType: BUILD_GENERAL1_SMALL
+      ServiceRole: !GetAtt CodeBuildServiceRole.Arn
+      Source: 
+        Location: https://github.com/zhafen/codebuild-example.git
+        Type: GITHUB
+  CodeBuildServiceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - codebuild.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: /
+      Policies:
+        - PolicyName: CodeBuildRolePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Sid: CloudWatchLogsPolicy
+                Effect: Allow
+                Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+                Resource: "*"
+              - Sid: CodeCommitPolicy
+                Effect: Allow
+                Action:
+                - codecommit:GitPull
+                Resource: "*"
+              - Sid: S3GetObjectPolicy
+                Effect: Allow
+                Action:
+                - s3:GetObject
+                - s3:GetObjectVersion
+                Resource: "*"
+              - Sid: S3PutObjectPolicy
+                Effect: Allow
+                Action:
+                - s3:PutObject
+                Resource: "*"
+              - Sid: S3BucketIdentity
+                Effect: Allow
+                Action:
+                - s3:GetBucketAcl
+                - s3:GetBucketLocation
+                Resource: "*"
+  OutputBucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: RetainExceptOnCreate
+    Properties:
+      BucketName: codebuild-example-output-bucket
