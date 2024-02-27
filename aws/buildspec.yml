@@ -1,19 +1,63 @@
 version: 0.2
 
+# TODO: Currently running as root, if we change to non-root then change this
+# run-as: Linux-user-name
+
+env:
+  shell: bash
+  # TODO: Consider setting up the data directory with environment variables
+  # variables:
+  #   key: "value"
+  #   key: "value"
+        
 phases:
   install:
-    runtime-versions:
-      java: corretto11
-  pre_build:
+    on-failure: ABORT
     commands:
-      - echo Nothing to do in the pre_build phase...
+      - git clone https://github.com/AdlerFarHorizons/NITELite-pipeline.git
+      - ./bin/validate.sh
   build:
+    on-failure: ABORT
     commands:
-      - echo Build started on `date`
-      - mvn install
+      - ./bin/aws_mapmake.sh
+    # steps:
   post_build:
+    on-failure: CONTINUE
     commands:
-      - echo Build completed on `date`
+      - ./bin/aws_convert.sh
+reports:
+  report-group-name-or-arn:
+    files:
+      - location
+      - location
+    base-directory: location
+    discard-paths: no | yes
+    file-format: report-format
 artifacts:
   files:
-    - target/messageUtil-1.0.jar
+    - location
+    - location
+  name: artifact-name
+  discard-paths: no | yes
+  base-directory: location
+  exclude-paths: excluded paths
+  enable-symlinks: no | yes
+  s3-prefix: prefix
+  secondary-artifacts:
+    artifactIdentifier:
+      files:
+        - location
+        - location
+      name: secondary-artifact-name
+      discard-paths: no | yes
+      base-directory: location
+    artifactIdentifier:
+      files:
+        - location
+        - location
+      discard-paths: no | yes
+      base-directory: location
+cache:
+  paths:
+    - path
+    - path
