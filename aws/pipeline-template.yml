@@ -1,6 +1,6 @@
 Resources:
   NLPipelineCodeBuildProject:
-    Name: nitelite-pipeline
+    Name: "nitelite-pipeline"
     Type: AWS::CodeBuild::Project
     Properties:
       Artifacts: 
