@@ -10,7 +10,7 @@ DOCKER_CMD+=" --progress plain"
 DOCKER_CMD+=" -f ./build/Dockerfile"
 
 # The tag
-DOCKER_CMD+=" -t zhafen/nitelite-pipeline:latest"
+DOCKER_CMD+=" -t nitelite-pipeline:latest"
 
 # Pass any other commands to the docker build command
 if [ $# -gt 0 ]; then
