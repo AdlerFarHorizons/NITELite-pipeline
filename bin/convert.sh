@@ -12,7 +12,7 @@ sleep 10
 docker exec -it build-db-1 psql -U gis -c "CREATE EXTENSION IF NOT EXISTS postgis_raster; DROP TABLE IF EXISTS public.referenced;"
 
 # Convert the referenced rasters to pgsql
-docker exec build-db-1 /bin/bash -c "raster2pgsql /data/referenced/*modified.tif public.referenced | psql -U gis -d gis"
+docker exec build-db-1 /bin/bash -c "raster2pgsql -F -I /data/referenced/*modified.tif public.referenced | psql -U gis -d gis"
 
 # Open up the psql shell so we can take a look at output interactively, if we want
 docker exec -it build-db-1 psql -U gis
