@@ -11,53 +11,12 @@ env:
   #   key: "value"
         
 phases:
-  install:
-    on-failure: ABORT
+  pre_build:
     commands:
-      - git clone https://github.com/AdlerFarHorizons/NITELite-pipeline.git
+      - echo Pulling image from Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       - ./bin/validate.sh
   build:
-    on-failure: ABORT
     commands:
-      - ./bin/aws_mapmake.sh
-    # steps:
-  post_build:
-    on-failure: CONTINUE
-    commands:
-      - ./bin/aws_convert.sh
-reports:
-  report-group-name-or-arn:
-    files:
-      - location
-      - location
-    base-directory: location
-    discard-paths: no | yes
-    file-format: report-format
-artifacts:
-  files:
-    - location
-    - location
-  name: artifact-name
-  discard-paths: no | yes
-  base-directory: location
-  exclude-paths: excluded paths
-  enable-symlinks: no | yes
-  s3-prefix: prefix
-  secondary-artifacts:
-    artifactIdentifier:
-      files:
-        - location
-        - location
-      name: secondary-artifact-name
-      discard-paths: no | yes
-      base-directory: location
-    artifactIdentifier:
-      files:
-        - location
-        - location
-      discard-paths: no | yes
-      base-directory: location
-cache:
-  paths:
-    - path
-    - path
+      - ./bin/mapmake.sh

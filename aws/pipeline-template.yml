@@ -1,5 +1,5 @@
 Resources:
-  CodeBuildProject:
+  NLPipelineCodeBuildProject:
     Type: AWS::CodeBuild::Project
     Properties:
       Artifacts: 
@@ -11,7 +11,8 @@ Resources:
         ComputeType: BUILD_GENERAL1_SMALL
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
       Source: 
-        Location: https://github.com/zhafen/codebuild-example.git
+        Location: https://github.com/AdlerFarHorizons/NITELite-pipeline.git
+        BuildSpec: aws/buildspec.yml
         Type: GITHUB
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
@@ -64,4 +65,4 @@ Resources:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
     Properties:
-      BucketName: codebuild-example-output-bucket
+      BucketName: nitelite-pipeline-output
