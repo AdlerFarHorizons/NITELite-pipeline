@@ -11,13 +11,12 @@ env:
   #   key: "value"
         
 phases:
-  install:
-    runtime-versions:
-      docker: 24
   pre_build:
     commands:
       - echo Pulling image from Amazon ECR...
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+      - docker version
+      - docker compose --help
       - ./bin/validate.sh
   build:
     commands:
