@@ -9,6 +9,7 @@ Resources:
         Type: LINUX_CONTAINER
         Image: aws/codebuild/standard:5.0
         ComputeType: BUILD_GENERAL1_SMALL
+        PrivilegedMode: true
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
       Source: 
         Location: https://github.com/AdlerFarHorizons/NITELite-pipeline.git
