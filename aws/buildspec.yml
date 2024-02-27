@@ -11,6 +11,9 @@ env:
   #   key: "value"
         
 phases:
+  install:
+    runtime-versions:
+      docker: 24
   pre_build:
     commands:
       - echo Pulling image from Amazon ECR...
