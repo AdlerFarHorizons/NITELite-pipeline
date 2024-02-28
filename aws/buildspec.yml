@@ -15,8 +15,10 @@ phases:
     commands:
       # Login to docker registry. This isn't necessary for public repos, but may help with rate limiting
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611695165675.dkr.ecr.us-east-1.amazonaws.com
+  build:
+    commands:
       - ./bin/build.sh
       - ./bin/validate.sh
-  # build:
+  # post_build:
   #   commands:
   #     - ./bin/mapmake.sh
