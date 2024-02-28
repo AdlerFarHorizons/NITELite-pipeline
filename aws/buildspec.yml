@@ -14,11 +14,12 @@ phases:
   pre_build:
     commands:
       - echo Pulling image from Amazon ECR...
+      # Login to ECR
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611695165675.dkr.ecr.us-east-1.amazonaws.com
       # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # - bin/validate.sh
-      - docker pull hello-world
-      - docker run hello-world
+      - docker compose -f ./build/docker-compose.yaml build
+      - docker compose -f ./build/docker-compose.yaml run -i hello-world /bin/bash -c 'echo "Pipeline is ready to run!"'
   # build:
   #   commands:
   #     - ./bin/mapmake.sh
