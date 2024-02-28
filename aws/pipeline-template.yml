@@ -35,6 +35,13 @@ Resources:
           PolicyDocument:
             Version: '2012-10-17'
             Statement:
+              - Sid: ParameterStore
+                Effect: Allow
+                Action:
+                  - ssm:GetParameters
+                  - ssm:GetParameter
+                  - ssm:GetParametersByPath
+                Resource: "*"
               - Sid: CloudWatchLogsPolicy
                 Effect: Allow
                 Action:
