@@ -1,4 +1,4 @@
 services:
-  interior-nitelite-pipeline:
-    # image: public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-    image: ubuntu
+  nitelite-pipeline:
+    image: public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+    # image: ubuntu
