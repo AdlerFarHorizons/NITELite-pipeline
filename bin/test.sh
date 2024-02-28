@@ -11,18 +11,13 @@ uname -a
 echo
 
 echo
-echo "ubuntu system parameters:"
-docker run ubuntu bash -c "uname -a"
-echo
-
-echo
 echo "alpine system parameters:"
 docker run alpine uname -a
 echo
 
 echo
-echo "busybox system parameters:"
-docker run busybox uname -a
+echo "miniconda system parameters:"
+docker run continuumio/miniconda3 /bin/bash -c "uname -a"
 echo
 
 echo
