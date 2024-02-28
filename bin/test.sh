@@ -1,10 +1,9 @@
 #!/bin/bash
 # Short script to test scripting works
 
-echo "Checking docker compose"
-docker compose --help
+echo "Current system parameters:"
+uname -a
+echo
 
-docker pull 
-docker compose -f ./build/docker-compose.yaml run -i nitelite-pipeline /bin/bash -c 'echo "Pipeline is ready to run!"'
-
-echo "The script works!"
+echo "nitelite-pipeline system parameters:"
+docker compose -f ./build/docker-compose.yaml run nitelite-pipeline bash -c "uname -a"
