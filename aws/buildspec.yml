@@ -13,7 +13,6 @@ env:
 phases:
   pre_build:
     commands:
-      - echo Pulling image from Amazon ECR...
       # Login to docker registry
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611695165675.dkr.ecr.us-east-1.amazonaws.com
       # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
