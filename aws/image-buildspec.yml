@@ -3,7 +3,7 @@ version: 0.2
 env:
   parameter-store:
     AWS_DEFAULT_REGION: us-east-1
-    AWS_ACCOUNT_ID: 611695165675
+    AWS_ACCOUNT_ID: "611695165675"
     IMAGE_REPO_NAME: nitelite-pipeline
     IMAGE_TAG: latest
 
