@@ -16,8 +16,7 @@ phases:
       # Login to docker registry
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611695165675.dkr.ecr.us-east-1.amazonaws.com
       # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-      # - bin/validate.sh
-      - docker compose -f ./build/docker-compose.yaml run -i nitelite-pipeline conda run -n nitelite-pipeline-conda python -c "import sys; print(sys.executable)"
+      - ./bin/validate.sh
   # build:
   #   commands:
   #     - ./bin/mapmake.sh
