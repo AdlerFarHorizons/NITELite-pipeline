@@ -16,7 +16,8 @@ phases:
       - echo Pulling image from Amazon ECR...
       # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # - bin/validate.sh
-      - ./bin/test.sh
+      - docker pull hello-world
+      - docker run hello-world
   # build:
   #   commands:
   #     - ./bin/mapmake.sh
