@@ -17,7 +17,7 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611695165675.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      - ./bin/build.sh
+      - docker build --progress plain -f ./build/Dockerfile -t nitelite-pipeline:latest .
       - ./bin/validate.sh
   # post_build:
   #   commands:
