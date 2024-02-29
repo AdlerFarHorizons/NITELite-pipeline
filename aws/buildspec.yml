@@ -28,5 +28,7 @@ phases:
       - ./bin/validate.sh
   build: 
     commands:
+      - pwd
+      - ls
       # Run mapmake.py
       - ./bin/mapmake.py -c ./config/mosaic.yml -d /data
