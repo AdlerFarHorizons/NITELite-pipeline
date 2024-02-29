@@ -92,12 +92,15 @@ Resources:
                 Effect: Allow
                 Action:
                   - s3:PutObject
+                  - s3:AbortMultipartUpload
+                  - s3:DeleteObject
                 Resource: "*"
               - Sid: S3BucketIdentity
                 Effect: Allow
                 Action:
                   - s3:GetBucketAcl
                   - s3:GetBucketLocation
+                  - s3:ListBucket
                 Resource: "*"
               - Sid: ECRPolicy
                 Effect: Allow
