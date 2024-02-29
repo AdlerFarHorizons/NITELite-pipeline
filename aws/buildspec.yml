@@ -15,10 +15,11 @@ phases:
     commands:
       # Login to docker registry. This isn't necessary for public repos, but may help with rate limiting
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 611695165675.dkr.ecr.us-east-1.amazonaws.com
-  build:
-    commands:
-      - docker build --progress plain -f ./build/Dockerfile -t nitelite-pipeline:latest .
+      # Pull the image from the registry. This is faster than building from scratch
+      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       - ./bin/validate.sh
+  # build:
+  #   commands:
   # post_build:
   #   commands:
   #     - ./bin/mapmake.sh
