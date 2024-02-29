@@ -27,6 +27,8 @@ Resources:
   # to pull the image from amazon ecr than to build it from scratch.
   # Also, docker hub rate limits anonymous users, so building occasionally
   # fails because we can't pull the base image, continuumio/miniconda3
+  # If access to the base image continues to be a problem we should
+  # just mirror it on ECS.
   NLPipelineImageCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:

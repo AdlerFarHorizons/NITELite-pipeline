@@ -26,6 +26,7 @@ phases:
       # scratch, especially when cached
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # DEBUG
+      - ./bin/validate.sh
       - docker compose -f ./build/docker-compose.yaml \
           run \
           --volume /data:/data \
