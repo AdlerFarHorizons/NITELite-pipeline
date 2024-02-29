@@ -21,6 +21,8 @@ Resources:
   # so we use aws to build the image.
   # We make a separate project for building the image, because it's faster
   # to pull the image from amazon ecr than to build it from scratch.
+  # Also, docker hub rate limits anonymous users, so building occasionally
+  # fails because we can't pull the base image, continuumio/miniconda3
   NLPipelineImageCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:
