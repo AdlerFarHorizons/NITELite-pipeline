@@ -17,3 +17,4 @@ dependencies:
   - seaborn
   - folium
   - jupyterlab
+  - ocl-icd-system
