@@ -20,6 +20,8 @@ Options:
     -f, --compose-file              Specify the docker-compose file to use.
                                     Default is ./build/docker-compose.yaml
     -h, --help                      Show this help message
+    --validate_only                 Only validate the setup and exit. This
+                                    will not run the pipeline.
 
 Example:
     ./bin/mapmake.sh -c ./config/mosaic.yml -d /Users/shared/data
@@ -49,6 +51,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         -i|--interactive)
             INTERACTIVE="true"
+            shift # past argument
+            ;;
+        --validate_only)
+            VALIDATE_ONLY="true"
             shift # past argument
             ;;
         -h|--help)
@@ -127,6 +133,11 @@ if [ -z "$INTERACTIVE" ]; then
 
     # Pass in the config itself
     DOCKER_CMD+=" /used-config.yml"
+
+    # If validation only, then add the flag
+    if [ -n "$VALIDATE_ONLY" ]; then
+        DOCKER_CMD+=" --validate_only"
+    fi
 else
     DOCKER_CMD+=" /bin/bash"
 fi

@@ -1,5 +1,9 @@
 #!/bin/bash
-# Short script to validate the pipeline installation
+# Short script to validate the availability of the image
+# A more extensive validation that checks mounting, etc. is available as part
+# of mapmake.py
+
+echo 'Validating image...'
 
 docker compose -f ./build/docker-compose.yaml \
     run nitelite-pipeline \
