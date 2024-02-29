@@ -19,7 +19,7 @@ phases:
       - mount-s3 --version
       # Mount the directory
       - mkdir data; mkdir data/referenced_images
-      - mount-s3 nitelite.referenced-images data/referenced_images
+      - mount-s3 arn:aws:s3:::nitelite.referenced-images data/referenced_images
       - ls data/referenced_images
   # pre_build:
   #   commands:
