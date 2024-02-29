@@ -123,6 +123,7 @@ Resources:
                   - ecr-public:UploadLayerPart
                   - ecr-public:CompleteLayerUpload
                   - ecr-public:PutImage
+                Resource: "*"
   OutputBucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
