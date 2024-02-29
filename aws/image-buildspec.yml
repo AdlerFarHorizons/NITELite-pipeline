@@ -10,7 +10,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build --progress plain -f ./build/Dockerfile -t nitelite-pipeline:latest .
+      - docker build --progress plain -f ./build/Dockerfile -t nitelite-pipeline .
       - docker tag nitelite-pipeline:latest 611695165675.dkr.ecr.us-east-1.amazonaws.com/nitelite-pipeline:latest      
       - ./bin/validate.sh
   post_build:
