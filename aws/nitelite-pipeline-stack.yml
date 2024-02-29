@@ -109,6 +109,7 @@ Resources:
               - Sid: CodeBuildDockerPolicy
                 Effect: Allow
                 Action:
+                  - sts:GetServiceBearerToken
                   - ecr-public:GetAuthorizationToken
                   - ecr-public:BatchCheckLayerAvailability
                   - ecr-public:GetDownloadUrlForLayer
