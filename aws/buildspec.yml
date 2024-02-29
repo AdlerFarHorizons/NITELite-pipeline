@@ -16,15 +16,17 @@ phases:
       # Install mountpoint
       - wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.rpm
       - sudo yum -y install ./mount-s3.rpm
-      - mount-s3 --version
-      # Mount the directory
+  pre_build:
+    commands:
+      # Mount the referenced images directory
       - mkdir data; mkdir data/referenced_images
       - mount-s3 nitelite.referenced-images data/referenced_images
       - ls data/referenced_images
-  # pre_build:
-  #   commands:
-  #     # Login to docker registry. This isn't necessary for public repos, but may help with rate limiting
-  #     - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
-  #     # Pull the image from the registry. This is faster than building from scratch
-  #     - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-  #     - ./bin/validate.sh
+      # Pull the image from the registry. This is faster than building from
+      # scratch, especially when cached
+      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+      - ./bin/validate.sh
+  build: 
+    commands:
+      # Run mapmake.py
+      - ./bin/mapmake.py -c ./config/mosaic.yml -d /data
