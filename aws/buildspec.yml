@@ -27,12 +27,7 @@ phases:
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # DEBUG
       - ./bin/validate.sh
-      - docker compose -f ./build/docker-compose.yaml \
-          run \
-          --volume /data:/data \
-          nitelite-pipeline \
-          /bin/bash -c \
-          'ls /data'
+      - docker compose -f ./build/docker-compose.yaml run --volume /data:/data nitelite-pipeline /bin/bash -c 'ls /data'
       # Validate setup
       # - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
   # build: 
