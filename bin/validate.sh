@@ -7,4 +7,4 @@ docker compose -f ./build/docker-compose.yaml \
     'conda run -n nitelite-pipeline-conda python -c \
     "import sys; \
 print(f\"sys.executable at {sys.executable}\");
-print(\"Validation successful!\")"'
+print(\"Image validated!\")"'
