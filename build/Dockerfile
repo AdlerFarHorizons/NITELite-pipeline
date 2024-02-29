@@ -6,7 +6,7 @@ FROM continuumio/miniconda3
 
 # The base postgis image does not include any CLI tools, so we install them
 # We also install a few other essential packages
-RUN --mount=type=cache, \
+RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update -y && \
     apt-get install -y git libgl1 && \
     apt-get clean && \
