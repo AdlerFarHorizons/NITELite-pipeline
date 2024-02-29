@@ -25,8 +25,9 @@ phases:
       # Pull the image from the registry. This is faster than building from
       # scratch, especially when cached
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-      - ./bin/validate.sh
+      # Validate setup
+      - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
   build: 
     commands:
       # Run mapmake.py
-      - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data
+      - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
