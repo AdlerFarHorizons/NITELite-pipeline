@@ -98,6 +98,7 @@ Resources:
                 Action:
                   - ecr:GetAuthorizationToken
                   - ecr-public:GetAuthorizationToken
+                  - ecr-public:InitiateLayerUpload
                   - sts:GetServiceBearerToken
                 Resource: "*"
   OutputBucket:
