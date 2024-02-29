@@ -11,19 +11,14 @@ env:
   #   key: "value"
         
 phases:
-  install:
+  pre_build:
     commands:
       - echo "Install phase"
       - mount-s3 --version
-  pre_build:
-    commands:
-      # Login to docker registry. This isn't necessary for public repos, but may help with rate limiting
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
-      # Pull the image from the registry. This is faster than building from scratch
-      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-      - ./bin/validate.sh
-  # build:
+  # pre_build:
   #   commands:
-  # post_build:
-  #   commands:
-  #     - ./bin/mapmake.sh
+  #     # Login to docker registry. This isn't necessary for public repos, but may help with rate limiting
+  #     - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
+  #     # Pull the image from the registry. This is faster than building from scratch
+  #     - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+  #     - ./bin/validate.sh
