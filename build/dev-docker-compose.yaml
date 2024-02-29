@@ -4,7 +4,7 @@ version: '3.9'
 services:
 
   nitelite-pipeline:
-    image: zhafen/nitelite-pipeline
+    image: nitelite-pipeline:latest
   db:
     # image: postgis/postgis
     build:

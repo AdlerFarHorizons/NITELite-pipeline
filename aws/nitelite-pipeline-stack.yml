@@ -45,6 +45,10 @@ Resources:
         Type: GITHUB
         GitSubmodulesConfig:
           FetchSubmodules: true
+      Cache:
+        Type: LOCAL
+        Modes:
+          - LOCAL_DOCKER_LAYER_CACHE
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
     Properties:
