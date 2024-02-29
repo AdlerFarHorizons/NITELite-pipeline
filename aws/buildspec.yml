@@ -18,10 +18,10 @@ phases:
       - sudo yum -y install ./mount-s3.rpm
   pre_build:
     commands:
-      # Mount the referenced images directory
-      - mkdir data; mkdir data/referenced_images
+      # Mount the S3 buckets
+      - mkdir data; mkdir data/referenced_images; mkdir data/nitelite_pipeline_output
       - mount-s3 nitelite.referenced-images data/referenced_images
-      - ls data/referenced_images
+      - mount-s3 nitelite-pipeline-output data/nitelite_pipeline_output
       # Pull the image from the registry. This is faster than building from
       # scratch, especially when cached
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
