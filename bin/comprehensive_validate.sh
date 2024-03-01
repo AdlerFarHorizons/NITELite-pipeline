@@ -41,9 +41,8 @@ echo 'Can we see the input and output buckets from inside a python script inside
 docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
-    'conda run -n nitelite-pipeline-conda python -c \
-    "import os; \
-print(os.listdir(\"/data/\"))"'
+    'conda run -n nitelite-pipeline-conda \
+    python ./bin/validate.py'
 echo
 
 echo 'Is the code inside the docker container what we expect?'
@@ -51,6 +50,7 @@ docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
     'tail ./night-horizons-mapmaker/night_horizons/mapmake.py'
+echo
 
 echo 'Does the pipeline code inside the docker container find the data?'
 docker compose -f ./aws/docker-compose.yaml \
@@ -61,3 +61,7 @@ docker compose -f ./aws/docker-compose.yaml \
     'conda run -n nitelite-pipeline-conda \
     python ./night-horizons-mapmaker/night_horizons/mapmake.py \
     /used_config.yml --validate_only'
+
+echo 'Does the execution script work?'
+./bin/mapmake.sh -d /data:/data -c $(realpath ./config/mosaic.yml):/used_config.yml --validate_only
+echo
