@@ -17,4 +17,4 @@ docker compose -f ./aws/docker-compose.yaml \
     "import os; \
 os.listdir(\"/data\"); \
 os.listdir(\"/data/referenced_images\"); \
-os.listdir(\"/data/nitelite_pipelin_output\")"'
+os.listdir(\"/data/nitelite_pipeline_output\")"'
