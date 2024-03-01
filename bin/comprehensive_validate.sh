@@ -12,6 +12,15 @@ docker compose -f ./aws/docker-compose.yaml \
     'ls /data/'
 echo
 
+echo 'Can we see the config file from inside the docker container inside the ec2 instance?'
+docker compose -f ./aws/docker-compose.yaml \
+    run \
+    --volume $(realpath ./config/mosaic.yml):/used_config.yml \
+    nitelite-pipeline \
+    /bin/bash -c \
+    'ls /*.yml'
+echo
+
 echo 'Does the conda environment inside the docker container work?'
 docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
@@ -46,7 +55,7 @@ docker compose -f ./aws/docker-compose.yaml \
 echo 'Does the pipeline code inside the docker container find the data?'
 docker compose -f ./aws/docker-compose.yaml \
     run \
-    --volume $(realpath ./config/mosaic.yml):/used-config.yml \
+    --volume $(realpath ./config/mosaic.yml):/used_config.yml \
     nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda \
