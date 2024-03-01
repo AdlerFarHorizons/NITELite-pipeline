@@ -3,6 +3,11 @@ echo 'Validating mount...'
 docker compose -f ./build/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
+    'conda run -n nitelite-pipeline-conda touch /data/test_mount'
+
+docker compose -f ./build/docker-compose.yaml \
+    run nitelite-pipeline \
+    /bin/bash -c \
     'conda run -n nitelite-pipeline-conda python -c \
     "import os; \
 os.listdir(\"/data\"); \
