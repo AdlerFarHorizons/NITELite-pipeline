@@ -27,8 +27,7 @@ phases:
       # scratch, especially when cached
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # DEBUG
-      - ./bin/validate.sh
-      - ./bin/mount_validate.sh
+      - ./bin/comprehensive_validate.sh
       # - docker compose -f ./build/docker-compose.yaml run --volume /data:/data nitelite-pipeline /bin/bash -c 'ls /data > /data/nitelite_pipeline_output/this_works.txt'
       # Validate setup
       # - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
