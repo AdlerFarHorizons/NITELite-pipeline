@@ -1,16 +1,16 @@
 echo 'Validating mount...'
 
-docker compose -f ./build/docker-compose.yaml \
+docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
     'touch /data/nitelite_pipeline_output/test_mount'
 
-docker compose -f ./build/docker-compose.yaml \
+docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda touch /data/nitelite_pipeline_output/test_mount_conda'
 
-docker compose -f ./build/docker-compose.yaml \
+docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda python -c \
