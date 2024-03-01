@@ -18,3 +18,8 @@ docker compose -f ./aws/docker-compose.yaml \
 print(os.listdir(\"/data\")); \
 print(os.listdir(\"/data/referenced_images\")); \
 print(os.listdir(\"/data/nitelite_pipeline_output\"))"'
+
+docker compose -f ./aws/docker-compose.yaml \
+    run nitelite-pipeline \
+    /bin/bash -c \
+    'tail ./night-horizons-mapmaker/night_horizons/mapmake.py'
