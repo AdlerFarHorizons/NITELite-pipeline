@@ -19,6 +19,7 @@ phases:
   pre_build:
     commands:
       # Mount the S3 buckets
+      # Alternative: try mounting them *inside* the container.
       - mkdir /data; mkdir /data/referenced_images; mkdir /data/nitelite_pipeline_output
       - mount-s3 nitelite.referenced-images /data/referenced_images
       - mount-s3 nitelite-pipeline-output /data/nitelite_pipeline_output
@@ -27,9 +28,9 @@ phases:
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # DEBUG
       - ./bin/validate.sh
-      - docker compose -f ./build/docker-compose.yaml run --volume /data:/data nitelite-pipeline /bin/bash -c 'ls /data > /data/nitelite_pipeline_output/this_works.txt'
+      # - docker compose -f ./build/docker-compose.yaml run --volume /data:/data nitelite-pipeline /bin/bash -c 'ls /data > /data/nitelite_pipeline_output/this_works.txt'
       # Validate setup
-      # - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
+      - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
   # build: 
   #   commands:
   #     # Run mapmake.py
