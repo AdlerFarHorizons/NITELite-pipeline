@@ -131,4 +131,4 @@ Resources:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
     Properties:
-      BucketName: nitelite-pipeline-output
+      BucketName: nitelite.pipeline-output
