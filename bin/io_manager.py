@@ -98,17 +98,17 @@ class IOManager:
                 tracked_file_key=tracked_file_key,
             )
 
-        print('Got past output fps')
+        # And finally, the checkpoint info
+        self.checkpoint_filepatterns, self.checkpoint_dir = \
+            self.get_checkpoint_filepatterns(
+                output_dir=self.output_dir,
+                output_filepaths=self.output_filepaths,
+                checkpoint_subdir=self.checkpoint_subdir,
+                checkpoint_selection=self.checkpoint_selection,
+                checkpoint_tag=self.checkpoint_tag,
+            )
 
-        # # And finally, the checkpoint info
-        # self.checkpoint_filepatterns, self.checkpoint_dir = \
-        #     self.get_checkpoint_filepatterns(
-        #         output_dir=self.output_dir,
-        #         output_filepaths=self.output_filepaths,
-        #         checkpoint_subdir=self.checkpoint_subdir,
-        #         checkpoint_selection=self.checkpoint_selection,
-        #         checkpoint_tag=self.checkpoint_tag,
-        #     )
+        print('Got past checkpoints')
 
     def find_input_files(
         self,
