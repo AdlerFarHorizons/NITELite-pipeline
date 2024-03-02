@@ -24,10 +24,10 @@ phases:
       - mount-s3 nitelite.referenced-images /data/referenced_images
       # Pull the image from the registry. This is faster than building from
       # scratch, especially when cached
-      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+      # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # DEBUG
+      - docker build -t nitelite-pipeline -f ./build/Dockerfile .
       - ./bin/comprehensive_validate.sh
-      # - docker compose -f ./build/docker-compose.yaml run --volume /data:/data nitelite-pipeline /bin/bash -c 'ls /data > /data/nitelite_pipeline_output/this_works.txt'
       # Validate setup
       # - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
   # build: 

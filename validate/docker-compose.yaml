@@ -1,0 +1,5 @@
+services:
+  nitelite-pipeline:
+    image: public.ecr.aws/docker/library/python
+    volumes:
+      - /data:/data

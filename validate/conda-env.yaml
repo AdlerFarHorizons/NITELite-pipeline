@@ -1,0 +1,20 @@
+name: nitelite-pipeline-conda
+channels:
+  - conda-forge
+dependencies:
+  # - pytest
+  - numpy
+  # - scipy
+  # - pandas
+  # - pyarrow
+  # - scikit-learn
+  # - tqdm
+  # - PyYAML
+  # - opencv
+  # - gdal
+  # - pyproj
+  # - matplotlib
+  # - seaborn
+  # - folium
+  # - jupyterlab
+  # - ocl-icd-system
