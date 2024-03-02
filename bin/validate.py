@@ -12,5 +12,11 @@ parser.add_argument(
     type=str,
     help='Location of config file.',
 )
+parser.add_argument(
+    '--validate_only',
+    action='store_true',
+    help='If True, only validate the config file.'
+)
 args = parser.parse_args()
 print(args.config_filepath)
+print(args.validate_only)

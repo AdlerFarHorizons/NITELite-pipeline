@@ -52,7 +52,7 @@ docker compose -f ./aws/docker-compose.yaml \
     nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda --live-stream \
-    python /validate.py /used_config.yml'
+    python /validate.py /used_config.yml --validate_only'
 echo
 
 echo 'Does the pipeline code inside the docker container find the data?'
