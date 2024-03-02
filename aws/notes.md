@@ -3,7 +3,7 @@
 - Resume
     - Yes or no apply to places that ask for Azure exp instead of AWS
 
-TODO: Remove all glob
+TODO: Remove all glob - change into s3 client boto3
 TODO: Metadata handling
 
 Key points:
@@ -22,3 +22,12 @@ Key points:
 - "Last week in AWS" Cory Quinn (sp?)
 - Concepts are transferrable, details aren't.
 - Emphasize that I took a local analysis and put it into the cloud, which makes it very transferrable.
+
+Good training:
+AWS practitioner training
+- Focuses on use cases for different services
+- Not on how to do it, but what the use case (esp. cost) 
+Solutions architect associate course
+- Comes with a certificate
+- Lasts two years, and is good because it requires you to stay on top of the very-fast-changing information.
+- Have to go through a training provider (AWS does not have an in-house training)
