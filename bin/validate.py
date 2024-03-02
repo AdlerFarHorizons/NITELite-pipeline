@@ -20,3 +20,8 @@ parser.add_argument(
 args = parser.parse_args()
 print(args.config_filepath)
 print(args.validate_only)
+
+# Create the mapmaker
+from night_horizons.mapmake import create_mapmaker
+mapmaker = create_mapmaker(args.config_filepath)
+print(mapmaker)
