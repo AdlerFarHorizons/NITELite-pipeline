@@ -63,6 +63,7 @@ io_manager = IOManager(
     input_description={},
     output_dir=kwargs['output_dir'],
     output_description={},
+    file_exists='new',
 )
 # print(io_manager.input_filepaths)
 print('After IO manager')
