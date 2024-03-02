@@ -24,11 +24,30 @@ print(args.validate_only)
 # Create the mapmaker
 from night_horizons.mapmake import create_mapmaker
 mapmaker = create_mapmaker(args.config_filepath)
+def get_service(self, name, *args, **kwargs):
+    '''
+    TODO: Add parameter validation.
+    '''
+
+    # Get parameters for constructing the service
+    constructor_dict = self._services.get(name)
+    if not constructor_dict:
+        raise ValueError(f'Service {name} not registered')
+
+    # Parse constructor parameters
+    if constructor_dict['singleton'] and name in self.services:
+        return self.services[name]
+    constructor = constructor_dict['constructor']
+
+    print(constructor)
+
 def validate(self):
 
     print('Validating pipeline setup...')
+    print(self.container)
     # io_manager = self.container.get_service('io_manager')
     # print(io_manager)
+    get_service(self.container, 'io_manager')
 
     # print('Counting input filepaths...')
     # input_fp_count = {
