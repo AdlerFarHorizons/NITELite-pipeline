@@ -14,8 +14,10 @@ Resources:
         EnvironmentVariables:
           - Name: INPUT_BUCKET
             Value: nitelite.referenced-images
+          - Name: OUTPUT_BUCKET
+            Value: !Ref OutputBucket
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
-      Source: 
+      Source:
         Location: https://github.com/AdlerFarHorizons/NITELite-pipeline.git
         BuildSpec: aws/buildspec.yml
         Type: GITHUB
@@ -36,6 +38,7 @@ Resources:
   NLPipelineImageCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:
+      Name: NITELitePipelineImage
       Artifacts: 
         Location: !Ref OutputBucket
         Type: S3
@@ -58,6 +61,7 @@ Resources:
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
     Properties:
+      Name: NITELitePipelineServiceRole
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -135,4 +139,5 @@ Resources:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
     Properties:
+      Name: NITELitePipelineOutputBucket
       BucketName: nitelite.pipeline-output
