@@ -25,8 +25,7 @@ print('Before IOManager')
 from io_manager import IOManager
 from night_horizons.mapmake import create_mapmaker
 mapmaker = create_mapmaker(args.config_filepath)
-kwargs = mapmaker.container.get_service_args('io_manager', IOManager)
-io_manager = IOManager(**kwargs)
+io_manager = mapmaker.container.get_service('io_manager')
 
 # io_manager = IOManager(
 #     input_dir='/data/referenced_images',
