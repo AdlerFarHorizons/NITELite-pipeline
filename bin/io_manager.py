@@ -23,6 +23,8 @@ from sklearn.model_selection import train_test_split
 
 from night_horizons.data_io import GDALDatasetIO
 
+print('Loading the correct io_manager.')
+
 
 class IOManager:
     '''
