@@ -143,7 +143,6 @@ class IOManager:
     def find_files(
         self,
         directory: str,
-        extension: Union[str, list[str]] = None,
         pattern: str = None,
     ) -> pd.Series:
         '''
@@ -160,33 +159,15 @@ class IOManager:
                 Data filepaths.
         '''
 
-        # When all files
-        if extension is None:
-            # glob_pattern = os.path.join(directory, '**', '*.*')
-            # fps = glob.glob(glob_pattern, recursive=True)
-            fps = os.listdir(directory)
-        # When a single extension
-        elif isinstance(extension, str):
-            glob_pattern = os.path.join(directory, '**', f'*{extension}')
-            fps = glob.glob(glob_pattern, recursive=True)
-        # When a list of extensions
-        else:
-            try:
-                fps = []
-                for ext in extension:
-                    glob_pattern = os.path.join(directory, '**', f'*{ext}')
-                    fps.extend(glob.glob(glob_pattern, recursive=True))
-            except TypeError:
-                raise TypeError(f'Unexpected type for extension: {extension}')
+        fps = os.listdir(directory)
+        fps = pd.Series(fps)
 
-        # fps = pd.Series(fps)
+        # Filter to select particular files
+        if pattern is not None:
+            contains_pattern = fps.str.findall(pattern).str[0].notna()
+            fps = fps.loc[contains_pattern]
 
-        # # Filter to select particular files
-        # if pattern is not None:
-        #     contains_pattern = fps.str.findall(pattern).str[0].notna()
-        #     fps = fps.loc[contains_pattern]
-
-        # fps.index = np.arange(fps.size)
+        fps.index = np.arange(fps.size)
 
         return fps
 

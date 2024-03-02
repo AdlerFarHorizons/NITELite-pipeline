@@ -16,13 +16,12 @@ io_manager:
   input_description:
     # Images with georeferencing. We perform a search for matching files.
     referenced_images:
-      # This filepath is relative to input_dir, e.g. the full path could be
-      # /data/nitelite/220513-FH135/images/referenced
-      directory: referenced_images
+      # This filepath is relative to input_dir
+      directory: referenced_images/220513-FH135
       # Only files with these extensions will be considered.
       extension: ['tif', 'tiff']
       # This is a RegEx pattern. The "1" selects nadir images only.
-      pattern: 'Geo\s\d+_1.tif'
+      pattern: '^Geo\s\d+_1.(tif|tiff)$'
   # Where the output files will be saved
   output_dir: /data/output
   # If the output directory already exists then a new directory is created
