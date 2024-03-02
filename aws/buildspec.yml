@@ -21,7 +21,7 @@ phases:
       # Mount the S3 buckets
       # Alternative: try mounting them *inside* the container.
       - mkdir /data; mkdir /data/input; mkdir /data/output; mkdir /data/input/referenced_images
-      - mount-s3 $(INPUT_BUCKET) /data/input/referenced_images
+      - mount-s3 ${INPUT_BUCKET} /data/input/referenced_images
       # Pull the image from the registry. This is faster than building from
       # scratch, especially when cached
       # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
