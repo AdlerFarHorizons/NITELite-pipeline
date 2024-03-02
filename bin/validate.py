@@ -39,7 +39,15 @@ def get_service(self, name, *args, **kwargs):
         return self.services[name]
     constructor = constructor_dict['constructor']
 
-    print(constructor)
+    # Get the used arguments
+    if constructor_dict['args_key'] is None:
+        args_key = name
+    else:
+        args_key = constructor_dict['args_key']
+    kwargs = self.get_service_args(args_key, constructor, **kwargs)
+
+    print('At kwargs.')
+    print(kwargs)
 
 def validate(self):
 
