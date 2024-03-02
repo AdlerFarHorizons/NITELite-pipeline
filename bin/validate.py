@@ -58,11 +58,11 @@ print('\nkwargs:')
 print(kwargs)
 # io_manager = IOManager(*args, **kwargs)
 
-# io_manager = IOManager(
-#     input_dir='/data/referenced_images',
-#     input_description={},
-#     output_dir='/data/nitelite_pipeline_output',
-#     output_description={},
-# )
+io_manager = IOManager(
+    input_dir=kwargs['input_dir'],
+    input_description=kwargs['input_description'],
+    output_dir=kwargs['output_dir'],
+    output_description=kwargs['input_description'],
+)
 # print(io_manager.input_filepaths)
 print('After IO manager')
