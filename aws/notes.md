@@ -31,3 +31,6 @@ Solutions architect associate course
 - Comes with a certificate
 - Lasts two years, and is good because it requires you to stay on top of the very-fast-changing information.
 - Have to go through a training provider (AWS does not have an in-house training)
+- CloudGuru focuses on passing the test
+Make own account for free tier etc
+- Change password, add MFA, add billing alert
