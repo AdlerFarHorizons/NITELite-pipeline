@@ -129,14 +129,14 @@ class IOManager:
                     os.path.join(self.input_dir, descr['directory'])
 
         # Find files
-        input_filepaths = {
-            key: (
-                self.find_files(**item)
-                if isinstance(item, dict)
-                else item
-            )
-            for key, item in modified_input_description.items()
-        }
+        input_filepaths = {}
+        #     key: (
+        #         self.find_files(**item)
+        #         if isinstance(item, dict)
+        #         else item
+        #     )
+        #     for key, item in modified_input_description.items()
+        # }
 
         return input_filepaths, modified_input_description
 
