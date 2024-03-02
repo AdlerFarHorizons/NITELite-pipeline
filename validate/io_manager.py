@@ -162,8 +162,9 @@ class IOManager:
 
         # When all files
         if extension is None:
-            glob_pattern = os.path.join(directory, '**', '*.*')
-            fps = glob.glob(glob_pattern, recursive=True)
+            # glob_pattern = os.path.join(directory, '**', '*.*')
+            # fps = glob.glob(glob_pattern, recursive=True)
+            fps = os.listdir(directory)
         # When a single extension
         elif isinstance(extension, str):
             glob_pattern = os.path.join(directory, '**', f'*{extension}')
