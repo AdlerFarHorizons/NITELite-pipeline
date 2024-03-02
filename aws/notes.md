@@ -19,7 +19,7 @@ Key points:
 - Amazon solution architecting: what to use when
 - Optimize for cost, speed, code availability, etc.
 - Write a little narrative to remind yourself how to explain it
-- "Last week in AWS" Cory Quinn (sp?)
+- "Last week in AWS" podcast Cory Quinn (sp?)
 - Concepts are transferrable, details aren't.
 - Emphasize that I took a local analysis and put it into the cloud, which makes it very transferrable.
 
