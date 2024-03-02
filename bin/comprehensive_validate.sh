@@ -47,7 +47,7 @@ echo
 echo 'Can we see the input and output buckets from inside a python script inside the conda environment inside the docker container inside the ec2 instance?'
 docker compose -f ./aws/docker-compose.yaml \
     run \
-    --volume $(realpath ./bin/validate.py):/NITELite-pipeline/bin/validate.py \
+    --volume $(realpath ./bin/validate.py):/validate.py \
     --volume $(realpath ./night-horizons-mapmaker/night_horizons/io_manager.py):/NITELite-pipeline/bin/io_manager.py \
     --volume $(realpath ./config/mosaic.yml):/used_config.yml \
     nitelite-pipeline \
