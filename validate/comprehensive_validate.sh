@@ -1,29 +1,29 @@
 echo 'Performing comprehensive validation...'
 echo
 
-echo 'Can we see the input and output buckets (referenced_images, nitelite_pipeline_output) from inside the ec2 instance?'
+echo 'Can we see the input and output buckets (referenced_images, output) from inside the ec2 instance?'
 ls /data/
 echo
 
-echo 'Can we see the input and output buckets from inside the docker container inside the ec2 instance?'
+echo 'Can we see the input bucket from inside the docker container inside the ec2 instance?'
 docker compose -f ./validate/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
-    'ls /data/'
+    'ls /data/input'
 echo
 
 echo 'Can we see files inside the input directory?'
-ls /data/referenced_images/220513-FH135/
+ls /data/input/referenced_images/220513-FH135/
 echo
 
 echo 'Can we create, see, and delete files inside the output directory?'
 echo 'Writing files to output bucket...'
-touch /data/nitelite_pipeline_output/test.txt; touch /data/nitelite_pipeline_output/test2.txt
+touch /data/output/test.txt; touch /data/output/test2.txt
 echo 'Files in output bucket:'
-ls /data/nitelite_pipeline_output/
+ls /data/output/
 echo 'Removing files from output bucket...'
-rm /data/nitelite_pipeline_output/test.txt; rm /data/nitelite_pipeline_output/test2.txt
-ls /data/nitelite_pipeline_output/
+rm /data/output/test.txt; rm /data/output/test2.txt
+ls /data/output/
 echo
 
 echo 'Can we see the config file from inside the docker container inside the ec2 instance?'
