@@ -64,5 +64,5 @@ io_manager = IOManager(
     output_dir=kwargs['output_dir'],
     output_description={},
 )
-# print(io_manager.input_filepaths)
+print(io_manager.input_filepaths)
 print('After IO manager')
