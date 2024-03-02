@@ -60,10 +60,9 @@ print(kwargs)
 
 io_manager = IOManager(
     input_dir=kwargs['input_dir'],
-    input_description={},
+    input_description={'referenced_images': {'directory': '/'}},
     output_dir=kwargs['output_dir'],
     output_description={},
-    file_exists='new',
 )
 # print(io_manager.input_filepaths)
 print('After IO manager')
