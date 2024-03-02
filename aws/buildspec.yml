@@ -27,7 +27,7 @@ phases:
       # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # DEBUG
       - docker build -t nitelite-pipeline -f ./validate/Dockerfile .
-      - ./bin/comprehensive_validate.sh
+      - ./validate/comprehensive_validate.sh
       # Validate setup
       # - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
   # build: 
