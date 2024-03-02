@@ -61,7 +61,7 @@ Resources:
   CodeBuildServiceRole:
     Type: AWS::IAM::Role
     Properties:
-      Name: NITELitePipelineServiceRole
+      RoleName: NITELitePipelineServiceRole
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -139,5 +139,4 @@ Resources:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
     Properties:
-      Name: NITELitePipelineOutputBucket
       BucketName: nitelite.pipeline-output
