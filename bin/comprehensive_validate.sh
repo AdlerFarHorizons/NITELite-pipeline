@@ -12,7 +12,11 @@ docker compose -f ./aws/docker-compose.yaml \
     'ls /data/'
 echo
 
-echo 'Can we create, see, and delete files inside the output bucket?'
+echo 'Can we see files inside the input directory?'
+ls /data/referenced_images/220513-FH135/
+echo
+
+echo 'Can we create, see, and delete files inside the output directory?'
 echo 'Writing files to output bucket...'
 touch /data/nitelite_pipeline_output/test.txt; touch /data/nitelite_pipeline_output/test2.txt
 echo 'Files in output bucket:'
