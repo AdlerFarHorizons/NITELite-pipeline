@@ -27,8 +27,8 @@ mapmaker = create_mapmaker(args.config_filepath)
 def validate(self):
 
     print('Validating pipeline setup...')
-    io_manager = self.container.get_service('io_manager')
-    print(io_manager)
+    # io_manager = self.container.get_service('io_manager')
+    # print(io_manager)
 
     # print('Counting input filepaths...')
     # input_fp_count = {
