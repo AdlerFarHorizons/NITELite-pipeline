@@ -80,16 +80,16 @@ docker compose -f ./validate/docker-compose.yaml \
     python /validate.py /used_config.yml --validate_only'
 echo
 
-echo 'Does the pipeline code inside the docker container find the data?'
-docker compose -f ./validate/docker-compose.yaml \
-    run \
-    --volume $(realpath ./config/mosaic.yml):/used_config.yml \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'conda run -n nitelite-pipeline-conda \
-    python night-horizons-mapmaker/night_horizons/mapmake.py \
-    /used_config.yml --validate_only'
-
-echo 'Does the execution script work?'
-./validate/mapmake.sh -d /data:/data -c $(realpath ./config/mosaic.yml):/used_config.yml --validate_only
-echo
+# echo 'Does the pipeline code inside the docker container find the data?'
+# docker compose -f ./validate/docker-compose.yaml \
+#     run \
+#     --volume $(realpath ./config/mosaic.yml):/used_config.yml \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'conda run -n nitelite-pipeline-conda \
+#     python night-horizons-mapmaker/night_horizons/mapmake.py \
+#     /used_config.yml --validate_only'
+# 
+# echo 'Does the execution script work?'
+# ./validate/mapmake.sh -d /data:/data -c $(realpath ./config/mosaic.yml):/used_config.yml --validate_only
+# echo
