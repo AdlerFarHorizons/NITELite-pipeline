@@ -46,8 +46,8 @@ def get_service(self, name, *args, **kwargs):
         args_key = constructor_dict['args_key']
     kwargs = self.get_service_args(args_key, constructor, **kwargs)
 
-    print('At kwargs.')
-    print(kwargs)
+    print('At constructor.')
+    print(constructor(*args, **kwargs))
 
 def validate(self):
 
