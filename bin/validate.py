@@ -1,3 +1,5 @@
-# import os
-print('Testing /data/ directory...')
-# os.listdir('/data/')
+print('Testing...')
+
+import os
+print(os.getcwd())
+print(os.listdir('/data/'))
