@@ -42,7 +42,7 @@ docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda \
-    python ./bin/validate.py'
+    python bin/validate.py'
 echo
 
 echo 'Is the code inside the docker container what we expect?'
@@ -59,7 +59,7 @@ docker compose -f ./aws/docker-compose.yaml \
     nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda \
-    python ./night-horizons-mapmaker/night_horizons/mapmake.py \
+    python night-horizons-mapmaker/night_horizons/mapmake.py \
     /used_config.yml --validate_only'
 
 echo 'Does the execution script work?'
