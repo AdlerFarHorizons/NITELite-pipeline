@@ -5,9 +5,6 @@ FROM continuumio/miniconda3
 # Last known good tag: 23.10.0-1
 
 # Install the python environment
-RUN conda env create -n nitelite-pipeline-conda
-
-# Install the python environment
 COPY ./validate/conda-env.yaml /conda-env.yaml
 RUN conda env create -f /conda-env.yaml
 
