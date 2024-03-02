@@ -13,10 +13,13 @@ docker compose -f ./aws/docker-compose.yaml \
 echo
 
 echo 'Can we create, see, and delete files inside the output bucket?'
+echo 'Writing files to output bucket...'
 touch /data/nitelite_pipeline_output/test.txt; touch /data/nitelite_pipeline_output/test2.txt
-print('Files in output bucket:')
+echo 'Files in output bucket:'
 ls /data/nitelite_pipeline_output/
+echo 'Removing files from output bucket...'
 rm /data/nitelite_pipeline_output/test.txt; rm /data/nitelite_pipeline_output/test2.txt
+ls /data/nitelite_pipeline_output/
 echo
 
 echo 'Can we see the config file from inside the docker container inside the ec2 instance?'
