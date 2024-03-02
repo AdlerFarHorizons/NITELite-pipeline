@@ -48,10 +48,11 @@ echo 'Can we see the input and output buckets from inside a python script inside
 docker compose -f ./aws/docker-compose.yaml \
     run \
     --volume $(realpath ./bin/validate.py):/validate.py \
+    --volume $(realpath ./config/mosaic.yml):/used_config.yml \
     nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda --live-stream \
-    python /validate.py'
+    python /validate.py /used_config.yml'
 echo
 
 echo 'Does the pipeline code inside the docker container find the data?'
