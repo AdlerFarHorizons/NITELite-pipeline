@@ -108,8 +108,6 @@ class IOManager:
                 checkpoint_tag=self.checkpoint_tag,
             )
 
-        print('Got past checkpoints')
-
     def find_input_files(
         self,
         input_description: dict[dict],

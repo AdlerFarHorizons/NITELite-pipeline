@@ -29,4 +29,4 @@ io_manager = IOManager(
     output_dir='/data/nitelite_pipeline_output',
     output_description={},
 )
-print(io_manager)
+print(io_manager.input_filepaths)
