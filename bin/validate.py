@@ -25,3 +25,4 @@ print(args.validate_only)
 from night_horizons.mapmake import create_mapmaker
 mapmaker = create_mapmaker(args.config_filepath)
 print(mapmaker)
+mapmaker.validate()
