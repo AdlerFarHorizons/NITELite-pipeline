@@ -88,17 +88,17 @@ class IOManager:
         self.input_filepaths, self.input_description = \
             self.find_input_files(input_description)
 
-        print('Got past input fps')
+        # Process output filetree
+        # TODO: Ideally this would be called at the time of the fit.
+        self.output_filepaths, self.output_dir = \
+            self.get_output_filepaths(
+                output_dir=output_dir,
+                output_description=output_description,
+                file_exists=file_exists,
+                tracked_file_key=tracked_file_key,
+            )
 
-        # # Process output filetree
-        # # TODO: Ideally this would be called at the time of the fit.
-        # self.output_filepaths, self.output_dir = \
-        #     self.get_output_filepaths(
-        #         output_dir=output_dir,
-        #         output_description=output_description,
-        #         file_exists=file_exists,
-        #         tracked_file_key=tracked_file_key,
-        #     )
+        print('Got past output fps')
 
         # # And finally, the checkpoint info
         # self.checkpoint_filepatterns, self.checkpoint_dir = \
