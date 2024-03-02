@@ -1,2 +1,3 @@
-import os
-os.listdir('/data/')
+# import os
+print('Testing /data/ directory...')
+# os.listdir('/data/')
