@@ -23,10 +23,16 @@ print(args.validate_only)
 
 print('Before IOManager')
 from io_manager import IOManager
-io_manager = IOManager(
-    input_dir='/data/referenced_images',
-    input_description={},
-    output_dir='/data/nitelite_pipeline_output',
-    output_description={},
-)
+from night_horizons.mapmake import create_mapmaker
+mapmaker = create_mapmaker(args.config_filepath)
+kwargs = mapmaker.container.get_service_args('io_manager', IOManager)
+io_manager = IOManager(**kwargs)
+
+# io_manager = IOManager(
+#     input_dir='/data/referenced_images',
+#     input_description={},
+#     output_dir='/data/nitelite_pipeline_output',
+#     output_description={},
+# )
 print(io_manager.input_filepaths)
+print('After IO manager')
