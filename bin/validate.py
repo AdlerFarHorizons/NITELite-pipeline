@@ -50,11 +50,12 @@ print('Before IOManager')
 from io_manager import IOManager
 from night_horizons.mapmake import create_mapmaker
 mapmaker = create_mapmaker(args.config_filepath)
-constructor, args, kwargs = mapmaker.container.get_service('io_manager')
+print(mapmaker)
+# constructor, args, kwargs = mapmaker.container.get_service('io_manager')
 # print('\nargs:')
 # print(args)
-print('\nkwargs:')
-print(kwargs)
+# print('\nkwargs:')
+# print(kwargs)
 # io_manager = IOManager(*args, **kwargs)
 
 # io_manager = IOManager(
