@@ -48,7 +48,7 @@ echo 'Can we see the input and output buckets from inside a python script inside
 docker compose -f ./aws/docker-compose.yaml \
     run \
     --volume $(realpath ./bin/validate.py):/validate.py \
-    --volume $(realpath ./night-horizons-mapmaker/night_horizons/io_manager.py):/NITELite-pipeline/bin/io_manager.py \
+    --volume $(realpath ./night-horizons-mapmaker/night_horizons/io_manager.py):/io_manager.py \
     --volume $(realpath ./config/mosaic.yml):/used_config.yml \
     nitelite-pipeline \
     /bin/bash -c \
