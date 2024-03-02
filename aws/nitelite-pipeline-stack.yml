@@ -2,7 +2,7 @@ Resources:
   NLPipelineCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: NITELitePipeline
+      Name: nitelite-pipeline
       Artifacts: 
         Location: !Ref OutputBucket
         Type: S3
@@ -38,7 +38,7 @@ Resources:
   NLPipelineImageCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: NITELitePipelineImage
+      Name: nitelite-pipeline-image
       Artifacts: 
         Location: !Ref OutputBucket
         Type: S3
