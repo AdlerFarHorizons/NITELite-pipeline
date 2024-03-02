@@ -41,5 +41,4 @@ def validate(self):
     print(f'    ------------\n    Total: {total_fp_count} filepaths')
     if total_fp_count == 0:
         print('WARNING: No input filepaths found.')
-mapmaker.validate = validate
-mapmaker.validate()
+validate(mapmaker)
