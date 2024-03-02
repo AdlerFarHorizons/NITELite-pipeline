@@ -41,7 +41,7 @@ echo 'Is the code inside the docker container what we expect?'
 docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
-    'ls; ls ./bin/; ls ./night-horizons-mapmaker/night_horizons/'
+    'ls; ls ../bin/'
 echo
 
 echo 'Can we see the input and output buckets from inside a python script inside the conda environment inside the docker container inside the ec2 instance?'
@@ -49,7 +49,7 @@ docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda \
-    python ./bin/validate.py'
+    python ../bin/validate.py'
 echo
 
 echo 'Does the pipeline code inside the docker container find the data?'
