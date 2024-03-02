@@ -22,11 +22,5 @@ print(args.config_filepath)
 print(args.validate_only)
 
 print('Before IOManager')
-from night_horizons.io_manager import IOManager
-io_manager = IOManager(
-    input_dir='/data/referenced_images',
-    input_description={},
-    output_dir='/data/nitelite_pipeline_output',
-    output_description={},
-)
-print(io_manager)
+from io_manager import IOManager
+print(IOManager)
