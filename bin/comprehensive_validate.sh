@@ -50,7 +50,7 @@ docker compose -f ./aws/docker-compose.yaml \
     --volume $(realpath ./bin/validate.py):/validate.py \
     nitelite-pipeline \
     /bin/bash -c \
-    'conda run -n nitelite-pipeline-conda \
+    'conda run -n nitelite-pipeline-conda --live-stream \
     python /validate.py'
 echo
 
