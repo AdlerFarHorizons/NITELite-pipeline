@@ -5,7 +5,7 @@ fps = []
 for i in range(2):
     fp = f'/data/output/test{i}.txt'
     with open(fp, 'w') as f:
-        f.write('Hello, world!\n')
+        f.write(f'Contents of file {i}')
     fps.append(fp)
 
 # Read
