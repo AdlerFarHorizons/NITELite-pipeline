@@ -129,14 +129,14 @@ class IOManager:
                     os.path.join(self.input_dir, descr['directory'])
 
         # Find files
-        input_filepaths = {}
-        #     key: (
-        #         self.find_files(**item)
-        #         if isinstance(item, dict)
-        #         else item
-        #     )
-        #     for key, item in modified_input_description.items()
-        # }
+        input_filepaths = {
+            key: (
+                self.find_files(**item)
+                if isinstance(item, dict)
+                else item
+            )
+            for key, item in modified_input_description.items()
+        }
 
         return input_filepaths, modified_input_description
 
@@ -178,14 +178,14 @@ class IOManager:
             except TypeError:
                 raise TypeError(f'Unexpected type for extension: {extension}')
 
-        fps = pd.Series(fps)
+        # fps = pd.Series(fps)
 
-        # Filter to select particular files
-        if pattern is not None:
-            contains_pattern = fps.str.findall(pattern).str[0].notna()
-            fps = fps.loc[contains_pattern]
+        # # Filter to select particular files
+        # if pattern is not None:
+        #     contains_pattern = fps.str.findall(pattern).str[0].notna()
+        #     fps = fps.loc[contains_pattern]
 
-        fps.index = np.arange(fps.size)
+        # fps.index = np.arange(fps.size)
 
         return fps
 
