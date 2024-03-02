@@ -1,8 +1,8 @@
 Resources:
   NLPipelineCodeBuild:
-    Name: NITELitePipeline
     Type: AWS::CodeBuild::Project
     Properties:
+      Name: NITELitePipeline
       Artifacts: 
         Location: !Ref OutputBucket
         Type: S3
