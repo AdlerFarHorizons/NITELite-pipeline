@@ -12,6 +12,13 @@ docker compose -f ./aws/docker-compose.yaml \
     'ls /data/'
 echo
 
+echo 'Can we create, see, and delete files inside the output bucket?'
+touch /data/nitelite_pipeline_output/test.txt; touch /data/nitelite_pipeline_output/test2.txt
+print('Files in output bucket:')
+ls /data/nitelite_pipeline_output/
+rm /data/nitelite_pipeline_output/test.txt; rm /data/nitelite_pipeline_output/test2.txt
+echo
+
 echo 'Can we see the config file from inside the docker container inside the ec2 instance?'
 docker compose -f ./aws/docker-compose.yaml \
     run \
@@ -35,6 +42,16 @@ docker compose -f ./aws/docker-compose.yaml \
     run nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda ls /data/'
+echo
+
+echo 'Can we create, see, and delete files inside the output bucket using Python?'
+docker compose -f ./aws/docker-compose.yaml \
+    run \
+    --volume $(realpath ./bin/validate_filesystem.py):/validate_filesystem.py \
+    nitelite-pipeline \
+    /bin/bash -c \
+    'conda run -n nitelite-pipeline-conda --live-stream \
+    python /validate_filesystem.py'
 echo
 
 echo 'Is the code inside the docker container what we expect?'
