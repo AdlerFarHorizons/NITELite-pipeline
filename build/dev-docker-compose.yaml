@@ -2,41 +2,23 @@
 version: '3.9'
 
 services:
-
   nitelite-pipeline:
     image: nitelite-pipeline:latest
-  db:
+    environment:
+      DATABASE_URL: 'postgresql://nitelite:nitelite@database:5432/nitelite'
+    depends_on:
+      - database
+  database:
     # image: postgis/postgis
     build:
       context: ..
       dockerfile: ./build/postgis.Dockerfile
-
     restart: always
-    # set shared memory limit when using docker-compose
-    # shm_size: 128mb
-    # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
-      POSTGRES_DB: gis
-      POSTGRES_USER: gis
-      POSTGRES_PASSWORD: gis
+      POSTGRES_DB: nitelite
+      POSTGRES_USER: nitelite
+      POSTGRES_PASSWORD: nitelite
     volumes:
-      - /Users/Shared/data/nitelite/220513-FH135/images/referenced:/data/referenced
-      - /Users/Shared/data/nitelite/220513-FH135/db:/var/lib/postgresql/data
-
-  # nitelite-pipeline:
-  #   image: nitelite-pipeline
-  # postgis:
-  #   build:
-  #     context: ..
-  #     dockerfile: ./build/postgis.Dockerfile
-  #   environment:
-  #     POSTGRES_DB: gis
-  #     POSTGRES_USER: gis
-  #     POSTGRES_PASSWORD: gis
-  #   ports:
-  #     - 5432:5432
+      - /Users/Shared/data/nitelite/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

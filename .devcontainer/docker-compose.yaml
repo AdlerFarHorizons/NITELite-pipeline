@@ -9,12 +9,22 @@ services:
       - ../..:/workspaces:cached
       - /Users/Shared/data:/data:cached
       # TODO: The test data is stored on google drive, so we need to ensure
-      # that the user has access to the data.
-      # - "/Users/zhafensaavedra/Google Drive/Shared drives/NITELite/NITELite_Mapmaker/data/night_horizons_test_data:/data/night_horizons_test_data:cached"
     command: sleep infinity
-    # environment: 
-    #   POSTGRES_DB: gis
-    #   POSTGRES_USER: gis
-    #   POSTGRES_PASSWORD: gis
-    # ports:
-    #   - 5432:5432
+    environment:
+      DATABASE_URL: 'postgresql://nitelite:nitelite@database:5432/nitelite'
+    depends_on:
+      - database
+  database:
+    # image: postgis/postgis
+    build:
+      context: ..
+      dockerfile: ./build/postgis.Dockerfile
+    restart: always
+    environment:
+      POSTGRES_DB: nitelite
+      POSTGRES_USER: nitelite
+      POSTGRES_PASSWORD: nitelite
+    volumes:
+      - /Users/Shared/data/nitelite/db:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

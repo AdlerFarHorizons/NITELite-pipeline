@@ -18,3 +18,5 @@ dependencies:
   - folium
   - jupyterlab
   - ocl-icd-system
+  - sqlalchemy
+  - psycopg2
