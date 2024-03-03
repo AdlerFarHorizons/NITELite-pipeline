@@ -10,8 +10,10 @@ services:
       - /Users/Shared/data:/data:cached
       # TODO: The test data is stored on google drive, so we need to ensure
     command: sleep infinity
+    # TODO: Probably define these in the stack?
     environment:
       DATABASE_URL: 'postgresql://nitelite:nitelite@database:5432/nitelite'
+      FLIGHT_ID: 'FH135'
     depends_on:
       - database
   database:
