@@ -1,0 +1,14 @@
+﻿Estimate summary
+Upfront cost,Monthly cost,Total 12 months cost,Currency
+0,108.49,1301.88,USD
+,,* Includes upfront cost
+
+
+Detailed Estimate
+Group hierarchy,Region,Description,Service,Upfront,Monthly,First 12 months total,Currency,Status,Configuration summary
+My Estimate,US East (Ohio),NITELite metadata-only DB hosted on RDS,Amazon RDS for SQL server,0,108.4857,1301.83,USD,,"Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (100 GB), Number of nodes (1), Instance type (db.m6i.xlarge), Utilization (On-Demand only) (10 Hours/Week), Deployment option (Single-AZ), License (License included), Database edition (Standard), Pricing strategy (OnDemand)"
+
+
+
+Acknowledgement
+"* AWS Pricing Calculator provides only an estimate of your AWS fees and doesn't include any taxes that might apply. Your actual fees depend on a variety of factors, including your actual usage of AWS services."
