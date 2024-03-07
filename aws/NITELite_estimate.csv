@@ -1,0 +1,22 @@
+﻿Estimate summary
+Upfront cost,Monthly cost,Total 12 months cost,Currency
+0,1289.77,15477.24,USD
+,,* Includes upfront cost
+
+
+Detailed Estimate
+Group hierarchy,Region,Description,Service,Upfront,Monthly,First 12 months total,Currency,Status,Configuration summary
+NITELite_estimate > RDS only,US East (N. Virginia),RDS:images,Amazon RDS for SQL server,0,957.1456999999999,11485.75,USD,,"Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (4 TB), Number of nodes (1), Instance type (db.m4.xlarge), Utilization (On-Demand only) (10 Hours/Week), Deployment option (Single-AZ), License (License included), Database edition (Standard), Pricing strategy (OnDemand), Additional backup storage (4 TB)"
+NITELite_estimate > RDS only,US East (N. Virginia),RDS:metadata,Amazon RDS for SQL server,0,43.17,518.04,USD,,"Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (100 GB), Number of nodes (1), Instance type (db.m6i.large), Utilization (On-Demand only) (10 Hours/Month), Deployment option (Single-AZ), License (License included), Database edition (Standard), Pricing strategy (OnDemand)"
+NITELite_estimate > S3 only,US East (N. Virginia),S3:metadata,S3 Standard,0,0.26,3.12,USD,,"S3 Standard storage (10 GB per month), PUT, COPY, POST, LIST requests to S3 Standard (100), GET, SELECT, and all other requests from S3 Standard (100), Data returned by S3 Select (10 GB per month), Data scanned by S3 Select (10 GB per month)"
+NITELite_estimate > S3 only,US East (N. Virginia),S3:metadata,Data Transfer,0,0.9,10.80,USD,,"DT Inbound: Internet (10 GB per month), DT Outbound: Internet (10 GB per month)"
+NITELite_estimate > S3 only,US East (N. Virginia),S3:images,S3 Standard,0,95.56,1146.72,USD,,"S3 Standard storage (4 TB per month), PUT, COPY, POST, LIST requests to S3 Standard (2), GET, SELECT, and all other requests from S3 Standard (2), Data returned by S3 Select (500 GB per month), Data scanned by S3 Select (500 GB per month)"
+NITELite_estimate > S3 only,US East (N. Virginia),S3:images,Data Transfer,0,27,324.00,USD,,"DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (300 GB per month)"
+NITELite_estimate > RDS and S3,US East (N. Virginia),S3:images,S3 Standard,0,95.56,1146.72,USD,,"S3 Standard storage (4 TB per month), PUT, COPY, POST, LIST requests to S3 Standard (2), GET, SELECT, and all other requests from S3 Standard (2), Data returned by S3 Select (500 GB per month), Data scanned by S3 Select (500 GB per month)"
+NITELite_estimate > RDS and S3,US East (N. Virginia),S3:images,Data Transfer,0,27,324.00,USD,,"DT Inbound: Not selected (0 TB per month), DT Outbound: Internet (300 GB per month)"
+NITELite_estimate > RDS and S3,US East (N. Virginia),RDS:metadata,Amazon RDS for SQL server,0,43.17,518.04,USD,,"Storage for each RDS instance (General Purpose SSD (gp2)), Storage amount (100 GB), Number of nodes (1), Instance type (db.m6i.large), Utilization (On-Demand only) (10 Hours/Month), Deployment option (Single-AZ), License (License included), Database edition (Standard), Pricing strategy (OnDemand)"
+
+
+
+Acknowledgement
+"* AWS Pricing Calculator provides only an estimate of your AWS fees and doesn't include any taxes that might apply. Your actual fees depend on a variety of factors, including your actual usage of AWS services."
