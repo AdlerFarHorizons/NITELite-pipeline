@@ -6,16 +6,18 @@ services:
       dockerfile: ./build/Dockerfile
       # dockerfile: ./.devcontainer/devtest.Dockerfile
     volumes:
-      - ../..:/workspaces:cached
+      # - ../..:/workspaces:cached
+      - /Users/Shared/repos/NITELite-pipeline:/NITELite-pipeline:cached
       - /Users/Shared/data:/data:cached
       # TODO: The test data is stored on google drive, so we need to ensure
     command: sleep infinity
     # TODO: Probably define these in the stack?
     environment:
-      DATABASE_URL: 'postgresql://nitelite:nitelite@database:5432/nitelite'
       FLIGHT_ID: 'FH135'
+      DATABASE_URL: 'postgresql://nitelite:nitelite@database:5432/nitelite'
     depends_on:
       - database
+  # TODO: Remove the database, we don't need it
   database:
     # image: postgis/postgis
     build:
