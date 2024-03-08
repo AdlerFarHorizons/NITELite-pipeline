@@ -14,21 +14,3 @@ services:
     # TODO: Probably define these in the stack?
     environment:
       FLIGHT_ID: 'FH135'
-      DATABASE_URL: 'postgresql://nitelite:nitelite@database:5432/nitelite'
-    depends_on:
-      - database
-  # TODO: Remove the database, we don't need it
-  database:
-    # image: postgis/postgis
-    build:
-      context: ..
-      dockerfile: ./build/postgis.Dockerfile
-    restart: always
-    environment:
-      POSTGRES_DB: nitelite
-      POSTGRES_USER: nitelite
-      POSTGRES_PASSWORD: nitelite
-    volumes:
-      - /Users/Shared/data/nitelite/db:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
