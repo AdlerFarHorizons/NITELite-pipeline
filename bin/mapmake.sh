@@ -107,10 +107,11 @@ if [ -n "$CONFIG_FILEPATH" ]; then
     DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yml"
 fi
 
-# TODO: Delete and explain why
+# TODO: Delete and place explanation somewhere
 # Explanation for removal: The idea behind this is to allow the user to use
 # their own version of the pipeline. However, one of the goals is to freeze the
-# used code. In addition, copying over the code requires reinstalling it too.
+# used code. In addition, copying over the code requires reinstalling it too,
+# unless they overwrite the original location.
 # If the user wants to use their own code, they should either intentionally
 # mess with a running image separately, or they should edit and rebuild.
 # if [ -n "$COPY_CODE" ]; then
