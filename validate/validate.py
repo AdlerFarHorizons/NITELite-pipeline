@@ -48,8 +48,8 @@ def get_service(self, name, *args, **kwargs):
 
 print('Before IOManager')
 from io_manager import IOManager
-from night_horizons.mapmake import create_mapmaker
-mapmaker = create_mapmaker(args.config_filepath)
+from night_horizons.pipeline import create_stage
+mapmaker = create_stage(args.config_filepath)
 print(mapmaker)
 constructor, args, kwargs = get_service(mapmaker.container, 'io_manager')
 print('\nargs:')
