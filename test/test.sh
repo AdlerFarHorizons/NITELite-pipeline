@@ -70,7 +70,7 @@ if [ -z "$COMPOSE_FILE" ]; then
     COMPOSE_FILE="./build/docker-compose.yaml"
 fi
 
-echo 'Performing comprehensive validation...'
+echo 'Running the test suite...'
 echo
 
 echo 'Can we see the input and output?'

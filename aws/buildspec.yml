@@ -18,18 +18,23 @@ phases:
       - sudo yum -y install ./mount-s3.rpm
   pre_build:
     commands:
-      # Mount the S3 buckets
-      # Alternative: try mounting them *inside* the container.
-      - mkdir /data; mkdir /data/output; mkdir /data/metadata/; mkdir /data/input/images; mkdir /data/input/referenced_images
-      - mount-s3 ${INPUT_BUCKET} /data/input/referenced_images
       # Pull the image from the registry. This is faster than building from
       # scratch, especially when cached
-      # - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-      # DEBUG
-      # - docker build -t nitelite-pipeline -f ./validate/Dockerfile .
-      - ./validate/comprehensive_validate.sh
-      # Validate setup
-      # - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
+      - echo Pulling the Docker image...
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
+      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+      # Mount the S3 buckets
+      - mkdir /data; mkdir /data/input; mkdir /data/output
+      # DEBUG: uncomment
+      # - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
+      # - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
+      # - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
+  build:
+    commands:
+      # Run the test suite
+      - echo Running the test suite...
+      - mkdir /data/test_data; mount-s3 nitelite.test-data /data/test_data
+      - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data
   # build: 
   #   commands:
   #     # Run mapmake.py
