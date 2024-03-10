@@ -21,6 +21,7 @@ args = parser.parse_args()
 print(args.config_filepath)
 print(args.validate_only)
 
+
 def get_service(self, name, *args, **kwargs):
     '''
     TODO: Add parameter validation.
