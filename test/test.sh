@@ -142,7 +142,7 @@ echo 'Can we create, see, and delete files inside the output using Python?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
-    --volume $(realpath ./validate/validate_filesystem.py):/validate_filesystem.py \
+    --volume $(realpath ./test/validate_filesystem.py):/validate_filesystem.py \
     nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda --live-stream \
