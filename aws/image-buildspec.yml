@@ -23,6 +23,6 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Testing the Docker image...
-      - ./validate/comprehensive_validate.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data 
+      - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data 
       - echo Pushing the Docker image...
       - docker push public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
