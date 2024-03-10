@@ -81,6 +81,14 @@ echo 'Can we see individual input files?'
 ls $DATA_DIR/input/referenced_images/220513-FH135/
 echo
 
+echo 'Where are we inside the docker container?'
+docker compose -f $COMPOSE_FILE \
+    run \
+    --volume $DATA_DIR:/data \
+    nitelite-pipeline \
+    pwd
+echo
+
 echo 'Can we see individual input files from inside the docker container?'
 docker compose -f $COMPOSE_FILE \
     run \
@@ -147,20 +155,18 @@ docker compose -f $COMPOSE_FILE \
     --volume $DATA_DIR:/data \
     nitelite-pipeline \
     /bin/bash -c \
-    'pwd; echo "Contained files:"; ls ./night-horizons-mapmaker/night_horizons'
+    'pwd; echo "Files in night_horizons:"; ls ./night-horizons-mapmaker/night_horizons'
 echo
 
-echo 'Can we see the input and output from inside a python script inside the conda environment inside the docker container?'
+echo 'Does the test suite work?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
-    # --volume $(realpath ./validate/validate.py):/validate.py \
-    # --volume $(realpath ./validate/io_manager.py):/io_manager.py \
-    --volume $CONFIG_FILEPATH:/used_config.yml \
     nitelite-pipeline \
     /bin/bash -c \
-    'conda run -n nitelite-pipeline-conda --live-stream \
-    python /validate.py /used_config.yml --validate_only'
+    'cd night-horizons-mapmaker; \
+    conda run -n nitelite-pipeline-conda --live-stream \
+    pytest .'
 echo
 
 # echo 'Does the pipeline code inside the docker container find the data?'
