@@ -22,7 +22,7 @@ phases:
       # scratch, especially when cached
       - echo Pulling the Docker image...
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
-      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest nitelite-pipeline:latest
+      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # Mount the S3 buckets
       - mkdir /data; mkdir /data/input; mkdir /data/output
       # DEBUG: uncomment
@@ -34,7 +34,7 @@ phases:
       # Run the test suite
       - echo Running the test suite...
       - mkdir /data/test_data; mount-s3 nitelite.test-data /data/test_data --allow-overwrite --allow-delete
-      - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data
+      - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data -f ./aws/docker-compose.yaml
   # build: 
   #   commands:
   #     # Run mapmake.py
