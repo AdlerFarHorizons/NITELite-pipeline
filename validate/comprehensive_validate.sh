@@ -14,14 +14,9 @@ Options:
                                     the docker container. Any data you want to
                                     use should be inside DATA_DIR, and any paths
                                     in the config should be relative to this.
-    -i, --interactive               Instead of running the execution script,
-                                    open an interactive shell inside the
-                                    docker container.
     -f, --compose-file              Specify the docker-compose file to use.
                                     Default is ./build/docker-compose.yaml
     -h, --help                      Show this help message
-    --validate_only                 Only validate the setup and exit. This
-                                    will not run the pipeline.
 
 Example:
     ./bin/mapmake.sh -c ./config/mosaic.yml -d /Users/shared/data
@@ -33,8 +28,13 @@ while [[ $# -gt 0 ]]; do
     key="$1"
 
     case $key in
+        -c|--config)
+            CONFIG_FILEPATH=$(realpath "$2")
+            shift # past argument
+            shift # past value
+            ;;
         -d|--data)
-            DATA_DIR="$2"
+            DATA_DIR=$(realpath "$2")
             shift # past argument
             shift # past value
             ;;
@@ -42,6 +42,10 @@ while [[ $# -gt 0 ]]; do
             COMPOSE_FILE="$2"
             shift # past argument
             shift # past value
+            ;;
+        -h|--help)
+            show_help
+            exit 0
             ;;
         *)
             echo "Error: Unrecognized option $1"
@@ -57,6 +61,11 @@ if [ -z "$DATA_DIR" ]; then
     show_help
     exit 1
 fi
+if [ -z "$CONFIG_FILEPATH" ]; then
+    echo "Error: Configuration filepath is required."
+    show_help
+    exit 1
+fi
 if [ -z "$COMPOSE_FILE" ]; then
     COMPOSE_FILE="./build/docker-compose.yaml"
 fi
@@ -65,37 +74,37 @@ echo 'Performing comprehensive validation...'
 echo
 
 echo 'Can we see the input and output?'
-ls /data/
+ls $DATA_DIR
 echo
 
 echo 'Can we see individual input files?'
-ls /data/input/referenced_images/220513-FH135/
+ls $DATA_DIR/input/referenced_images/220513-FH135/
 echo
 
-echo 'Can we see input and output from inside the docker container?'
+echo 'Can we see individual input files from inside the docker container?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
     nitelite-pipeline \
     /bin/bash -c \
-    'ls /data/input; ls /data/output'
+    'ls /data/input/referenced_images/220513-FH135/'
 echo
 
 echo 'Can we create, see, and delete files inside the output directory?'
 echo 'Writing files to output...'
-touch /data/output/test.txt; touch /data/output/test2.txt
+touch $DATA_DIR/output/test.txt; touch $DATA_DIR/output/test2.txt
 echo 'Files in output bucket:'
-ls /data/output/
+ls $DATA_DIR/output/
 echo 'Removing files from output bucket...'
-rm /data/output/test.txt; rm /data/output/test2.txt
-ls /data/output/
+rm $DATA_DIR/output/test.txt; rm $DATA_DIR/output/test2.txt
+ls $DATA_DIR/output/
 echo
 
 echo 'Can we see the config file from inside the docker container?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
-    --volume $(realpath ./config/mosaic.yml):/used_config.yml \
+    --volume $CONFIG_FILEPATH:/used_config.yml \
     nitelite-pipeline \
     /bin/bash -c \
     'ls /*.yml'
@@ -147,7 +156,7 @@ docker compose -f $COMPOSE_FILE \
     --volume $DATA_DIR:/data \
     # --volume $(realpath ./validate/validate.py):/validate.py \
     # --volume $(realpath ./validate/io_manager.py):/io_manager.py \
-    --volume $(realpath ./config/mosaic.yml):/used_config.yml \
+    --volume $CONFIG_FILEPATH:/used_config.yml \
     nitelite-pipeline \
     /bin/bash -c \
     'conda run -n nitelite-pipeline-conda --live-stream \
@@ -157,7 +166,7 @@ echo
 # echo 'Does the pipeline code inside the docker container find the data?'
 # docker compose -f $COMPOSE_FILE \
 #     run \
-#     --volume $(realpath ./config/mosaic.yml):/used_config.yml \
+#     --volume $CONFIG_FILEPATH:/used_config.yml \
 #     nitelite-pipeline \
 #     /bin/bash -c \
 #     'conda run -n nitelite-pipeline-conda \
@@ -165,5 +174,5 @@ echo
 #     /used_config.yml --validate_only'
 # 
 # echo 'Does the execution script work?'
-# ./validate/mapmake.sh -d /data:/data -c $(realpath ./config/mosaic.yml):/used_config.yml --validate_only
+# ./validate/mapmake.sh -d /data:/data -c $CONFIG_FILEPATH:/used_config.yml --validate_only
 # echo
