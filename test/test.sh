@@ -169,7 +169,10 @@ docker compose -f $COMPOSE_FILE \
     'cd night-horizons-mapmaker; \
     conda run -n nitelite-pipeline-conda --live-stream \
     pytest ./test/test_pipeline.py::TestMetadataProcessor'
+echo 'pytest.log:'
+cat ./night-horizons-mapmaker/test/pytest.log
 echo
+
 
 echo 'Does the mosaic work?'
 docker compose -f $COMPOSE_FILE \
@@ -181,6 +184,8 @@ docker compose -f $COMPOSE_FILE \
     'cd night-horizons-mapmaker; \
     conda run -n nitelite-pipeline-conda --live-stream \
     pytest ./test/test_pipeline.py::TestMosaicMaker'
+echo 'pytest.log:'
+cat ./night-horizons-mapmaker/test/pytest.log
 echo
 
 echo 'Does the sequential mosaic work?'
@@ -193,6 +198,8 @@ docker compose -f $COMPOSE_FILE \
     'cd night-horizons-mapmaker; \
     conda run -n nitelite-pipeline-conda --live-stream \
     pytest ./test/test_pipeline.py::TestSequentialMosaicMaker'
+echo 'pytest.log:'
+cat ./night-horizons-mapmaker/test/pytest.log
 echo
 
 # echo 'Does the pipeline code inside the docker container find the data?'
