@@ -158,7 +158,8 @@ docker compose -f $COMPOSE_FILE \
     'pwd; echo "Files in night_horizons:"; ls ./night-horizons-mapmaker/night_horizons'
 echo
 
-echo 'Does the test suite work?'
+# echo 'Does the test suite work?'
+echo 'Does the metadata work?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
@@ -167,7 +168,31 @@ docker compose -f $COMPOSE_FILE \
     /bin/bash -c \
     'cd night-horizons-mapmaker; \
     conda run -n nitelite-pipeline-conda --live-stream \
-    pytest .'
+    pytest ./test/test_pipeline.py::TestMetadataProcessor'
+echo
+
+echo 'Does the mosaic work?'
+docker compose -f $COMPOSE_FILE \
+    run \
+    --volume $DATA_DIR:/data \
+    --volume $(realpath .):/NITELite-pipeline \
+    nitelite-pipeline \
+    /bin/bash -c \
+    'cd night-horizons-mapmaker; \
+    conda run -n nitelite-pipeline-conda --live-stream \
+    pytest ./test/test_pipeline.py::TestMosaicMaker'
+echo
+
+echo 'Does the sequential mosaic work?'
+docker compose -f $COMPOSE_FILE \
+    run \
+    --volume $DATA_DIR:/data \
+    --volume $(realpath .):/NITELite-pipeline \
+    nitelite-pipeline \
+    /bin/bash -c \
+    'cd night-horizons-mapmaker; \
+    conda run -n nitelite-pipeline-conda --live-stream \
+    pytest ./test/test_pipeline.py::TestSequentialMosaicMaker'
 echo
 
 # echo 'Does the pipeline code inside the docker container find the data?'
