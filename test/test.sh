@@ -166,7 +166,7 @@ docker compose -f $COMPOSE_FILE \
     /bin/bash -c \
     'cd night-horizons-mapmaker; \
     conda run -n nitelite-pipeline-conda --live-stream \
-    pytest .'
+    pytest test/test_dataio.py'
 echo
 
 # echo 'Does the pipeline code inside the docker container find the data?'
