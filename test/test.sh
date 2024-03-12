@@ -158,8 +158,20 @@ docker compose -f $COMPOSE_FILE \
     'pwd; echo "Files in night_horizons:"; ls ./night-horizons-mapmaker/night_horizons'
 echo
 
+echo 'Do the unit tests pass?'
+docker compose -f $COMPOSE_FILE \
+    run \
+    --volume $DATA_DIR:/data \
+    --volume $(realpath .):/NITELite-pipeline \
+    nitelite-pipeline \
+    /bin/bash -c \
+    'cd night-horizons-mapmaker; \
+    conda run -n nitelite-pipeline-conda --live-stream \
+    pytest --ignore=./test/test_pipeline.py .'
+echo
+
 # echo 'Does the test suite work?'
-echo 'Does the metadata work?'
+echo 'Does the metadata stage work?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
@@ -174,7 +186,7 @@ cat ./night-horizons-mapmaker/test/pytest.log
 echo
 
 
-echo 'Does the mosaic work?'
+echo 'Does the mosaic stage work?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
@@ -188,7 +200,7 @@ echo 'pytest.log:'
 cat ./night-horizons-mapmaker/test/pytest.log
 echo
 
-echo 'Does the sequential mosaic work?'
+echo 'Does the sequential mosaic stage work?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
