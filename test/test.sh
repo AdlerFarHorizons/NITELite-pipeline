@@ -162,6 +162,7 @@ echo 'Does the test suite work?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
+    --volume $(realpath .):/NITELite-pipeline \
     nitelite-pipeline \
     /bin/bash -c \
     'cd night-horizons-mapmaker; \
