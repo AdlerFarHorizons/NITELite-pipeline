@@ -16,6 +16,9 @@ phases:
       # Install mountpoint
       - wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.rpm
       - sudo yum -y install ./mount-s3.rpm
+      # DEBUG
+      - echo ${CONFIG_FILEPATH}
+      - ls ${CONFIG_FILEPATH}
   pre_build:
     commands:
       # Pull the image from the registry. This is faster than building from
@@ -36,7 +39,7 @@ phases:
   build:
     commands:
       # Run the pipeline
-      - ./bin/mapmake.sh -c $CONFIG_FILEPATH -d /data
+      - ./bin/mapmake.sh -c ${CONFIG_FILEPATH} -d /data
 
 artifacts:
   files:
