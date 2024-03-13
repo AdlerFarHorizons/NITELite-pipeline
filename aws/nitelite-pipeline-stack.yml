@@ -12,10 +12,10 @@ Resources:
         ComputeType: BUILD_GENERAL1_LARGE
         PrivilegedMode: true
         EnvironmentVariables:
-          - Name: INPUT_BUCKET
-            Value: nitelite.referenced-images
-          - Name: OUTPUT_BUCKET
-            Value: !Ref OutputBucket
+          - Name: CONFIG_FP
+            Value: ./configs/metadata.yml
+          - Name: LOGGING_LEVEL
+            Value: WARNING
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
       Source:
         Location: https://github.com/AdlerFarHorizons/NITELite-pipeline.git

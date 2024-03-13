@@ -41,3 +41,7 @@ phases:
   #   commands:
   #     # Run mapmake.py
   #     - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
+
+  artifacts:
+    files:
+      - /data/output/*
