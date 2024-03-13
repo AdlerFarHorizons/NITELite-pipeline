@@ -38,6 +38,6 @@ phases:
       # Run the pipeline
       - ./bin/mapmake.sh -c $CONFIG_FILEPATH -d /data
 
-  artifacts:
-    files:
-      - /data/output/*
+artifacts:
+  files:
+    - /data/output/*
