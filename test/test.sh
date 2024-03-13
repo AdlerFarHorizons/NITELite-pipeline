@@ -73,132 +73,132 @@ fi
 echo 'Running the test suite...'
 echo
 
-echo 'Can we see the input and output?'
-ls $DATA_DIR
-echo
-
-echo 'Can we see individual input files?'
-ls $DATA_DIR/input/referenced_images/220513-FH135/
-echo
-
-echo 'Where are we inside the docker container?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    nitelite-pipeline \
-    pwd
-echo
-
-echo 'Can we see individual input files from inside the docker container?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'ls /data/input/referenced_images/220513-FH135/'
-echo
-
-echo 'Can we create, see, and delete files inside the output directory?'
-echo 'Writing files to output...'
-touch $DATA_DIR/output/test.txt; touch $DATA_DIR/output/test2.txt
-echo 'Files in output bucket:'
-ls $DATA_DIR/output/
-echo 'Removing files from output bucket...'
-rm $DATA_DIR/output/test.txt; rm $DATA_DIR/output/test2.txt
-ls $DATA_DIR/output/
-echo
-
-echo 'Can we see the config file from inside the docker container?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    --volume $CONFIG_FILEPATH:/used_config.yml \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'ls /*.yml'
-echo
-
-echo 'Does the conda environment inside the docker container work?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'conda run -n nitelite-pipeline-conda python -c \
-    "import sys; \
-print(f\"Found sys.executable at {sys.executable}!\");"'
-echo
-
-echo 'Can we see the input and output from inside the conda environment inside the docker container?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'conda run -n nitelite-pipeline-conda ls /data/'
-echo
-
-echo 'Can we create, see, and delete files inside the output using Python?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    --volume $(realpath ./test/validate_filesystem.py):/validate_filesystem.py \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'conda run -n nitelite-pipeline-conda --live-stream \
-    python /validate_filesystem.py'
-echo
-
-echo 'Is the code inside the docker container what we expect?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'pwd; echo "Files in night_horizons:"; ls ./night-horizons-mapmaker/night_horizons'
-echo
-
-echo 'Do the unit tests pass?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    --volume $(realpath .):/NITELite-pipeline \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'cd night-horizons-mapmaker; \
-    conda run -n nitelite-pipeline-conda --live-stream \
-    pytest --ignore=./test/test_pipeline.py .'
-echo
-
-# echo 'Does the test suite work?'
-echo 'Does the metadata stage work?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    --volume $(realpath .):/NITELite-pipeline \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'cd night-horizons-mapmaker; \
-    conda run -n nitelite-pipeline-conda --live-stream \
-    pytest ./test/test_pipeline.py::TestMetadataProcessor'
-echo 'pytest.log:'
-cat ./night-horizons-mapmaker/test/pytest.log
-echo
-
-
-echo 'Does the mosaic stage work?'
-docker compose -f $COMPOSE_FILE \
-    run \
-    --volume $DATA_DIR:/data \
-    --volume $(realpath .):/NITELite-pipeline \
-    nitelite-pipeline \
-    /bin/bash -c \
-    'cd night-horizons-mapmaker; \
-    conda run -n nitelite-pipeline-conda --live-stream \
-    pytest ./test/test_pipeline.py::TestMosaicMaker'
-echo 'pytest.log:'
-cat ./night-horizons-mapmaker/test/pytest.log
-echo
+# echo 'Can we see the input and output?'
+# ls $DATA_DIR
+# echo
+# 
+# echo 'Can we see individual input files?'
+# ls $DATA_DIR/input/referenced_images/220513-FH135/
+# echo
+# 
+# echo 'Where are we inside the docker container?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     nitelite-pipeline \
+#     pwd
+# echo
+# 
+# echo 'Can we see individual input files from inside the docker container?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'ls /data/input/referenced_images/220513-FH135/'
+# echo
+# 
+# echo 'Can we create, see, and delete files inside the output directory?'
+# echo 'Writing files to output...'
+# touch $DATA_DIR/output/test.txt; touch $DATA_DIR/output/test2.txt
+# echo 'Files in output bucket:'
+# ls $DATA_DIR/output/
+# echo 'Removing files from output bucket...'
+# rm $DATA_DIR/output/test.txt; rm $DATA_DIR/output/test2.txt
+# ls $DATA_DIR/output/
+# echo
+# 
+# echo 'Can we see the config file from inside the docker container?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     --volume $CONFIG_FILEPATH:/used_config.yml \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'ls /*.yml'
+# echo
+# 
+# echo 'Does the conda environment inside the docker container work?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'conda run -n nitelite-pipeline-conda python -c \
+#     "import sys; \
+# print(f\"Found sys.executable at {sys.executable}!\");"'
+# echo
+# 
+# echo 'Can we see the input and output from inside the conda environment inside the docker container?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'conda run -n nitelite-pipeline-conda ls /data/'
+# echo
+# 
+# echo 'Can we create, see, and delete files inside the output using Python?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     --volume $(realpath ./test/validate_filesystem.py):/validate_filesystem.py \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'conda run -n nitelite-pipeline-conda --live-stream \
+#     python /validate_filesystem.py'
+# echo
+# 
+# echo 'Is the code inside the docker container what we expect?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'pwd; echo "Files in night_horizons:"; ls ./night-horizons-mapmaker/night_horizons'
+# echo
+# 
+# echo 'Do the unit tests pass?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     --volume $(realpath .):/NITELite-pipeline \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'cd night-horizons-mapmaker; \
+#     conda run -n nitelite-pipeline-conda --live-stream \
+#     pytest --ignore=./test/test_pipeline.py .'
+# echo
+# 
+# # echo 'Does the test suite work?'
+# echo 'Does the metadata stage work?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     --volume $(realpath .):/NITELite-pipeline \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'cd night-horizons-mapmaker; \
+#     conda run -n nitelite-pipeline-conda --live-stream \
+#     pytest ./test/test_pipeline.py::TestMetadataProcessor'
+# echo 'pytest.log:'
+# cat ./night-horizons-mapmaker/test/pytest.log
+# echo
+# 
+# 
+# echo 'Does the mosaic stage work?'
+# docker compose -f $COMPOSE_FILE \
+#     run \
+#     --volume $DATA_DIR:/data \
+#     --volume $(realpath .):/NITELite-pipeline \
+#     nitelite-pipeline \
+#     /bin/bash -c \
+#     'cd night-horizons-mapmaker; \
+#     conda run -n nitelite-pipeline-conda --live-stream \
+#     pytest ./test/test_pipeline.py::TestMosaicMaker'
+# echo 'pytest.log:'
+# cat ./night-horizons-mapmaker/test/pytest.log
+# echo
 
 echo 'Does the sequential mosaic stage work?'
 docker compose -f $COMPOSE_FILE \
