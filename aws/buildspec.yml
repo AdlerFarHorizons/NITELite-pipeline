@@ -14,7 +14,6 @@ phases:
   install:
     commands:
       # Install mountpoint
-      - echo "Using compute type $CODEBUILD_COMPUTE_TYPE"
       - wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.rpm
       - sudo yum -y install ./mount-s3.rpm
   pre_build:
@@ -26,21 +25,18 @@ phases:
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # Mount the S3 buckets
       - mkdir /data; mkdir /data/input; mkdir /data/output
-      # DEBUG: uncomment
-      # - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
-      # - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
-      # - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
-  build:
-    commands:
+      - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
+      - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
+      - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
       # Run the test suite
       - echo Running the test suite...
       - mkdir /data/test_data; mkdir /data/test_data/input; mkdir /data/test_data/output
       - mount-s3 nitelite.test-data /data/test_data/input --allow-overwrite --allow-delete
       - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data -f ./aws/docker-compose.yaml
-  # build: 
-  #   commands:
-  #     # Run mapmake.py
-  #     - ./bin/mapmake.sh -c ./config/mosaic.yml -d /data --validate_only
+  build:
+    commands:
+      # Run the pipeline
+      - ./bin/mapmake.sh -c $CONFIG_FILEPATH -d /data
 
   artifacts:
     files:

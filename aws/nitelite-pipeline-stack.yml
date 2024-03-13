@@ -12,7 +12,7 @@ Resources:
         ComputeType: BUILD_GENERAL1_LARGE
         PrivilegedMode: true
         EnvironmentVariables:
-          - Name: CONFIG_FP
+          - Name: CONFIG_FILEPATH
             Value: ./configs/metadata.yml
           - Name: LOGGING_LEVEL
             Value: WARNING
