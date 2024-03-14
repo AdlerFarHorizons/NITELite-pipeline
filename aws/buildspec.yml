@@ -52,4 +52,4 @@ artifacts:
   files:
     - '/data/output/metadata/*'
   name:
-    - ${FLIGHT_ID}-$(date +%Y-%m-%d)
+    - run-$(date +%Y-%m-%d)'
