@@ -46,4 +46,5 @@ phases:
 artifacts:
   files:
     - '/data/output/*'
-  name: name-${FLIGHT_ID}-$(date +%Y-%m-%d)
+  name: ${FLIGHT_ID}-$(date +%Y-%m-%d)
+  base-directory: '/data/output'
