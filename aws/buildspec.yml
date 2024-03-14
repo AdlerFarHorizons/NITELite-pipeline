@@ -44,7 +44,8 @@ phases:
       - echo 'Output:'; ls -R /data/output
 
 artifacts:
+  base-directory: /data/output
   files:
-    - '/data/output/*'
+    - '**/*'
+  discard-paths: yes
   name: ${FLIGHT_ID}-$(date +%Y-%m-%d)
-  base-directory: '/data/output'
