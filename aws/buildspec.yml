@@ -5,10 +5,6 @@ version: 0.2
 
 env:
   shell: bash
-  # TODO: Consider setting up the data directory with environment variables
-  # variables:
-  #   key: "value"
-  #   key: "value"
         
 phases:
   # DEBUG
@@ -50,5 +46,4 @@ phases:
 artifacts:
   files:
     - '/data/output/*'
-  base-directory: ${FLIGHT_ID}-$(date +%Y-%m-%d)
   name: name-${FLIGHT_ID}-$(date +%Y-%m-%d)
