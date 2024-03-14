@@ -19,14 +19,11 @@ io_manager:
       # This is a RegEx pattern. The "1" selects nadir images only.
       pattern: 'Geo\s\d+_1\.(tif|tiff)$'
   # Where the output files will be saved
-  output_dir: /data/output/mosaics/220513-FH135
-  # If the output directory already exists then a new directory is created
-  # with a new ID attached.
-  file_exists: new
+  output_dir: /data/output
 
 # Coordinate reference-system employed
 crs:
   projparams: 'EPSG:3857'
 
-random_state: 
+random_state:
   seed: 15923

@@ -4,14 +4,14 @@
 
 # Indicate what type of map we want to create
 mapmaker:
-  map_type: sequential
+  stage: sequential_mosaicker
 
 # I/O settings
 # These settings assume that the user has mounted their data directory at /data
 io_manager:
   # Directory containing input files. Filepaths in input_description
   # are relative to this directory.
-  input_dir: /data/nitelite/220513-FH135
+  input_dir: /data/input
   # Specifies the input data
   input_description:
     # Metadata files. We provide the exact full path relative to input_dir.
@@ -22,18 +22,14 @@ io_manager:
     referenced_images:
       # This filepath is relative to input_dir, e.g. the full path could be
       # /data/nitelite/220513-FH135/images/referenced
-      directory: images/referenced
-      # Only files with these extensions will be considered.
-      extension: ['tif', 'tiff']
+      directory: referenced_images/220513-FH135
       # This is a RegEx pattern. The "1" selects nadir images only.
-      pattern: 'Geo\s\d+_1.tif'
+      pattern: 'Geo\s\d+_1\.(tif|tiff)'
   # Where the output files will be saved
-  output_dir: /data/nitelite/220513-FH135/mosaics/referenced
-  # If the output directory already exists then a new directory is created
-  # with a new ID attached.
-  file_exists: new
+  output_dir: /data/output
 
 # Settings for testing and training data
+# The "drop raw images" arg is what makes this an evaluation
 data_splitter:
   drop_raw_images: True
 
