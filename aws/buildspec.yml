@@ -42,17 +42,16 @@ phases:
       - touch /data/output/test.txt
   post_build:
     commands:
-      # Display output
+      # Check output
       - echo 'Output:'; ls -R /data/output
-      - export BASENAME=$(basename ${CONFIG_FILEPATH})
-      - echo $BASENAME
-      - export DIRNAME=${BASENAME%.*}
-      - echo $DIRNAME
-      - echo "${${basename ${CONFIG_FILEPATH}}%.*}"
+      # Set up name for the artifact in the destination bucket
+      - BASENAME=$(basename ${CONFIG_FILEPATH})
+      - DIR=${BASENAME%.*}
+      - SUBDIR=${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
 
 artifacts:
   base-directory: /data/output
   files:
     - '**/*'
   discard-paths: yes
-  name: $DIRNAME/${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
+  name: $DIR/$SUBDIR
