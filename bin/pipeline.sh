@@ -130,7 +130,7 @@ if [ -z "$INTERACTIVE" ]; then
     # (inside the docker image) to use
     DOCKER_CMD+=" conda run -n nitelite-pipeline-conda --live-stream"
 
-    DOCKER_CMD+=" python night-horizons-mapmaker/night_horizons/mapmake.py"
+    DOCKER_CMD+=" python night-horizons-mapmaker/night_horizons/pipeline.py"
 
     # Pass in the config itself
     DOCKER_CMD+=" /used-config.yml"
