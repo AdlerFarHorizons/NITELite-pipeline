@@ -52,4 +52,4 @@ artifacts:
   files:
     - '/data/output/metadata/*'
   name:
-    - 'run-$(date +%Y-%m-%d)'
+    - builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
