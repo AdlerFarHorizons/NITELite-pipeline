@@ -7,39 +7,33 @@ env:
   shell: bash
         
 phases:
-  # DEBUG
-  # install:
-  #   commands:
-  #     # Install mountpoint
-  #     - wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.rpm
-  #     - sudo yum -y install ./mount-s3.rpm
-  # pre_build:
-  #   commands:
-  #     # Pull the image from the registry. This is faster than building from
-  #     # scratch, especially when cached
-  #     - echo 'Pulling the Docker image...'
-  #     - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
-  #     - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-  #     # Mount the S3 buckets
-  #     - mkdir /data; mkdir /data/input; mkdir /data/output
-  #     - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
-  #     - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
-  #     - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
-  #     # DEBUG
-  #     # # Run the test suite. test.sh: environment setup, pytest.sh: python tests
-  #     # - echo 'Running the test suite...'
-  #     # - mkdir /data/test_data; mkdir /data/test_data/input; mkdir /data/test_data/output
-  #     # - mount-s3 nitelite.test-data /data/test_data/input --allow-overwrite --allow-delete
-  #     # - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data -f ./aws/docker-compose.yaml
-  #     # - ./test/pytest.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data -f ./aws/docker-compose.yaml
+  install:
+    commands:
+      # Install mountpoint
+      - wget https://s3.amazonaws.com/mountpoint-s3-release/latest/x86_64/mount-s3.rpm
+      - sudo yum -y install ./mount-s3.rpm
+  pre_build:
+    commands:
+      # Pull the image from the registry. This is faster than building from
+      # scratch, especially when cached
+      - echo 'Pulling the Docker image...'
+      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
+      - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+      # Mount the S3 buckets
+      - mkdir /data; mkdir /data/input; mkdir /data/output
+      - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
+      - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
+      - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
+      # Run the test suite. test.sh: environment setup, pytest.sh: python tests
+      - echo 'Running the test suite...'
+      - mkdir /data/test_data; mkdir /data/test_data/input; mkdir /data/test_data/output
+      - mount-s3 nitelite.test-data /data/test_data/input --allow-overwrite --allow-delete
+      - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data -f ./aws/docker-compose.yaml
+      - ./test/pytest.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data -f ./aws/docker-compose.yaml
   build:
     commands:
-      # DEBUG
-      # # Run the pipeline
-      # - ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml
-      # DEBUG
-      - mkdir /data; mkdir /data/output
-      - touch /data/output/test.txt
+      # Run the pipeline
+      - ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml
   post_build:
     commands:
       # Check output
