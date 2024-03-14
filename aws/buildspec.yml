@@ -51,5 +51,3 @@ phases:
 artifacts:
   files:
     - '/data/output/metadata/*'
-  name:
-    - builds/$CODEBUILD_BUILD_NUMBER/my-artifacts
