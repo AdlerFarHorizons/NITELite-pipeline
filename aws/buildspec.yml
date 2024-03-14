@@ -48,7 +48,7 @@ phases:
       - echo $BASENAME
       - export DIRNAME=${BASENAME%.*}
       - echo $DIRNAME
-      - echo "${$(basename ${CONFIG_FILEPATH})%.*}"
+      - echo "${${basename ${CONFIG_FILEPATH}}%.*}"
 
 artifacts:
   base-directory: /data/output
