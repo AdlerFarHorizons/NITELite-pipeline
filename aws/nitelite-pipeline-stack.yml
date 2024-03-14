@@ -12,6 +12,8 @@ Resources:
         ComputeType: BUILD_GENERAL1_LARGE
         PrivilegedMode: true
         EnvironmentVariables:
+          - Name: FLIGHT_ID
+            Value: 220513-FH135
           - Name: CONFIG_FILEPATH
             Value: ./configs/metadata.yml
           - Name: LOGGING_LEVEL
