@@ -23,7 +23,7 @@ phases:
     commands:
       # Pull the image from the registry. This is faster than building from
       # scratch, especially when cached
-      - echo Pulling the Docker image...
+      - echo 'Pulling the Docker image...'
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # Mount the S3 buckets
@@ -45,7 +45,7 @@ phases:
   post_build:
     commands:
       # Display output
-      - echo Output:
+      - echo 'Output:'
       - ls -R /data/output
 
 artifacts:
