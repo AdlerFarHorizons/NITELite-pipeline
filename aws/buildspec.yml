@@ -45,10 +45,10 @@ phases:
   post_build:
     commands:
       # Display output
-      - echo 'Output:'
-      - ls -R /data/output
+      - echo 'Output:'; ls -R /data/output
 
 artifacts:
   files:
     - '/data/output/metadata/*'
-  name: ${FLIGHT_ID}-$(date +%Y-%m-%d)
+  base-directory: ${FLIGHT_ID}-$(date +%Y-%m-%d)
+  name: name-${FLIGHT_ID}-$(date +%Y-%m-%d)
