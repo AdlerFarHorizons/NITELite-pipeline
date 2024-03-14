@@ -37,6 +37,8 @@ phases:
       # DEBUG
       # # Run the pipeline
       # - ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml
+      # DEBUG
+      - mkdir /data; mkdir /data/output
       - touch /data/output/test.txt
   post_build:
     commands:
