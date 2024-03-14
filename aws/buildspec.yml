@@ -44,11 +44,13 @@ phases:
     commands:
       # Display output
       - echo 'Output:'; ls -R /data/output
-      - echo ${$(basename ${CONFIG_FILEPATH})%.*}/${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
+      - basename ${CONFIG_FILEPATH}
+      - echo ${$(basename ${CONFIG_FILEPATH})%.*}
+      - echo '${$(basename ${CONFIG_FILEPATH})%.*}'
 
 artifacts:
   base-directory: /data/output
   files:
     - '**/*'
   discard-paths: yes
-  name: ${$(basename ${CONFIG_FILEPATH})%.*}/${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
+  name: '${$(basename ${CONFIG_FILEPATH})%.*}/${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)'
