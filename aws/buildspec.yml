@@ -42,7 +42,12 @@ phases:
     commands:
       # Run the pipeline
       - ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml
+  post_build:
+    commands:
+      # Display output
+      - echo Output:
+      - ls -R /data/output
 
 artifacts:
   files:
-    - '/data/output/*'
+    - '/data/output/metadata/*'
