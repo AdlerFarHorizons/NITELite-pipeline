@@ -45,4 +45,4 @@ artifacts:
   files:
     - '**/*'
   discard-paths: yes
-  name: ${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
+  name: ${$(basename ${CONFIG_FILEPATH})%.*}/${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
