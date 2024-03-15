@@ -25,7 +25,7 @@ phases:
       - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
       - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
       # Run the test suite. test.sh: environment setup, pytest.sh: python tests
-      - echo 'Running the test suite...'
+      - echo 'Running tests...'
       - mkdir /data/test_data; mkdir /data/test_data/input; mkdir /data/test_data/output
       - mount-s3 nitelite.test-data /data/test_data/input --allow-overwrite --allow-delete
       - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yml -d /data/test_data -f ./aws/docker-compose.yaml
