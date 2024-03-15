@@ -30,6 +30,7 @@ Resources:
         Type: LOCAL
         Modes:
           - LOCAL_DOCKER_LAYER_CACHE
+      TimeOutInMinutes: 240
   # We need to build the image on linux to use it on linux,
   # so we use aws to build the image.
   # We make a separate project for building the image, because it's faster
