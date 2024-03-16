@@ -13,6 +13,7 @@ io_manager:
   input_dir: /data/input
   input_description:
     # Metadata files. This is the path relative to the input_dir.
+    # TODO: Use the complete metadata file from the metadata processor, instead of recalculating
     img_log: metadata/220513-FH135/image.log
     imu_log: metadata/220513-FH135/PresIMULog.csv
     gps_log: metadata/220513-FH135/GPSLog.csv
@@ -20,10 +21,9 @@ io_manager:
     images:
       # Relative to input_dir
       # 23085687 is the ID of the nadir camera. Delete it to process all images.
-      # DEBUG
       directory: images/220513-FH135/23085687
       # Only files with these extensions will be considered.
-      pattern: '2740_745696_1_50_0'
+      pattern: '\.(raw|tif|tiff)$'
     # Images with georeferencing.
     referenced_images:
       # This filepath is relative to input_dir
