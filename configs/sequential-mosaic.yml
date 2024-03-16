@@ -23,7 +23,9 @@ io_manager:
       # 23085687 is the ID of the nadir camera. Delete it to process all images.
       directory: images/220513-FH135/23085687
       # Only files with these extensions will be considered.
-      pattern: '\.(raw|tif|tiff)$'
+      # DEBUG
+      pattern: '860185_1_50_2'
+      # pattern: '\.(raw|tif|tiff)$'
     # Images with georeferencing.
     referenced_images:
       # This filepath is relative to input_dir
@@ -32,6 +34,10 @@ io_manager:
       pattern: 'Geo\s\d+_1\.(tif|tiff)$'
   # Where the output files will be saved
   output_dir: /data/output
+
+# DEBUG
+data_splitter:
+  test_size: 0.8
 
 # Coordinate reference-system employed
 crs:
