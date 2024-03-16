@@ -23,7 +23,7 @@ io_manager:
       # DEBUG
       directory: images/220513-FH135/23085687
       # Only files with these extensions will be considered.
-      pattern: '20220413_202740_745696_1_50_0\.raw'
+      pattern: '2740_745696_1_50_0'
     # Images with georeferencing.
     referenced_images:
       # This filepath is relative to input_dir
