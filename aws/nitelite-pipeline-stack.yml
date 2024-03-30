@@ -167,10 +167,10 @@ Resources:
               - s3:DeleteObject
               - s3:ListBucket
             Resource:
-              - !Ref MetadataBucket
-              - !Ref ImagesBucket
-              - !Ref ReferencedImagesBucket
-              - !Ref TestDataBucket
+              - arn:aws:s3:::nitelite.metadata
+              - arn:aws:s3:::nitelite.images
+              - arn:aws:s3:::nitelite.referenced-images
+              - arn:aws:s3:::nitelite.test-data
               - !Ref OutputBucket
           - Sid: PipelineUserDeleteBucketPolicy
             Effect: Allow
@@ -178,26 +178,6 @@ Resources:
               - s3:DeleteObject
             Resource:
               - !Ref OutputBucket
-  MetadataBucket:
-    Type: 'AWS::S3::Bucket'
-    DeletionPolicy: RetainExceptOnCreate
-    Properties:
-      BucketName: nitelite.metadata
-  ImagesBucket:
-    Type: 'AWS::S3::Bucket'
-    DeletionPolicy: RetainExceptOnCreate
-    Properties:
-      BucketName: nitelite.images
-  ReferencedImagesBucket:
-    Type: 'AWS::S3::Bucket'
-    DeletionPolicy: RetainExceptOnCreate
-    Properties:
-      BucketName: nitelite.referenced-images
-  TestDataBucket:
-    Type: 'AWS::S3::Bucket'
-    DeletionPolicy: RetainExceptOnCreate
-    Properties:
-      BucketName: nitelite.test-data
   OutputBucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
