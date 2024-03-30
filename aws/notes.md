@@ -6,6 +6,12 @@
 TODO: Remove all glob - change into s3 client boto3
 TODO: Metadata handling
 
+Aside:
+Docker hub rate limits anonymous users, so building occasionally
+fails because we can't pull the base image, continuumio/miniconda3
+If access to the base image continues to be a problem we should
+just mirror it on ECS.
+
 Key points:
 - end-to-end data analytics pipeline
 - ingests data from S3
