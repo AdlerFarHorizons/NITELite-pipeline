@@ -3,6 +3,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: nitelite-pipeline
+      Description: This codebuild actually runs the pipeline.
       Artifacts:
         Location: !Ref OutputBucket
         Type: S3
@@ -31,18 +32,19 @@ Resources:
         Modes:
           - LOCAL_DOCKER_LAYER_CACHE
       TimeoutInMinutes: 240
-  # We need to build the image on linux to use it on linux,
-  # so we use aws to build the image.
-  # We make a separate project for building the image, because it's faster
-  # to pull the image from amazon ecr than to build it from scratch.
-  # Also, docker hub rate limits anonymous users, so building occasionally
-  # fails because we can't pull the base image, continuumio/miniconda3
-  # If access to the base image continues to be a problem we should
-  # just mirror it on ECS.
   NLPipelineImageCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: docker-nitelite-pipeline
+      Description: |
+        We need to build the image on linux to use it on linux,
+        so we use aws to build the image.
+        We make a separate project for building the image, because it's faster
+        to pull the image from amazon ecr than to build it from scratch.
+        Also, docker hub rate limits anonymous users, so building occasionally
+        fails because we can't pull the base image, continuumio/miniconda3
+        If access to the base image continues to be a problem we should
+        just mirror it on ECS.
       Artifacts: 
         Location: !Ref OutputBucket
         Type: S3
@@ -140,46 +142,43 @@ Resources:
                   - ecr-public:CompleteLayerUpload
                   - ecr-public:PutImage
                 Resource: "*"
-  NITELitePipelineRole:
-    Type: AWS::IAM::Role
+  NITELiteUserPolicy:
+    Type: AWS::IAM::ManagedPolicy
     Properties:
-      RoleName: NITELitePipelineRole
-      Path: /
-      Policies:
-        - PolicyName: PipelineUserPolicy
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Sid: PipelineUserCodebuildPolicy
-                Effect: Allow
-                Action:
-                  - codebuild:StartBuild
-                  - codebuild:StopBuild
-                  - codebuild:ListProjects
-                  - codebuild:UpdateProject
-                  - codebuild:CreateProject
-                  - codebuild:BatchGetProjects
-                  - codebuild:DeleteProject
-                Resource: "*"
-              - Sid: PipelineUserReadBucketPolicy
-                Effect: Allow
-                Action:
-                  - s3:PutObject
-                  - s3:GetObject
-                  - s3:DeleteObject
-                  - s3:ListBucket
-                Resource:
-                  - arn:aws:s3:::nitelite.metadata
-                  - arn:aws:s3:::nitelite.images
-                  - arn:aws:s3:::nitelite.referenced-images
-                  - arn:aws:s3:::nitelite.test-data
-                  - !Ref OutputBucket
-              - Sid: PipelineUserDeleteBucketPolicy
-                Effect: Allow
-                Action:
-                  - s3:DeleteObject
-                Resource:
-                  - !Ref OutputBucket
+      Description: Policy for users.
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: PipelineUserCodebuildPolicy
+            Effect: Allow
+            Action:
+              - codebuild:StartBuild
+              - codebuild:StopBuild
+              - codebuild:ListProjects
+              - codebuild:UpdateProject
+              - codebuild:CreateProject
+              - codebuild:BatchGetProjects
+              - codebuild:DeleteProject
+            Resource: "*"
+          - Sid: PipelineUserReadBucketPolicy
+            Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetObject
+              - s3:DeleteObject
+              - s3:ListBucket
+            Resource:
+              - arn:aws:s3:::nitelite.metadata
+              - arn:aws:s3:::nitelite.images
+              - arn:aws:s3:::nitelite.referenced-images
+              - arn:aws:s3:::nitelite.test-data
+              - !Ref OutputBucket
+          - Sid: PipelineUserDeleteBucketPolicy
+            Effect: Allow
+            Action:
+              - s3:DeleteObject
+            Resource:
+              - !Ref OutputBucket
   OutputBucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
