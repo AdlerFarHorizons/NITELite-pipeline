@@ -172,13 +172,13 @@ Resources:
               - arn:aws:s3:::nitelite.images
               - arn:aws:s3:::nitelite.referenced-images
               - arn:aws:s3:::nitelite.test-data
-              - !Ref OutputBucket
+              - arn:aws:s3:::nitelite.pipeline-output
           - Sid: PipelineUserDeleteBucketPolicy
             Effect: Allow
             Action:
               - s3:DeleteObject
             Resource:
-              - !Ref OutputBucket
+              - arn:aws:s3:::nitelite.pipeline-output
   OutputBucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
