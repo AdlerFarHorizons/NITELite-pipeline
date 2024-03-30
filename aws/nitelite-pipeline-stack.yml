@@ -3,7 +3,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: nitelite-pipeline
-      Artifacts: 
+      Artifacts:
         Location: !Ref OutputBucket
         Type: S3
         OverrideArtifactName: true
@@ -42,7 +42,7 @@ Resources:
   NLPipelineImageCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:
-      Name: nitelite-pipeline-image
+      Name: docker-nitelite-pipeline
       Artifacts: 
         Location: !Ref OutputBucket
         Type: S3
@@ -140,6 +140,64 @@ Resources:
                   - ecr-public:CompleteLayerUpload
                   - ecr-public:PutImage
                 Resource: "*"
+  NITELitePipelineRolePolicy:
+    Type: AWS::IAM::RolePolicy
+    Properties:
+      RoleName: NITELitePipelineRole
+      PolicyName: nitelite-pipeline-role
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: PipelineUserCodebuildPolicy
+            Effect: Allow
+            Action:
+              - codebuild:StartBuild
+              - codebuild:StopBuild
+              - codebuild:ListProjects
+              - codebuild:UpdateProject
+              - codebuild:CreateProject
+              - codebuild:BatchGetProjects
+              - codebuild:DeleteProject
+            Resource: "*"
+          - Sid: PipelineUserReadBucketPolicy
+            Effect: Allow
+            Action:
+              - s3:PutObject
+              - s3:GetObject
+              - s3:DeleteObject
+              - s3:ListBucket
+            Resource:
+              - !Ref MetadataBucket
+              - !Ref ImagesBucket
+              - !Ref ReferencedImagesBucket
+              - !Ref TestDataBucket
+              - !Ref OutputBucket
+          - Sid: PipelineUserDeleteBucketPolicy
+            Effect: Allow
+            Action:
+              - s3:DeleteObject
+            Resource:
+              - !Ref OutputBucket
+  MetadataBucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: RetainExceptOnCreate
+    Properties:
+      BucketName: nitelite.metadata
+  ImagesBucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: RetainExceptOnCreate
+    Properties:
+      BucketName: nitelite.images
+  ReferencedImagesBucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: RetainExceptOnCreate
+    Properties:
+      BucketName: nitelite.referenced-images
+  TestDataBucket:
+    Type: 'AWS::S3::Bucket'
+    DeletionPolicy: RetainExceptOnCreate
+    Properties:
+      BucketName: nitelite.test-data
   OutputBucket:
     Type: 'AWS::S3::Bucket'
     DeletionPolicy: RetainExceptOnCreate
