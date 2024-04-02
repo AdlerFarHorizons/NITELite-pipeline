@@ -1,5 +1,0 @@
-services:
-  nitelite-pipeline:
-    image: public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
-    volumes:
-      - /data:/data
