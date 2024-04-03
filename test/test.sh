@@ -89,6 +89,10 @@ docker compose -f $COMPOSE_FILE \
     pwd
 echo
 
+echo 'What is inside the compose file?'
+docker compose -f $COMPOSE_FILE config
+echo
+
 echo 'Can we see individual input files from inside the docker container?'
 docker compose -f $COMPOSE_FILE \
     run \
