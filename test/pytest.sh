@@ -3,7 +3,7 @@
 # Function to display help message
 show_help() {
     cat << EOF
-Usage: ./bin/mapmake.sh -c CONFIG_FILEPATH -d DATA_DIR [OPTIONS]
+Usage: ./bin/mapmake.sh -d DATA_DIR [OPTIONS]
 
 Options:
     -c, --config CONFIG_FILEPATH    Location of the configuration file.
@@ -29,12 +29,12 @@ while [[ $# -gt 0 ]]; do
 
     case $key in
         -c|--config)
-            CONFIG_FILEPATH=$(realpath "$2")
+            CONFIG_FILEPATH=$2
             shift # past argument
             shift # past value
             ;;
         -d|--data)
-            DATA_DIR=$(realpath "$2")
+            DATA_DIR=$2
             shift # past argument
             shift # past value
             ;;
@@ -62,13 +62,14 @@ if [ -z "$DATA_DIR" ]; then
     exit 1
 fi
 if [ -z "$CONFIG_FILEPATH" ]; then
-    echo "Error: Configuration filepath is required."
-    show_help
-    exit 1
+    CONFIG_FILEPATH="./configs/sequential-mosaic.yaml"
 fi
 if [ -z "$COMPOSE_FILE" ]; then
     COMPOSE_FILE="./build/docker-compose.yaml"
 fi
+
+CONFIG_FILEPATH=$(realpath $CONFIG_FILEPATH)
+DATA_DIR=$(realpath $DATA_DIR)
 
 echo 'Running the test suite...'
 echo
