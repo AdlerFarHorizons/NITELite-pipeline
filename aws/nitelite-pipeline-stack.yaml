@@ -17,13 +17,13 @@ Resources:
           - Name: FLIGHT_ID
             Value: 220513-FH135
           - Name: CONFIG_FILEPATH
-            Value: ./configs/metadata.yml
+            Value: ./configs/metadata.yaml
           - Name: LOGGING_LEVEL
             Value: WARNING
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
       Source:
         Location: https://github.com/AdlerFarHorizons/NITELite-pipeline.git
-        BuildSpec: aws/buildspec.yml
+        BuildSpec: aws/buildspec.yaml
         Type: GITHUB
         GitSubmodulesConfig:
           FetchSubmodules: true
@@ -53,7 +53,7 @@ Resources:
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
       Source: 
         Location: https://github.com/AdlerFarHorizons/NITELite-pipeline.git
-        BuildSpec: aws/image-buildspec.yml
+        BuildSpec: aws/image-buildspec.yaml
         Type: GITHUB
         GitSubmodulesConfig:
           FetchSubmodules: true

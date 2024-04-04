@@ -24,7 +24,7 @@ Options:
                                     will not run the pipeline.
 
 Example:
-    ./bin/mapmake.sh -c ./config/mosaic.yml -d /Users/shared/data
+    ./bin/mapmake.sh -c ./config/mosaic.yaml -d /Users/shared/data
 EOF
 }
 
@@ -104,7 +104,7 @@ fi
 # Mount the config file
 if [ -n "$CONFIG_FILEPATH" ]; then
     CONFIG_FILEPATH=$(realpath $CONFIG_FILEPATH)
-    DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yml"
+    DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yaml"
 fi
 
 # TODO: Delete and place explanation somewhere
@@ -133,7 +133,7 @@ if [ -z "$INTERACTIVE" ]; then
     DOCKER_CMD+=" python night-horizons-mapmaker/night_horizons/pipeline.py"
 
     # Pass in the config itself
-    DOCKER_CMD+=" /used-config.yml"
+    DOCKER_CMD+=" /used-config.yaml"
 
     # If validation only, then add the flag
     if [ -n "$VALIDATE_ONLY" ]; then

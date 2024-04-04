@@ -19,7 +19,7 @@ Options:
     -h, --help                      Show this help message
 
 Example:
-    ./bin/mapmake.sh -c ./config/mosaic.yml -d /Users/shared/data
+    ./bin/mapmake.sh -c ./config/mosaic.yaml -d /Users/shared/data
 EOF
 }
 

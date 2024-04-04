@@ -19,7 +19,7 @@ Options:
     -h, --help                      Show this help message
 
 Example:
-    ./bin/mapmake.sh -c ./config/mosaic.yml -d /Users/shared/data
+    ./bin/mapmake.sh -c ./config/mosaic.yaml -d /Users/shared/data
 EOF
 }
 
@@ -116,10 +116,10 @@ echo 'Can we see the config file from inside the docker container?'
 docker compose -f $COMPOSE_FILE \
     run \
     --volume $DATA_DIR:/data \
-    --volume $CONFIG_FILEPATH:/used_config.yml \
+    --volume $CONFIG_FILEPATH:/used_config.yaml \
     nitelite-pipeline \
     /bin/bash -c \
-    'ls /*.yml'
+    'ls /*.yaml'
 echo
 
 echo 'Does the conda environment inside the docker container work?'

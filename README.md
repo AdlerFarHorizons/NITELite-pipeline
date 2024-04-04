@@ -56,11 +56,11 @@ The configuration file specifies the parameters of the analysis.
 There are template config files in `./config` which have sensible defaults.
 The are...
 
-- `./config/mosaic.yml`: Produce a mosaic out of images that are already
+- `./config/mosaic.yaml`: Produce a mosaic out of images that are already
 georeferenced.
-- `./config/sequential-mosaic.yml`: Perform georeferencing on raw images,
+- `./config/sequential-mosaic.yaml`: Perform georeferencing on raw images,
 using a set of existing georeferenced images as a base.
-- `./config/test-sequential-mosaic.yml`: Evaluate georeferencing accuracy by
+- `./config/test-sequential-mosaic.yaml`: Evaluate georeferencing accuracy by
 splitting a set of referenced images into a training sample and a test sample,
 and using the training sample as a base to georeference the test sample.
 
@@ -88,7 +88,7 @@ configuration files to `/data/nitelite/220513-FH135`.
 After identifying and editing the above, our command might look like
 
 ```shell
-./bin/mapmake.sh -c ./config/mosaic.yml -d /Users/Shared/data
+./bin/mapmake.sh -c ./config/mosaic.yaml -d /Users/Shared/data
 ```
 
 ## FAQ
@@ -113,7 +113,7 @@ but include the option `-f ./build/dev-docker-compose.yaml`.
 For example,
 
 ```shell
-./bin/mapmake.sh -c ./config/mosaic.yml -d my/data -f ./build/dev-docker-compose.yaml
+./bin/mapmake.sh -c ./config/mosaic.yaml -d my/data -f ./build/dev-docker-compose.yaml
 ```
 
 

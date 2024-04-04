@@ -42,4 +42,4 @@ Make own account for free tier etc
 - Change password, add MFA, add billing alert
 
 Command for updating the stack.
-aws cloudformation update-stack --stack-name nitelite-pipeline --template-body file://aws/nitelite-pipeline-stack.yml --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
+aws cloudformation update-stack --stack-name nitelite-pipeline --template-body file://aws/nitelite-pipeline-stack.yaml --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM
