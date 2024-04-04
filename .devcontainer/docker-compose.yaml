@@ -8,7 +8,6 @@ services:
       # - ../..:/workspaces:cached
       - /Users/Shared/repos/NITELite-pipeline:/NITELite-pipeline:cached
       - /Users/Shared/data/night_horizons_test_data:/data:cached
-      # TODO: The test data is stored on google drive, so we need to ensure
     command: sleep infinity
     # TODO: Probably define these in the stack?
     environment:
