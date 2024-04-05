@@ -10,6 +10,7 @@ dependencies:
   - scikit-learn
   - tqdm
   - PyYAML
+  - ruamel
   - opencv
   - gdal
   - pyproj
