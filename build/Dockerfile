@@ -8,7 +8,11 @@ FROM continuumio/miniconda3
 # We also install a few other essential packages
 RUN --mount=type=cache,target=/var/cache/apt \
     apt-get update -y && \
-    apt-get install -y git libgl1 && \
+    apt-get install -y git && \
+    apt-get install libavcodec-dev libavformat-dev libswscale-dev -y && \
+    apt-get install libgstreamer-plugins-base1.0-dev libgstreamer1.0-dev -y && \
+    apt-get install libgtk2.0-dev -y && \
+    apt-get install libgtk-3-dev -y && \
     apt-get clean && \
     rm -rf /var/cache/apt/lists
 
@@ -27,7 +31,8 @@ RUN conda run -n nitelite-pipeline-conda \
    pip install -e .
 
 # Validate
-RUN conda run -n nitelite-pipeline-conda python /NITELite-pipeline/test/test_install.py
+RUN conda run -n nitelite-pipeline-conda \
+    python /NITELite-pipeline/test/test_install.py
 
 # Set up the workdir
 # TODO: Avoid root
