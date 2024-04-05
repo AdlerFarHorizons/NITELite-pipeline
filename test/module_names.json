@@ -1,0 +1,6 @@
+{
+    "scikit-learn": "sklearn",
+    "PyYAML": "yaml",
+    "opencv": "cv2",
+    "gdal": "osgeo"
+}
