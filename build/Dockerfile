@@ -26,11 +26,9 @@ WORKDIR /NITELite-pipeline/night-horizons-mapmaker
 RUN conda run -n nitelite-pipeline-conda \
    pip install -e .
 
+# Validate
+RUN conda run -n nitelite-pipeline-conda python /NITELite-pipeline/test/test_install.py
+
 # Set up the workdir
 # TODO: Avoid root
 WORKDIR /NITELite-pipeline
-
-# Validate
-RUN conda list -n nitelite-pipeline-conda --json > /installed_dependencies.json
-RUN cat /conda-env.yaml
-RUN conda run -n nitelite-pipeline-conda python /NITELite-pipeline/test/test_install.py

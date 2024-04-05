@@ -1,18 +1,21 @@
 import importlib
 import json
 
-if __name__ == '__main__':
+def main():
 
     filepath = '/conda-env.yaml'
     with open(filepath, 'r') as f:
         lines = f.readlines()
 
-    with open('module_names.json') as f:
+    with open('/NITELite-pipeline/test/module_names.json') as f:
         module_names = json.load(f)
 
     in_dependencies = False
     failed = []
+    succeeded = []
     for line in lines:
+        # Remove endline char
+        line = line[:-1]
 
         # Skip until we get to dependencies
         if line == 'dependencies:':
@@ -21,6 +24,8 @@ if __name__ == '__main__':
             continue
 
         # Get the name of the module to import
+        if not ('  - ' in line):
+            continue
         module = line.split('  - ')[1]
         if module in module_names:
             module = module_names[module]
@@ -28,6 +33,7 @@ if __name__ == '__main__':
         # Test import
         try:
             importlib.import_module(module)
+            succeeded.append(module)
         except ImportError:
             failed.append(module)
 
@@ -38,3 +44,8 @@ if __name__ == '__main__':
             f'{len(lines)} attempts, {len(failed)} failures.\n'
             f'Failures: {failed}'
         )
+    print('Install validated successfully.')
+
+
+if __name__ == '__main__':
+    main()
