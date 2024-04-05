@@ -2,6 +2,9 @@
 # Example Mosaicker Config
 ###############################################################################
 
+# TODO: Make an ultra simple config that includes *just* the flight ID
+#       Don't try to ask users to access the ENV vars in the "override build settings"
+
 # Indicate what stage of the pipeline to run
 pipeline:
   stage: mosaicker
@@ -20,6 +23,8 @@ io_manager:
       pattern: 'Geo\s\d+_1\.(tif|tiff)$'
   # Where the output files will be saved
   output_dir: /data/output
+  output_description:
+    used_config: used-config.yaml
 
 # Coordinate reference-system employed
 crs:
