@@ -31,6 +31,6 @@ RUN conda run -n nitelite-pipeline-conda \
 WORKDIR /NITELite-pipeline
 
 # Validate
-RUN conda list -n nitelite-pipeline-conda -c > /installed_dependencies.txt && \
-    conda run -n nitelite-pipeline-conda \
-    python -c NITELite-pipeline/test/test_install.py
+RUN conda list -n nitelite-pipeline-conda --json > /installed_dependencies.json
+RUN cat /conda-env.yaml
+RUN conda run -n nitelite-pipeline-conda python /NITELite-pipeline/test/test_install.py
