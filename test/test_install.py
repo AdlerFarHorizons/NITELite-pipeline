@@ -1,31 +1,33 @@
 import importlib
+import json
 
 if __name__ == '__main__':
 
-    filepath = '/installed_dependencies.txt'
+    filepath = '/installed_dependencies.json'
 
     with open(filepath, 'r') as f:
-        lines = f.readlines()
+        packages = json.load(f)
 
     skipped = []
     failed = []
-    for line in lines:
-        package = line.split('=')[0]
+    for package in packages:
+        name = package['name']
 
         # Skip packages with dashes
-        if '-' in package:
-            skipped.append(line)
+        if '-' in name:
+            skipped.append(name)
             continue
 
         # Test import
         try:
-            importlib.import_module(package)
+            importlib.import_module(name)
         except ImportError:
-            failed.append(package)
+            failed.append(name)
 
+    # Check for key dependencies
     if len(failed) > 0:
         raise ImportError(
             'Could not import all modules.\n'
-            f'{len(lines)} attempts, {len(failed)} failures.\n'
+            f'{len(packages)} attempts, {len(failed)} failures.\n'
             f'Failures: {failed}'
         )
