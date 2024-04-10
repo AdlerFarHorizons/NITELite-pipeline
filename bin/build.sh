@@ -1,27 +1,16 @@
 #!/bin/bash
 
-# Main command
-DOCKER_CMD="docker build"
+# Build the image
+docker build --progress plain -f ./build/Dockerfile \
+    -t nitelite-pipeline:latest --platform linux/amd64 "$@" .
 
-# By default we want to see more
-DOCKER_CMD+=" --progress plain"
-
-# The docker file, for convenience
-DOCKER_CMD+=" -f ./build/Dockerfile"
-
-# The tag
-DOCKER_CMD+=" -t nitelite-pipeline:latest"
-
-# Pass any other commands to the docker build command
-if [ $# -gt 0 ]; then
-    DOCKER_CMD+=" \"$@\""
-fi
-
-# What to build
-DOCKER_CMD+=" ."
-
-# Execute the build
-echo "Executing:"
-echo $DOCKER_CMD
-echo
-eval $DOCKER_CMD
+# # Log in to AWS
+# aws ecr-public get-login-password --region us-east-1 | \
+#     docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
+# 
+# # Tag the image
+# docker tag nitelite-pipeline:latest \
+#     public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
+# 
+# # Push the image
+# docker push public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
