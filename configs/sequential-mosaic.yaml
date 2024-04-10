@@ -8,7 +8,7 @@ pipeline:
 
 # I/O settings
 # These settings assume that the user has mounted their data directory at /data
-io_manager:
+io_manager: &default_settings
   # Specifies the input data
   input_dir: /data/input
   input_description:
@@ -34,6 +34,14 @@ io_manager:
   output_dir: /data/output
   output_description:
     used_config: used-config.yaml
+
+# The new io manager inherits the default settings
+io_manager_train:
+  <<: *default_settings
+
+# What metadata processor to use (based on metadata format)
+metadata_processor:
+  version: fh135_metadata_processor
 
 # Coordinate reference-system employed
 crs:
