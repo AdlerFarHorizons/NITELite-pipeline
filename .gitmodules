@@ -1,3 +1,6 @@
 [submodule "night-horizons-mapmaker"]
 	path = night-horizons-mapmaker
 	url = https://github.com/AdlerFarHorizons/night-horizons-mapmaker.git
+[submodule "wiki"]
+	path = wiki
+	url = https://github.com/AdlerFarHorizons/NITELite-pipeline.wiki.git
