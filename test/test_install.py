@@ -24,6 +24,10 @@ def main():
         if not in_dependencies:
             continue
 
+        # Skip python specification
+        if 'python=' in line:
+            continue
+
         # Get the name of the module to import
         if not ('  - ' in line):
             continue
