@@ -3,7 +3,7 @@ Resources:
     Type: AWS::CodeBuild::Project
     Properties:
       Name: nitelite-pipeline
-      Description: This codebuild actually runs the pipeline.
+      Description: This project runs the NITELite pipeline.
       Artifacts:
         Location: !Ref OutputBucket
         Type: S3
@@ -37,10 +37,8 @@ Resources:
     Properties:
       Name: docker-nitelite-pipeline
       Description: |
-        We need to build the image on linux to use it on linux,
-        so we use aws to build the image.
-        We make a separate project for building the image, because it's faster
-        to pull the image from amazon ecr than to build it from scratch.
+        This project builds the docker image used by the pipeline.
+        Only run if you know what you're doing.
       Artifacts: 
         Location: !Ref OutputBucket
         Type: S3
