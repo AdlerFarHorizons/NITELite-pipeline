@@ -1,6 +1,8 @@
 # The NITELite data pipeline
 Code to process images and data taken with the HAB NITELite instrument.
 
+NOTE: The below is deprecated and is only relevant if you plan on running the pipeline locally (unlikely).
+
 ## Installation
 
 Installation requires a few steps.
