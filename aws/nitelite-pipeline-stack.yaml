@@ -17,7 +17,7 @@ Resources:
           - Name: FLIGHT_ID
             Value: 220513-FH135
           - Name: CONFIG_FILEPATH
-            Value: ./configs/sequential-mosaic.yaml
+            Value: ./configs/mosaic.yaml
           - Name: LOGGING_LEVEL
             Value: WARNING
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn
@@ -148,6 +148,8 @@ Resources:
             Action:
               - codebuild:StartBuild
               - codebuild:StopBuild
+              - codebuild:ListBuildsForProject
+              - codebuild:BatchGetBuilds
               - codebuild:ListProjects
               - codebuild:UpdateProject
               - codebuild:CreateProject
