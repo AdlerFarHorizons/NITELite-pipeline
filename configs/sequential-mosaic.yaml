@@ -39,9 +39,9 @@ io_manager: &default_settings
 io_manager_train:
   <<: *default_settings
 
+# DEBUG
 data_splitter:
-  # DEBUG
-  max_train_size: 100
+  max_raw_size: 1000
 
 # What metadata processor to use (based on metadata format)
 metadata_processor:
