@@ -8,7 +8,7 @@ pipeline:
 
 # I/O settings
 # These settings assume that the user has mounted their data directory at /data
-io_manager: &default_settings
+io_manager: &default_io_settings
   # Specifies the input data
   input_dir: /data/input
   input_description:
@@ -37,7 +37,7 @@ io_manager: &default_settings
 
 # The new io manager inherits the default settings
 io_manager_train:
-  <<: *default_settings
+  <<: *default_io_settings
 
 # DEBUG
 data_splitter:
