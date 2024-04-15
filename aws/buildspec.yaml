@@ -32,7 +32,7 @@ phases:
   build:
     commands:
       # Run the pipeline
-      - ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml
+      - ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml --mount_code
   post_build:
     commands:
       # Check output

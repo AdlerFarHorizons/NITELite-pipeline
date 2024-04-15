@@ -9,19 +9,31 @@ Options:
     -c, --config CONFIG_FILEPATH    Location of the configuration file.
                                     Must be inside either the repository
                                     or the data directory.
+
     -d, --data DATA_DIR             Location of the data directory. This will
                                     be mounted to the /data directory inside
                                     the docker container. Any data you want to
                                     use should be inside DATA_DIR, and any paths
                                     in the config should be relative to this.
+
     -i, --interactive               Instead of running the execution script,
                                     open an interactive shell inside the
                                     docker container.
+
     -f, --compose-file              Specify the docker-compose file to use.
                                     Default is ./build/docker-compose.yaml
+
     -h, --help                      Show this help message
+
     --validate_only                 Only validate the setup and exit. This
                                     will not run the pipeline.
+
+    --mount_code                    Mount the code directory into the docker
+                                    container. This is useful if you want to
+                                    use your own version of the pipeline code.
+                                    Note that if you added or removed any
+                                    dependencies, you will need to rebuild the
+                                    docker image instead.
 
 Example:
     ./bin/mapmake.sh -c ./config/mosaic.yaml -d /Users/shared/data
@@ -55,6 +67,10 @@ while [[ $# -gt 0 ]]; do
             ;;
         --validate_only)
             VALIDATE_ONLY="true"
+            shift # past argument
+            ;;
+        --mount_code)
+            MOUNT_CODE="true"
             shift # past argument
             ;;
         -h|--help)
@@ -105,6 +121,11 @@ fi
 if [ -n "$CONFIG_FILEPATH" ]; then
     CONFIG_FILEPATH=$(realpath $CONFIG_FILEPATH)
     DOCKER_CMD+=" --volume $CONFIG_FILEPATH:/used-config.yaml"
+fi
+
+# Mount the code directory
+if [ -n "$MOUNT_CODE" ]; then
+    DOCKER_CMD+=" --volume $(realpath .):/NITELite-pipeline"
 fi
 
 # TODO: Delete and place explanation somewhere
