@@ -45,6 +45,7 @@ phases:
       - BASENAME=$(basename ${CONFIG_FILEPATH})
       - DIR=${BASENAME%.*}
       - SUBDIR=${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
+      - echo "Artifacts will be stored in s3://nitelite.pipeline-output/$DIR/$SUBDIR"
 
 artifacts:
   base-directory: /data/output
