@@ -22,7 +22,7 @@ io_manager:
       # This is a RegEx pattern. The "1" selects nadir images only.
       pattern: 'Geo\s\d+_1\.(tif|tiff)$'
   # Where the output files will be saved
-  output_dir: /data/output
+  output_dir: /data/output/mosaic
   output_description:
     used_config: used-config.yaml
   file_exists: new
