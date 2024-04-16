@@ -31,7 +31,7 @@ Resources:
         Type: LOCAL
         Modes:
           - LOCAL_DOCKER_LAYER_CACHE
-      TimeoutInMinutes: 240
+      TimeoutInMinutes: 480
   NLPipelineImageCodeBuild:
     Type: AWS::CodeBuild::Project
     Properties:
