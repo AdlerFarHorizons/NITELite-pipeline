@@ -17,8 +17,8 @@ Resources:
           - Name: FLIGHT_ID
             Value: 220513-FH135
           - Name: CONFIG_FILEPATH
-            Value: ./configs/mosaic.yaml
-          - Name: EXISTING_OUTPUT
+            Value: ./configs/sequential-mosaic.yaml
+          - Name: CHECKPOINTED_OUTPUT
             Value: s3://nitelite.pipeline-output/sequential-mosaic/REPLACE_THIS
           - Name: LOGGING_LEVEL
             Value: WARNING
