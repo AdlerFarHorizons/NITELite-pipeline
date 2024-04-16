@@ -20,11 +20,10 @@ phases:
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # Mount the S3 buckets
-      - mkdir /data; mkdir /data/input
+      - mkdir /data; mkdir /data/input; mkdir /data/output
       - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
       - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
       - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
-      - mkdir /data/output; mount-s3 nitelite.pipeline-output /data/output
       # Run the test suite. test.sh: environment setup, pytest.sh: python tests
       - echo 'Running tests...'
       - mkdir /data/test_data; mkdir /data/test_data/input; mkdir /data/test_data/output
@@ -43,9 +42,9 @@ phases:
       - DIR=${BASENAME%.*}
       - SUBDIR=${FLIGHT_ID}_$(date +%Y-%m-%d_%H-%M-%S)
 
-# artifacts:
-#   base-directory: /data/output
-#   files:
-#     - '**/*'
-#   discard-paths: yes
-#   name: $DIR/$SUBDIR
+artifacts:
+  base-directory: /data/output
+  files:
+    - '**/*'
+  discard-paths: yes
+  name: $DIR/$SUBDIR
