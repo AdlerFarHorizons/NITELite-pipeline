@@ -25,7 +25,7 @@ phases:
       - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
       - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
       # If there's existing output, pull it
-      - [ -z $(aws s3 ls $EXISTING_OUTPUT) ] && aws s3 cp $EXISTING_OUTPUT ./data/output/ --recursive --exclude "referenced_images/*"
+      - [ -z "$(aws s3 ls $EXISTING_OUTPUT)" ] && aws s3 cp $EXISTING_OUTPUT ./data/output/ --recursive --exclude "referenced_images/*"
       # DEBUG
       # # Run the test suite. test.sh: environment setup, pytest.sh: python tests
       # - echo 'Running tests...'
