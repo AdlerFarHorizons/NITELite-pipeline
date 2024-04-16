@@ -41,7 +41,7 @@ io_manager_train:
 
 # DEBUG
 data_splitter:
-  max_raw_size: 10000
+  max_raw_size: 10
 
 # What metadata processor to use (based on metadata format)
 metadata_processor:
