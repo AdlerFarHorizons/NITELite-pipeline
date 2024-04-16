@@ -34,8 +34,9 @@ phases:
       # - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yaml -d /data/test_data -f ./aws/docker-compose.yaml
   build:
     commands:
-      # Run the pipeline
-      - ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml --mount_code
+      # Run the pipeline. We set the timeout to significantly below the max
+      # allowed by AWS (480m = 8h), so that there's time to copy the data
+      - timeout 10m ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml --mount_code
   post_build:
     commands:
       # Check output
