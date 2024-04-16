@@ -50,6 +50,7 @@ phases:
 artifacts:
   base-directory: /data/output
   files:
-    - '**/*'
+    - "**/*"
+  exclude-paths: "checkpoints/mosaic_i*"
   discard-paths: no
   name: $DIR/$SUBDIR
