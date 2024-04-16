@@ -34,6 +34,8 @@ io_manager: &default_io_settings
   output_dir: /data/output
   output_description:
     used_config: used-config.yaml
+  # DEBUG
+  checkpoint_freq: 10
 
 # The new io manager inherits the default settings
 io_manager_train:
