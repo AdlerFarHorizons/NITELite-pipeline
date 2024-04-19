@@ -35,15 +35,15 @@ io_manager: &default_io_settings
   output_description:
     used_config: used-config.yaml
   # DEBUG
-  checkpoint_freq: 10
+  checkpoint_freq: 1
 
 # The new io manager inherits the default settings
 io_manager_train:
   <<: *default_io_settings
 
 # DEBUG
-# data_splitter:
-#   max_raw_size: 10
+data_splitter:
+  max_raw_size: 10
 
 # What metadata processor to use (based on metadata format)
 metadata_processor:
