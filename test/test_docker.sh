@@ -71,7 +71,7 @@ fi
 CONFIG_FILEPATH=$(realpath $CONFIG_FILEPATH)
 DATA_DIR=$(realpath $DATA_DIR)
 
-echo 'Running the test suite...'
+echo 'Running the docker test suite...'
 echo
 
 echo 'Can we see the input and output?'

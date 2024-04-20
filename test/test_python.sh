@@ -71,7 +71,7 @@ fi
 CONFIG_FILEPATH=$(realpath $CONFIG_FILEPATH)
 DATA_DIR=$(realpath $DATA_DIR)
 
-echo 'Running the test suite...'
+echo 'Running the python test suite...'
 echo
 
 echo 'Do the unit tests pass?'
@@ -126,6 +126,20 @@ docker compose -f $COMPOSE_FILE \
     'cd night-horizons-mapmaker; \
     conda run -n nitelite-pipeline-conda --live-stream \
     pytest ./test/test_pipeline.py::TestSequentialMosaicMaker'
+echo 'pytest.log:'
+cat ./night-horizons-mapmaker/test/pytest.log
+echo
+
+echo 'Does the query stage work?'
+docker compose -f $COMPOSE_FILE \
+    run \
+    --volume $DATA_DIR:/data \
+    --volume $(realpath .):/NITELite-pipeline \
+    nitelite-pipeline \
+    /bin/bash -c \
+    'cd night-horizons-mapmaker; \
+    conda run -n nitelite-pipeline-conda --live-stream \
+    pytest ./test/test_pipeline.py::TestQueryProcessor'
 echo 'pytest.log:'
 cat ./night-horizons-mapmaker/test/pytest.log
 echo
