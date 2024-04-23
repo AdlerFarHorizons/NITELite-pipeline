@@ -20,6 +20,8 @@ Resources:
             Value: ./configs/sequential-mosaic.yaml
           - Name: CHECKPOINTED_OUTPUT
             Value: s3://nitelite.pipeline-output/sequential-mosaic/REPLACE_THIS
+          - Name: RUN_TESTS
+            Value: false
           - Name: LOGGING_LEVEL
             Value: WARNING
       ServiceRole: !GetAtt CodeBuildServiceRole.Arn

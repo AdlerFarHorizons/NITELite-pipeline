@@ -1,7 +1,14 @@
 #!/bin/bash
 
-# Docker tests
-./test/test_docker.sh "$@"
+if $RUN_TESTS; then
+    echo "Running tests..."
 
-# Python tests
-./test/test_python.sh "$@"
+    # Docker tests
+    ./test/test_docker.sh "$@"
+
+    # Python tests
+    ./test/test_python.sh "$@"
+else
+    echo "Skipping tests"
+    exit 0
+fi
