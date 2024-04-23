@@ -20,20 +20,11 @@ phases:
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
       - docker pull public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
       # Mount the S3 buckets
-      - mkdir /data; mkdir /data/input; mkdir /data/output
-      - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
-      - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
-      - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
-      # We only mount the existing output directory if it, well, exists
-      -  aws s3 ls $EXISTING_OUTPUT | grep -q "PRE" && \
-        mkdir /data/input/existing_output && \
-        mount-s3 ${EXISTING_OUTPUT} /data/input/existing_output
+      - ./aws/mount_buckets.sh
       # If there's checkpointed output, retrieve it
       - ./aws/get_checkpoint.sh
       # Run the test suite
-      - mkdir /data/test_data; mkdir /data/test_data/input; mkdir /data/test_data/output
-      - mount-s3 nitelite.test-data /data/test_data/input --allow-overwrite --allow-delete
-      - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yaml -d /data/test_data -f ./aws/docker-compose.yaml
+      - ./aws/run_tests.sh
   build:
     commands:
       # Run the pipeline. We set the timeout to 1 hr prior to the max
