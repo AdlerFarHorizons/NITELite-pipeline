@@ -11,9 +11,6 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/i2m6n0b5
-      - echo Mounting the test data...
-      - mkdir /data; mkdir /data/input; mkdir /data/output
-      - mount-s3 nitelite.test-data /data/input
   build:
     commands:
       - echo Build started on `date`
@@ -23,7 +20,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Testing the Docker image...
-      - ./test/test.sh -c ./night-horizons-mapmaker/configs/metadata.yaml -d /data 
+      # Run the test suite
+      - ./aws/run_tests.sh
       - echo Pushing the Docker image...
       - docker push public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
