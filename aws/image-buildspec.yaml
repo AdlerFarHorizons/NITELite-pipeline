@@ -21,6 +21,6 @@ phases:
     commands:
       - echo Build completed on `date`
       # Run the test suite
-      - ./aws/run_tests.sh
+      - mkdir data; ./aws/run_tests.sh
       - echo Pushing the Docker image...
       - docker push public.ecr.aws/i2m6n0b5/nitelite-pipeline:latest
