@@ -13,10 +13,10 @@ io_manager:
   input_dir: /data/input
   input_description:
     # Output metadata file from sequential-mosaic
-    y_pred: existing_output/sequential-mosaic/REPLACE_THIS/y_pred.csv
+    y_pred: existing_output/sequential-mosaic/220513-FH135_2024-04-19_21-29-39/y_pred.csv
     referenced_images:
       # Relative to input_dir
-      directory: existing_output/sequential-mosaic/REPLACE_THIS/referenced_images
+      directory: existing_output/sequential-mosaic/220513-FH135_2024-04-19_21-29-39/referenced_images
 
   # Where the output files will be saved
   output_dir: /data/output/queries
@@ -31,7 +31,7 @@ query_processor:
   # 39.7963°N, 86.1535°W # Test coords
   condition: >- # The ">-" allows you to use linebreaks for clarity
     (mAltitude > 13000.) &
-    (imuGyroMag < 0.075)
+    (imuGyroMag < 0.005)
 
 # What metadata processor to use (based on metadata format)
 metadata_processor:
