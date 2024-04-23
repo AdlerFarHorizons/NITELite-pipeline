@@ -24,6 +24,10 @@ phases:
       - mkdir /data/input/referenced_images; mount-s3 nitelite.referenced-images /data/input/referenced_images
       - mkdir /data/input/metadata; mount-s3 nitelite.metadata /data/input/metadata
       - mkdir /data/input/images; mount-s3 nitelite.images /data/input/images
+      # We only mount the existing output directory if it, well, exists
+      -  aws s3 ls $EXISTING_OUTPUT | grep -q "PRE" && \
+        mkdir /data/input/existing_output && \
+        mount-s3 ${EXISTING_OUTPUT} /data/input/existing_output
       # If there's checkpointed output, retrieve it
       - ./aws/get_checkpoint.sh
       # DEBUG
