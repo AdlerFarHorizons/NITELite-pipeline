@@ -87,11 +87,12 @@ done
 
 # Check the necessary arguments are provided
 if [ -z "$INTERACTIVE" ]; then
-    if [ -z "$DATA_DIR" ]; then
-        echo "Error: Data directory is required."
-        show_help
-        exit 1
-    fi
+    # TODO: Delete
+    # if [ -z "$DATA_DIR" ]; then
+    #     echo "Error: Data directory is required."
+    #     show_help
+    #     exit 1
+    # fi
     if [ -z "$CONFIG_FILEPATH" ]; then
         echo "Error: Configuration filepath is required."
         show_help
