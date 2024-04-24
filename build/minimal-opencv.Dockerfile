@@ -1,3 +1,6 @@
+# This dockerfile is the minimum dockerfile for which opencv works
+# It's kept around to be instructional. It's not used in the build process.
+
 # We use miniconda as a base image
 # We use this instead of the simpler python image because gdal is difficult to
 # install without conda.

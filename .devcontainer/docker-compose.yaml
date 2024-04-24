@@ -9,6 +9,3 @@ services:
       - /Users/Shared/repos/NITELite-pipeline:/NITELite-pipeline:cached
       - /Users/Shared/data/night_horizons_test_data:/data:cached
     command: sleep infinity
-    # TODO: Probably define these in the stack?
-    environment:
-      FLIGHT_ID: 'FH135'

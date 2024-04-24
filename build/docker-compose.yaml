@@ -1,0 +1,6 @@
+# Use postgres/example user/password credentials
+version: '3.9'
+
+services:
+  nitelite-pipeline:
+    image: nitelite-pipeline:latest
