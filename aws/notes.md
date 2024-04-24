@@ -3,8 +3,6 @@
 - Resume
     - Yes or no apply to places that ask for Azure exp instead of AWS
 
-TODO: Remove all glob - change into s3 client boto3
-TODO: Metadata handling
 
 Aside:
 Docker hub rate limits anonymous users, so building occasionally

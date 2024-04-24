@@ -1,6 +1,5 @@
 version: 0.2
 
-# TODO: Currently running as root, if we change to non-root then change this
 # run-as: Linux-user-name
 
 env:

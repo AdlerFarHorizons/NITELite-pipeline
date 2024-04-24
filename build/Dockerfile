@@ -35,5 +35,4 @@ RUN conda run -n nitelite-pipeline-conda \
     python /NITELite-pipeline/test/test_install.py
 
 # Set up the workdir
-# TODO: Avoid root
 WORKDIR /NITELite-pipeline
