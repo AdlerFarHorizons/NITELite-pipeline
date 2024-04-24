@@ -1,0 +1,12 @@
+# Use postgres/example user/password credentials
+version: '3.9'
+
+services:
+  nitelite-pipeline:
+    image: nitelite-pipeline:latest
+    volumes:
+      - /Users/Shared/data/nitelite/220513-FH135/images/referenced:/data/input/referenced_images
+      - /Users/Shared/data/nitelite/220513-FH135/metadata:/data/input/metadata
+      - /Users/Shared/data/nitelite/220513-FH135/images/raw:/data/input/images
+      - /Users/Shared/data/nitelite/pipeline-output:/data/input/existing_output
+      - /Users/Shared/data/nitelite/pipeline-output:/data/output

@@ -1,0 +1,46 @@
+###############################################################################
+# Example Metadata Processor Config
+###############################################################################
+
+# Indicate what stage of the pipeline to run
+pipeline:
+  stage: query_processor
+
+# I/O settings
+# These settings assume that the user has mounted their data directory at /data
+io_manager:
+  # Specifies the input data
+  input_dir: /data/input
+  input_description:
+    # Output metadata file from sequential-mosaic
+    metadata: existing_output/sequential-mosaic/220513-FH135_2024-04-21_00-05-33/y_pred.csv
+    referenced_images:
+      # Relative to input_dir
+      directory: existing_output/sequential-mosaic/220513-FH135_2024-04-21_00-05-33/referenced_images
+
+  # Where the output files will be saved
+  output_dir: /data/output/queries
+  output_description:
+    metadata_selected: y_pred_selected.csv
+    used_config: used-config.yaml
+  file_exists: overwrite
+
+query_processor:
+  # The actual condition for the queried data to obey.
+  # In this example we do a 1km box around two coordinates
+  condition: >- # The ">-" allows you to use linebreaks for clarity
+    (x_center < -9593500 + 1000) &
+    (x_center > -9593500 - 1000) &
+    (y_center < 4857700 + 1000) &
+    (y_center > 4857700 - 1000)
+
+# What metadata processor to use (based on metadata format)
+metadata_processor:
+  version: fh135_metadata_processor
+
+# Coordinate reference-system employed
+crs:
+  projparams: 'EPSG:3857'
+
+random_state: 
+  seed: 159234
