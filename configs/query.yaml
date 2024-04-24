@@ -13,25 +13,26 @@ io_manager:
   input_dir: /data/input
   input_description:
     # Output metadata file from sequential-mosaic
-    y_pred: existing_output/sequential-mosaic/220513-FH135_2024-04-19_21-29-39/y_pred.csv
+    metadata: existing_output/sequential-mosaic/220513-FH135_2024-04-21_00-05-33/y_pred.csv
     referenced_images:
       # Relative to input_dir
-      directory: existing_output/sequential-mosaic/220513-FH135_2024-04-19_21-29-39/referenced_images
+      directory: existing_output/sequential-mosaic/220513-FH135_2024-04-21_00-05-33/referenced_images
 
   # Where the output files will be saved
   output_dir: /data/output/queries
   output_description:
-    y_pred_selected: y_pred_selected.csv
+    metadata_selected: y_pred_selected.csv
     used_config: used-config.yaml
   file_exists: overwrite
 
 query_processor:
   # The actual condition for the queried data to obey.
-  # Change this to select different data
-  # 39.7963°N, 86.1535°W # Test coords
+  # In this example we do a 1km box around two coordinates
   condition: >- # The ">-" allows you to use linebreaks for clarity
-    (mAltitude > 13000.) &
-    (imuGyroMag < 0.005)
+    (x_center < -9593500 + 1000) &
+    (x_center > -9593500 - 1000) &
+    (y_center < 4857700 + 1000) &
+    (y_center > 4857700 - 1000)
 
 # What metadata processor to use (based on metadata format)
 metadata_processor:
