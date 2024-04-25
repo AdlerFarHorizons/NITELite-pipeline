@@ -19,7 +19,7 @@ io_manager:
       directory: existing_output/sequential-mosaic/220513-FH135_2024-04-21_00-05-33/referenced_images
 
   # Where the output files will be saved
-  output_dir: /data/output/queries
+  output_dir: /data/output
   output_description:
     metadata_selected: y_pred_selected.csv
     used_config: used-config.yaml
