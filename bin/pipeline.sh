@@ -87,12 +87,6 @@ done
 
 # Check the necessary arguments are provided
 if [ -z "$INTERACTIVE" ]; then
-    # TODO: Delete
-    # if [ -z "$DATA_DIR" ]; then
-    #     echo "Error: Data directory is required."
-    #     show_help
-    #     exit 1
-    # fi
     if [ -z "$CONFIG_FILEPATH" ]; then
         echo "Error: Configuration filepath is required."
         show_help
@@ -128,19 +122,6 @@ fi
 if [ -n "$MOUNT_CODE" ]; then
     DOCKER_CMD+=" --volume $(realpath .):/NITELite-pipeline"
 fi
-
-# TODO: Delete and place explanation somewhere
-# Explanation for removal: The idea behind this is to allow the user to use
-# their own version of the pipeline. However, one of the goals is to freeze the
-# used code. In addition, copying over the code requires reinstalling it too,
-# unless they overwrite the original location.
-# If the user wants to use their own code, they should either intentionally
-# mess with a running image separately, or they should edit and rebuild.
-# if [ -n "$COPY_CODE" ]; then
-#     # Mount the code. Only use this if you want to use your own edited code.
-#     CODE_DIR=$(realpath ..)
-#     DOCKER_CMD+=" --volume $CODE_DIR:/NITELite-pipeline"
-# fi
 
 # Name of the service
 DOCKER_CMD+=" nitelite-pipeline"
