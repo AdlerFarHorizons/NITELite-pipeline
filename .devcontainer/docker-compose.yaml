@@ -9,6 +9,8 @@ services:
       - /Users/Shared/repos/NITELite-pipeline:/NITELite-pipeline:cached
       - /Users/Shared/data/night_horizons_test_data:/data:cached
     command: sleep infinity
+    depends_on:
+      - postgis
   postgis:
     image: postgis/postgis:latest
     restart: always
