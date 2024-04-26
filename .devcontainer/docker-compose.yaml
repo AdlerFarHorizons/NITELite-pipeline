@@ -19,4 +19,4 @@ services:
     ports:
       - 5432:5432
     volumes:
-      - /Users/shared/data/postgis:/var/lib/postgresql/data
+      - /Users/Shared/data/postgis:/var/lib/postgresql/data
