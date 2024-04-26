@@ -18,7 +18,8 @@
 				"yy0931.mplstyle",
 				"esbenp.prettier-vscode",
 				"redhat.vscode-yaml",
-				"ckolkman.vscode-postgres"
+				"ckolkman.vscode-postgres",
+				"cmoog.sqlnotebook"
 			]
 		}
 	}
