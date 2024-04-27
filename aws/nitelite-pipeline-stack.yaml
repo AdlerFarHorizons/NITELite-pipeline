@@ -163,19 +163,19 @@ Resources:
           - Sid: PipelineUserReadBucketPolicy
             Effect: Allow
             Action:
-              - s3:PutObject
               - s3:GetObject
-              - s3:DeleteObject
               - s3:ListBucket
             Resource:
               - arn:aws:s3:::nitelite.metadata
               - arn:aws:s3:::nitelite.images
               - arn:aws:s3:::nitelite.referenced-images
               - arn:aws:s3:::nitelite.test-data
-              - arn:aws:s3:::nitelite.pipeline-output
           - Sid: PipelineUserDeleteBucketPolicy
             Effect: Allow
             Action:
+              - s3:GetObject
+              - s3:ListBucket
+              - s3:PutObject
               - s3:DeleteObject
             Resource:
               - arn:aws:s3:::nitelite.pipeline-output
