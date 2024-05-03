@@ -19,7 +19,8 @@
 				"esbenp.prettier-vscode",
 				"redhat.vscode-yaml",
 				"ckolkman.vscode-postgres",
-				"cmoog.sqlnotebook"
+				"cmoog.sqlnotebook",
+				"ms-python.black-formatter"
 			]
 		}
 	}
