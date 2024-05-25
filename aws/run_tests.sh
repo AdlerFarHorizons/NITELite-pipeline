@@ -1,13 +1,11 @@
 #!/bin/bash
 
-mkdir /data/test_data
-mkdir /data/test_data/input
-mkdir /data/test_data/output
+mkdir /data/nitelite.test-data
 
-mount-s3 nitelite.test-data /data/test_data/input \
+mount-s3 nitelite.test-data /data/nitelite.test-data \
     --allow-overwrite --allow-delete
 
 ./test/test.sh \
     -c ./night-horizons-mapmaker/configs/metadata.yaml \
-    -d /data/test_data \
+    -d /data/nitelite.test-data \
     -f ./aws/docker-compose.yaml
