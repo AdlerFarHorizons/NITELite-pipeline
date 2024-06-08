@@ -28,7 +28,7 @@ phases:
     commands:
       # Run the pipeline. We set the timeout to 1 hr prior to the max
       # allowed by AWS (480m = 8h), so that there's time to copy the data
-      - timeout --preserve-status 15m ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml --mount_code
+      - timeout --preserve-status 420m ./bin/pipeline.sh -c ${CONFIG_FILEPATH} -d /data  -f ./aws/docker-compose.yaml --mount_code
   post_build:
     commands:
       # Check output
